@@ -8,7 +8,7 @@ plugins {
     kotlin("jvm") version("1.3.41")
 }
 group = "org.openrndr.template"
-version = "1.0-SNAPSHOT"
+version = "0.3.1"
 
 val applicationMainClass = "TemplateProgramKt"
 val applicationFullLogging = false
@@ -23,13 +23,13 @@ val openrndrOs = when (OperatingSystem.current()) {
 }
 
 // supported features are: video, panel
-val openrndrFeatures = setOf("video")
+val openrndrFeatures = setOf("video", "panel")
 
 val panelUseSnapshot = false
-val panelVersion = "0.3.16"
+val panelVersion = if (panelUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.17-m3"
 
 val orxUseSnapshot = false
-val orxVersion = "0.0.30"
+val orxVersion = if (orxUseSnapshot) "0.1.0-SNAPSHOT" else "0.0.31"
 
 // supported features are: orx-camera, orx-compositor,orx-easing, orx-filter-extension,orx-file-watcher,
 // orx-integral-image, orx-interval-tree, orx-jumpflood,orx-kdtree, orx-mesh-generators,orx-midi, orx-no-clear,
@@ -43,15 +43,10 @@ repositories {
         mavenLocal()
     }
     maven(url = "https://dl.bintray.com/openrndr/openrndr")
-    maven(url = "https://jitpack.io")
 }
 
 fun DependencyHandler.orx(module: String): Any {
-    return if (!orxUseSnapshot) {
-        "com.github.openrndr.orx:$module:v$orxVersion"
-    } else {
-        "org.openrndr.extra:$module:$orxVersion"
-    }
+        return "org.openrndr.extra:$module:$orxVersion"
 }
 
 fun DependencyHandler.openrndr(module: String): Any {
@@ -89,7 +84,7 @@ dependencies {
     }
 
     if ("panel" in openrndrFeatures) {
-        compile("com.github.openrndr:openrndr-panel:v$panelVersion")
+        compile("org.openrndr.panel:openrndr-panel:$panelVersion")
     }
 
     for (feature in orxFeatures) {
