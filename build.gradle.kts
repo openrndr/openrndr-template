@@ -1,20 +1,20 @@
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinVersion = "1.3.41"
+val kotlinVersion = "1.3.50"
 
 plugins {
     java
-    kotlin("jvm") version("1.3.41")
+    kotlin("jvm") version("1.3.50")
 }
 group = "org.openrndr.template"
-version = "0.3.1"
+version = "0.3.2"
 
 val applicationMainClass = "TemplateProgramKt"
 val applicationFullLogging = false
 
 val openrndrUseSnapshot = false
-val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.35-rc1"
+val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.35"
 val openrndrOs = when (OperatingSystem.current()) {
     OperatingSystem.WINDOWS -> "windows"
     OperatingSystem.MAC_OS -> "macos"
@@ -29,9 +29,9 @@ val panelUseSnapshot = false
 val panelVersion = if (panelUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.17-m3"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.1.0-SNAPSHOT" else "0.0.31"
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.32"
 
-// supported features are: orx-camera, orx-compositor,orx-easing, orx-filter-extension,orx-file-watcher,
+// supported features are: orx-camera, orx-compositor,orx-easing, orx-filter-extension,orx-file-watcher, orx-kinect-v1
 // orx-integral-image, orx-interval-tree, orx-jumpflood,orx-kdtree, orx-mesh-generators,orx-midi, orx-no-clear,
 // orx-noise, orx-obj, orx-olive
 
