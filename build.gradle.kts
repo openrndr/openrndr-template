@@ -8,7 +8,7 @@ plugins {
     kotlin("jvm") version("1.3.50")
 }
 group = "org.openrndr.template"
-version = "0.3.2"
+version = "0.3.3"
 
 val applicationMainClass = "TemplateProgramKt"
 val applicationFullLogging = false
@@ -57,6 +57,10 @@ fun DependencyHandler.openrndrNatives(module: String): Any {
     return "org.openrndr:openrndr-$module-natives-$openrndrOs:$openrndrVersion"
 }
 
+fun DependencyHandler.orxNatives(module: String): Any {
+    return "org.openrndr.extra:$module-natives-$openrndrOs:$orxVersion"
+}
+
 dependencies {
     runtime(openrndr("gl3"))
     runtime(openrndrNatives("gl3"))
@@ -93,6 +97,10 @@ dependencies {
 
     if ("orx-olive" in orxFeatures) {
         compile("org.jetbrains.kotlin", "kotlin-scripting-compiler-embeddable")
+    }
+
+    if ("orx-kinect-v1" in orxFeatures) {
+        runtime(orxNatives("orx-kinect-v1"))
     }
 
     implementation(kotlin("stdlib-jdk8"))
