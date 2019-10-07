@@ -1,11 +1,11 @@
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinVersion = "1.3.41"
+val kotlinVersion = "1.3.50"
 
 plugins {
     java
-    kotlin("jvm") version("1.3.41")
+    kotlin("jvm") version("1.3.50")
 }
 group = "org.openrndr.template"
 version = "0.3.1"
@@ -29,7 +29,7 @@ val panelUseSnapshot = false
 val panelVersion = if (panelUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.17-m3"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.1.0-SNAPSHOT" else "0.0.31"
+val orxVersion = if (orxUseSnapshot) "0.1.0-SNAPSHOT" else "0.3.35"
 
 // supported features are: orx-camera, orx-compositor,orx-easing, orx-filter-extension,orx-file-watcher,
 // orx-integral-image, orx-interval-tree, orx-jumpflood,orx-kdtree, orx-mesh-generators,orx-midi, orx-no-clear,
@@ -66,7 +66,7 @@ dependencies {
     compile(openrndr("extensions"))
     compile(openrndr("filter"))
 
-    compile("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.0-RC")
+    compile("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.0")
 
     compile("io.github.microutils", "kotlin-logging","1.7.2")
 
