@@ -8,7 +8,7 @@ plugins {
     kotlin("jvm") version("1.3.50")
 }
 group = "org.openrndr.template"
-version = "0.3.1"
+version = "0.3.5"
 
 val applicationMainClass = "TemplateProgramKt"
 val applicationFullLogging = false
@@ -29,7 +29,7 @@ val panelUseSnapshot = false
 val panelVersion = if (panelUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.17-m3"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.1.0-SNAPSHOT" else "0.3.35"
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.36"
 
 // supported features are: orx-camera, orx-compositor,orx-easing, orx-filter-extension,orx-file-watcher,
 // orx-integral-image, orx-interval-tree, orx-jumpflood,orx-kdtree, orx-mesh-generators,orx-midi, orx-no-clear,
