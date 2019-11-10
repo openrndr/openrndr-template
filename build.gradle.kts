@@ -8,10 +8,17 @@ plugins {
     kotlin("jvm") version("1.3.50")
 }
 group = "org.openrndr.template"
-version = "0.3.5"
+version = "0.3.6"
 
 val applicationMainClass = "TemplateProgramKt"
-val applicationFullLogging = false
+
+enum class Logging {
+    NONE,
+    SIMPLE,
+    FULL
+}
+
+val applicationLogging = Logging.SIMPLE
 
 val openrndrUseSnapshot = false
 val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.35"
@@ -29,11 +36,11 @@ val panelUseSnapshot = false
 val panelVersion = if (panelUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.17-m3"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.36"
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.38"
 
 // supported features are: orx-camera, orx-compositor,orx-easing, orx-filter-extension,orx-file-watcher,
-// orx-integral-image, orx-interval-tree, orx-jumpflood,orx-kdtree, orx-mesh-generators,orx-midi, orx-no-clear,
-// orx-noise, orx-obj, orx-olive
+// orx-integral-image, orx-interval-tree, orx-jumpflood, orx-kdtree, orx-mesh-generators,orx-midi, orx-no-clear,
+// orx-noise, orx-obj, orx-olive, orx-osc
 
 val orxFeatures = setOf("orx-noise")
 
@@ -68,14 +75,20 @@ dependencies {
 
     compile("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.0")
 
-    compile("io.github.microutils", "kotlin-logging","1.7.2")
+    compile("io.github.microutils", "kotlin-logging","1.7.6")
 
-    if (!applicationFullLogging) {
-        runtime("org.slf4j","slf4j-nop","1.7.25")
-    } else {
-        runtime("org.apache.logging.log4j", "log4j-slf4j-impl", "2.12.0")
-        runtime("com.fasterxml.jackson.core", "jackson-databind", "2.8.7")
-        runtime("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml", "2.8.7")
+    when(applicationLogging) {
+        Logging.NONE -> {
+            runtime("org.slf4j","slf4j-nop","1.7.29")
+        }
+        Logging.SIMPLE -> {
+            runtime("org.slf4j","slf4j-simple","1.7.29")
+        }
+        Logging.FULL -> {
+            runtime("org.apache.logging.log4j", "log4j-slf4j-impl", "2.12.1")
+            runtime("com.fasterxml.jackson.core", "jackson-databind", "2.8.7")
+            runtime("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml", "2.8.7")
+        }
     }
 
     if ("video" in openrndrFeatures) {
