@@ -12,16 +12,8 @@ version = "0.3.6"
 
 val applicationMainClass = "TemplateProgramKt"
 
-enum class Logging {
-    NONE,
-    SIMPLE,
-    FULL
-}
-
-val applicationLogging = Logging.SIMPLE
-
 val openrndrUseSnapshot = false
-val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.35"
+val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.36"
 val openrndrOs = when (OperatingSystem.current()) {
     OperatingSystem.WINDOWS -> "windows"
     OperatingSystem.MAC_OS -> "macos"
@@ -33,16 +25,25 @@ val openrndrOs = when (OperatingSystem.current()) {
 val openrndrFeatures = setOf("video", "panel")
 
 val panelUseSnapshot = false
-val panelVersion = if (panelUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.17-m3"
+val panelVersion = if (panelUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.18"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.38"
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.40"
 
 // supported features are: orx-camera, orx-compositor,orx-easing, orx-filter-extension,orx-file-watcher,
 // orx-integral-image, orx-interval-tree, orx-jumpflood, orx-kdtree, orx-mesh-generators,orx-midi, orx-no-clear,
-// orx-noise, orx-obj, orx-olive, orx-osc
+// orx-noise, orx-obj, orx-olive, orx-osc, orx-palette
 
 val orxFeatures = setOf("orx-noise")
+
+enum class Logging {
+    NONE,
+    SIMPLE,
+    FULL
+}
+
+val applicationLogging = Logging.SIMPLE
+
 
 repositories {
     mavenCentral()
