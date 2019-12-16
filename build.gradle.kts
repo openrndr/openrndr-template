@@ -1,41 +1,35 @@
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinVersion = "1.3.50"
-
-plugins {
-    java
-    kotlin("jvm") version("1.3.50")
-}
 group = "org.openrndr.template"
-version = "0.3.6"
-
+version = "0.3.8"
 val applicationMainClass = "TemplateProgramKt"
 
 val openrndrUseSnapshot = false
-val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.36"
+val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.37"
+
+val panelUseSnapshot = false
+val panelVersion = if (panelUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.19"
+
+val orxUseSnapshot = false
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.44"
+
+// supported features are: orx-camera, orx-compositor,orx-easing, orx-filter-extension,orx-file-watcher, orx-fx
+// orx-integral-image, orx-interval-tree, orx-jumpflood, orx-kdtree, orx-mesh-generators,orx-midi, orx-no-clear,
+// orx-noise, orx-obj, orx-olive, orx-osc, orx-palette, orx-runway
+val orxFeatures = setOf("orx-noise", "orx-fx")
+
+// supported features are: video, panel
+val openrndrFeatures = setOf("video", "panel")
+
+// --------------------------------------------------------------------------------------------------------------------
+
 val openrndrOs = when (OperatingSystem.current()) {
     OperatingSystem.WINDOWS -> "windows"
     OperatingSystem.MAC_OS -> "macos"
     OperatingSystem.LINUX -> "linux-x64"
     else -> throw IllegalArgumentException("os not supported")
 }
-
-// supported features are: video, panel
-val openrndrFeatures = setOf("video", "panel")
-
-val panelUseSnapshot = false
-val panelVersion = if (panelUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.18"
-
-val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.42"
-
-// supported features are: orx-camera, orx-compositor,orx-easing, orx-filter-extension,orx-file-watcher,
-// orx-integral-image, orx-interval-tree, orx-jumpflood, orx-kdtree, orx-mesh-generators,orx-midi, orx-no-clear,
-// orx-noise, orx-obj, orx-olive, orx-osc, orx-palette
-
-val orxFeatures = setOf("orx-noise")
-
 enum class Logging {
     NONE,
     SIMPLE,
@@ -44,6 +38,12 @@ enum class Logging {
 
 val applicationLogging = Logging.SIMPLE
 
+val kotlinVersion = "1.3.61"
+
+plugins {
+    java
+    kotlin("jvm") version("1.3.61")
+}
 
 repositories {
     mavenCentral()
@@ -68,15 +68,17 @@ fun DependencyHandler.openrndrNatives(module: String): Any {
 dependencies {
     runtime(openrndr("gl3"))
     runtime(openrndrNatives("gl3"))
+    compile(openrndr("openal"))
+    runtime(openrndrNatives("openal"))
     compile(openrndr("core"))
     compile(openrndr("svg"))
     compile(openrndr("animatable"))
     compile(openrndr("extensions"))
     compile(openrndr("filter"))
 
-    compile("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.0")
+    compile("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.3")
 
-    compile("io.github.microutils", "kotlin-logging","1.7.6")
+    compile("io.github.microutils", "kotlin-logging","1.7.8")
 
     when(applicationLogging) {
         Logging.NONE -> {
@@ -86,9 +88,9 @@ dependencies {
             runtime("org.slf4j","slf4j-simple","1.7.29")
         }
         Logging.FULL -> {
-            runtime("org.apache.logging.log4j", "log4j-slf4j-impl", "2.12.1")
-            runtime("com.fasterxml.jackson.core", "jackson-databind", "2.8.7")
-            runtime("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml", "2.8.7")
+            runtime("org.apache.logging.log4j", "log4j-slf4j-impl", "2.13.0")
+            runtime("com.fasterxml.jackson.core", "jackson-databind", "2.10.1")
+            runtime("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml", "2.10.1")
         }
     }
 
@@ -112,6 +114,8 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     testCompile("junit", "junit", "4.12")
 }
+
+// --------------------------------------------------------------------------------------------------------------------
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
