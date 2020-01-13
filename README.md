@@ -1,3 +1,4 @@
+![0337_openrndr-3](https://user-images.githubusercontent.com/983309/70990617-39968280-20c6-11ea-8304-70ad0afa628d.png)
 # openrndr-template
 A feature rich template for creating OPENRNDR programs based on Gradle/Kts
 
