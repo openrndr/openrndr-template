@@ -1,5 +1,7 @@
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
+
 
 group = "org.openrndr.template"
 version = "0.3.9"
@@ -24,10 +26,23 @@ val openrndrFeatures = setOf("video", "panel")
 
 // --------------------------------------------------------------------------------------------------------------------
 
-val openrndrOs = when (OperatingSystem.current()) {
+val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
+
+val openrndrOs = if (project.hasProperty("targetPlatform")) {
+    val platform : String = project.property("targetPlatform") as String
+    if (platform !in supportedPlatforms) {
+        throw IllegalArgumentException("target platform not supported: $platform")
+    } else {
+        platform
+    }
+} else when (OperatingSystem.current()) {
     OperatingSystem.WINDOWS -> "windows"
     OperatingSystem.MAC_OS -> "macos"
-    OperatingSystem.LINUX -> "linux-x64"
+    OperatingSystem.LINUX -> when(val h = DefaultNativePlatform("current").architecture.name) {
+        "x86-64" -> "linux-x64"
+        "arm64" -> "linux-arm64"
+        else ->throw IllegalArgumentException("architecture not supported: $h")
+    }
     else -> throw IllegalArgumentException("os not supported")
 }
 enum class Logging {
