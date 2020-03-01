@@ -4,7 +4,7 @@ import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
 /* the name of this project, default is the template version but you are free to change these */
 group = "org.openrndr.template"
-version = "0.3.10"
+version = "0.3.11"
 
 val applicationMainClass = "TemplateProgramKt"
 
@@ -49,7 +49,7 @@ val panelUseSnapshot = false
 val panelVersion = if (panelUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.21"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.47"
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.49"
 
 //<editor-fold desc="This is code for OPENRNDR, no need to edit this .. most of the times">
 val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
