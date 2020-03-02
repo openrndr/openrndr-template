@@ -25,7 +25,7 @@ val orxFeatures = setOf(
 //    "orx-kdtree",
 //    "orx-mesh-generators"
 //    "orx-midi",
-//    "orx-noclear",
+//    "orx-no-clear",
     "orx-noise",
 //    "orx-obj"
     "orx-olive",
