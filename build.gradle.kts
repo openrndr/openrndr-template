@@ -10,29 +10,36 @@ val applicationMainClass = "TemplateProgramKt"
 
 /*  Which additional (ORX) libraries should be added to this project. */
 val orxFeatures = setOf(
-//    "orx-camera",
+//  "orx-camera",
     "orx-compositor",
-//    "orx-easing",
-//    "orx-filter-extension",
-//    "orx-file-watcher",
+//  "orx-easing",
+//  "orx-file-watcher",
+//  "orx-parameters",
+//  "orx-filter-extension",
     "orx-fx",
+//  "orx-glslify",
+//  "orx-gradient-descent",
+//  "orx-integral-image",
+//  "orx-interval-tree",
+//  "orx-jumpflood",
     "orx-gui",
-//    "orx-integral-image",
-//    "orx-interval-tree",
     "orx-image-fit",
-//    "orx-jumpflood",
-//    "orx-kinect-v1",
-//    "orx-kdtree",
-//    "orx-mesh-generators"
-//    "orx-midi",
-//    "orx-no-clear",
+//  "orx-kdtree",
+//  "orx-mesh-generators",
+//  "orx-midi",
+//  "orx-no-clear",
     "orx-noise",
-//    "orx-obj"
+//  "orx-obj-loader",
     "orx-olive",
-//    "orx-osc"
-//    "orx-palette"
-//    "orx-runway"
+//  "orx-osc",
+//  "orx-palette",
+//  "orx-poisson-fill",
+//  "orx-runway",
+//  "orx-shader-phrases",
     "orx-shade-styles"
+//  "orx-syphon",
+//  "orx-temporal-blur",
+//  "orx-kinect-v1"
 )
 
 /* Which OPENRNDR libraries should be added to this project? */
