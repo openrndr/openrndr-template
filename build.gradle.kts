@@ -37,6 +37,7 @@ val orxFeatures = setOf(
 //  "orx-runway",
 //  "orx-shader-phrases",
     "orx-shade-styles"
+//  "orx-shapes",
 //  "orx-syphon",
 //  "orx-temporal-blur",
 //  "orx-kinect-v1"
