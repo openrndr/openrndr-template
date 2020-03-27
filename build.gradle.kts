@@ -36,11 +36,12 @@ val orxFeatures = setOf(
 //  "orx-poisson-fill",
 //  "orx-runway",
 //  "orx-shader-phrases",
-    "orx-shade-styles"
+    "orx-shade-styles",
 //  "orx-shapes",
 //  "orx-syphon",
 //  "orx-temporal-blur",
-//  "orx-kinect-v1"
+//  "orx-kinect-v1",
+    "orx-panel"
 )
 
 /* Which OPENRNDR libraries should be added to this project? */
@@ -51,13 +52,10 @@ val openrndrFeatures = setOf(
 
 /*  Which version of OPENRNDR, ORX and Panel should be used? */
 val openrndrUseSnapshot = false
-val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.39"
-
-val panelUseSnapshot = false
-val panelVersion = if (panelUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.21"
+val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.40"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.49"
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.50"
 
 //<editor-fold desc="This is code for OPENRNDR, no need to edit this .. most of the times">
 val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
@@ -88,18 +86,18 @@ enum class Logging {
 }
 
 /*  What type of logging should this project use? */
-val applicationLogging = Logging.SIMPLE
+val applicationLogging = Logging.FULL
 
-val kotlinVersion = "1.3.61"
+val kotlinVersion = "1.3.71"
 
 plugins {
     java
-    kotlin("jvm") version("1.3.61")
+    kotlin("jvm") version("1.3.71")
 }
 
 repositories {
     mavenCentral()
-    if (openrndrUseSnapshot || orxUseSnapshot || panelUseSnapshot) {
+    if (openrndrUseSnapshot || orxUseSnapshot) {
         mavenLocal()
     }
     maven(url = "https://dl.bintray.com/openrndr/openrndr")
@@ -139,30 +137,26 @@ dependencies {
     implementation(openrndr("extensions"))
     implementation(openrndr("filter"))
 
-    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.3")
-    implementation("io.github.microutils", "kotlin-logging","1.7.8")
+    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.5")
+    implementation("io.github.microutils", "kotlin-logging","1.7.9")
 
     when(applicationLogging) {
         Logging.NONE -> {
-            runtimeOnly("org.slf4j","slf4j-nop","1.7.29")
+            runtimeOnly("org.slf4j","slf4j-nop","1.7.30")
         }
         Logging.SIMPLE -> {
-            runtimeOnly("org.slf4j","slf4j-simple","1.7.29")
+            runtimeOnly("org.slf4j","slf4j-simple","1.7.30")
         }
         Logging.FULL -> {
-            runtimeOnly("org.apache.logging.log4j", "log4j-slf4j-impl", "2.13.0")
-            runtimeOnly("com.fasterxml.jackson.core", "jackson-databind", "2.10.1")
-            runtimeOnly("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml", "2.10.1")
+            runtimeOnly("org.apache.logging.log4j", "log4j-slf4j-impl", "2.13.1")
+            runtimeOnly("com.fasterxml.jackson.core", "jackson-databind", "2.10.3")
+            runtimeOnly("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml", "2.10.3")
         }
     }
 
     if ("video" in openrndrFeatures) {
         implementation(openrndr("ffmpeg"))
         runtimeOnly(openrndrNatives("ffmpeg"))
-    }
-
-    if ("panel" in openrndrFeatures) {
-        implementation("org.openrndr.panel:openrndr-panel:$panelVersion")
     }
 
     for (feature in orxFeatures) {
@@ -192,6 +186,7 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Jar> {
+    isZip64 = true
     manifest {
         attributes["Main-Class"] = applicationMainClass
     }
