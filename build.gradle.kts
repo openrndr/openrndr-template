@@ -4,7 +4,7 @@ import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
 /* the name of this project, default is the template version but you are free to change these */
 group = "org.openrndr.template"
-version = "0.3.11"
+version = "0.3.12"
 
 val applicationMainClass = "TemplateProgramKt"
 
@@ -52,10 +52,10 @@ val openrndrFeatures = setOf(
 
 /*  Which version of OPENRNDR, ORX and Panel should be used? */
 val openrndrUseSnapshot = false
-val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.40"
+val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.42-rc.2"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.50"
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.51-rc.3"
 
 //<editor-fold desc="This is code for OPENRNDR, no need to edit this .. most of the times">
 val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
@@ -88,7 +88,7 @@ enum class Logging {
 /*  What type of logging should this project use? */
 val applicationLogging = Logging.FULL
 
-val kotlinVersion = "1.3.71"
+val kotlinVersion = "1.3.72"
 
 plugins {
     java
@@ -165,10 +165,6 @@ dependencies {
 
     if ("orx-kinect-v1" in orxFeatures) {
         runtimeOnly(orxNatives("orx-kinect-v1"))
-    }
-
-    if ("orx-olive" in orxFeatures) {
-        implementation("org.jetbrains.kotlin", "kotlin-scripting-compiler-embeddable")
     }
 
     implementation(kotlin("stdlib-jdk8"))
