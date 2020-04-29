@@ -167,6 +167,10 @@ dependencies {
         runtimeOnly(orxNatives("orx-kinect-v1"))
     }
 
+    if ("orx-olive" in orxFeatures) {
+        implementation("org.jetbrains.kotlin:kotlin-script-runtime:$kotlinVersion")
+    }
+
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("junit", "junit", "4.12")
     //</editor-fold>
