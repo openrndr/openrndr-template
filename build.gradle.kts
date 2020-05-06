@@ -52,10 +52,10 @@ val openrndrFeatures = setOf(
 
 /*  Which version of OPENRNDR, ORX and Panel should be used? */
 val openrndrUseSnapshot = false
-val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.42-rc.2"
+val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.42-rc.5"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.51-rc.3"
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.51-rc.4"
 
 //<editor-fold desc="This is code for OPENRNDR, no need to edit this .. most of the times">
 val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
@@ -92,7 +92,7 @@ val kotlinVersion = "1.3.72"
 
 plugins {
     java
-    kotlin("jvm") version("1.3.71")
+    kotlin("jvm") version("1.3.72")
 }
 
 repositories {
