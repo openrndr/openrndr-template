@@ -50,12 +50,12 @@ val openrndrFeatures = setOf(
     "video"
 )
 
-/*  Which version of OPENRNDR, ORX and Panel should be used? */
+/*  Which version of OPENRNDR and ORX should be used? */
 val openrndrUseSnapshot = false
-val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.42-rc.5"
+val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.42-rc.7"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.51-rc.4"
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.51-rc.5"
 
 //<editor-fold desc="This is code for OPENRNDR, no need to edit this .. most of the times">
 val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
@@ -120,13 +120,11 @@ fun DependencyHandler.orxNatives(module: String): Any {
 }
 
 dependencies {
-
     /*  This is where you add additional (third-party) dependencies */
 
 //    implementation("org.jsoup:jsoup:1.12.2")
 //    implementation("com.google.code.gson:gson:2.8.6")
 
-    //<editor-fold desc="Managed dependencies">
     runtimeOnly(openrndr("gl3"))
     runtimeOnly(openrndrNatives("gl3"))
     implementation(openrndr("openal"))
@@ -137,7 +135,7 @@ dependencies {
     implementation(openrndr("extensions"))
     implementation(openrndr("filter"))
 
-    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.5")
+    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.6")
     implementation("io.github.microutils", "kotlin-logging","1.7.9")
 
     when(applicationLogging) {
@@ -173,7 +171,6 @@ dependencies {
 
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("junit", "junit", "4.12")
-    //</editor-fold>
 }
 
 // --------------------------------------------------------------------------------------------------------------------
