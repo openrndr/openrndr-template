@@ -1,3 +1,4 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
@@ -46,7 +47,6 @@ val orxFeatures = setOf(
 
 /* Which OPENRNDR libraries should be added to this project? */
 val openrndrFeatures = setOf(
-    "panel",
     "video"
 )
 
@@ -93,6 +93,8 @@ val kotlinVersion = "1.3.72"
 plugins {
     java
     kotlin("jvm") version("1.3.72")
+    id("com.github.johnrengelman.shadow") version ("5.2.0")
+    id("org.beryx.runtime") version ("1.8.1")
 }
 
 repositories {
@@ -182,29 +184,64 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-tasks.withType<Jar> {
-    isZip64 = true
-    manifest {
-        attributes["Main-Class"] = applicationMainClass
-    }
-    doFirst {
-        from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
-        from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
-    }
 
-    exclude(listOf("META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA", "**/module-info*"))
-    archiveFileName.set("application-$openrndrOs.jar")
+project.setProperty("mainClassName", applicationMainClass)
+tasks {
+    named<ShadowJar>("shadowJar") {
+        manifest {
+            attributes["Main-Class"] = applicationMainClass
+        }
+        minimize {
+            exclude(dependency("org.openrndr:openrndr-gl3:.*"))
+            exclude(dependency("org.jetbrains.kotlin:kotlin-reflect:.*"))
+        }
+    }
+    named<org.beryx.runtime.JPackageTask>("jpackage") {
+        doLast {
+            when (OperatingSystem.current()) {
+                OperatingSystem.WINDOWS, OperatingSystem.LINUX -> {
+                    copy {
+                        from("data") {
+                            include("**/*")
+                        }
+                        into("build/jpackage/openrndr-application/data")
+                    }
+                }
+                OperatingSystem.MAC_OS -> {
+                    copy {
+                        from("data") {
+                            include("**/*")
+                        }
+                        into("build/jpackage/openrndr-application.app/data")
+                    }
+                }
+            }
+        }
+    }
 }
 
-tasks.create("zipDistribution", Zip::class.java) {
-    archiveFileName.set("application-$openrndrOs.zip")
-    from("./") {
-        include("data/**")
+tasks.register<Zip>("jpackageZip") {
+    archiveFileName.set("openrndr-application-$openrndrOs.zip")
+    from("$buildDir/jpackage") {
+        include("**/*")
     }
-    from("$buildDir/libs/application-$openrndrOs.jar")
-}.dependsOn(tasks.jar)
+}
+tasks.findByName("jpackageZip")?.dependsOn("jpackage")
 
-tasks.create("run", JavaExec::class.java) {
-    main = applicationMainClass
-    classpath = sourceSets.main.get().runtimeClasspath
-}.dependsOn(tasks.build)
+runtime {
+    jpackage {
+        imageName = "openrndr-application"
+        skipInstaller = true
+        if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
+            jvmArgs.add("-XstartOnFirstThread")
+        }
+    }
+    options.empty()
+    options.add("--strip-debug")
+    options.add("--compress")
+    options.add("1")
+    options.add("--no-header-files")
+    options.add("--no-man-pages")
+    modules.empty()
+    modules.add("jdk.unsupported")
+}

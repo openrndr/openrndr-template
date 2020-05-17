@@ -11,5 +11,5 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 14
-      - name: Build apidocs
+      - name: Build sources
         run: ./gradlew build
