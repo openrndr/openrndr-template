@@ -41,6 +41,7 @@ val orxFeatures = setOf(
 //  "orx-shapes",
 //  "orx-syphon",
 //  "orx-temporal-blur",
+//  "orx-time-operators,
 //  "orx-kinect-v1",
     "orx-panel"
 )
