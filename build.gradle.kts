@@ -11,6 +11,7 @@ val applicationMainClass = "TemplateProgramKt"
 
 /*  Which additional (ORX) libraries should be added to this project. */
 val orxFeatures = setOf(
+//  "orx-boofcv",
 //  "orx-camera",
     "orx-compositor",
 //  "orx-easing",
@@ -170,6 +171,10 @@ dependencies {
 
     if ("orx-olive" in orxFeatures) {
         implementation("org.jetbrains.kotlin:kotlin-script-runtime:$kotlinVersion")
+    }
+
+    if ("orx-boofcv" in orxFeatures) {
+        implementation("org.boofcv:boofcv-core:0.35")
     }
 
     implementation(kotlin("stdlib-jdk8"))
