@@ -174,7 +174,7 @@ dependencies {
     }
 
     if ("orx-boofcv" in orxFeatures) {
-        implementation("org.boofcv:boofcv-core:0.35")
+        implementation("org.boofcv:boofcv-core:0.36")
     }
 
     implementation(kotlin("stdlib-jdk8"))
