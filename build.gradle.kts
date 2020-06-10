@@ -173,10 +173,6 @@ dependencies {
         implementation("org.jetbrains.kotlin:kotlin-script-runtime:$kotlinVersion")
     }
 
-    if ("orx-boofcv" in orxFeatures) {
-        implementation("org.boofcv:boofcv-core:0.35")
-    }
-
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("junit", "junit", "4.12")
 }
