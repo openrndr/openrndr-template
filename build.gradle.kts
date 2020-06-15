@@ -246,4 +246,5 @@ runtime {
     options.add("--no-man-pages")
     modules.empty()
     modules.add("jdk.unsupported")
+    modules.add("java.management")
 }
