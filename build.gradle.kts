@@ -13,7 +13,9 @@ val applicationMainClass = "TemplateProgramKt"
 val orxFeatures = setOf(
 //  "orx-boofcv",
 //  "orx-camera",
+//  "orx-chataigne",
     "orx-compositor",
+//  "orx-dnk3"
 //  "orx-easing",
 //  "orx-file-watcher",
 //  "orx-parameters",
@@ -21,11 +23,11 @@ val orxFeatures = setOf(
     "orx-fx",
 //  "orx-glslify",
 //  "orx-gradient-descent",
+    "orx-gui",
+    "orx-image-fit",
 //  "orx-integral-image",
 //  "orx-interval-tree",
 //  "orx-jumpflood",
-    "orx-gui",
-    "orx-image-fit",
 //  "orx-kdtree",
 //  "orx-mesh-generators",
 //  "orx-midi",
@@ -36,14 +38,16 @@ val orxFeatures = setOf(
 //  "orx-osc",
 //  "orx-palette",
 //  "orx-poisson-fill",
+//  "orx-rabbit-control
 //  "orx-runway",
-//  "orx-shader-phrases",
     "orx-shade-styles",
+//  "orx-shader-phrases",
 //  "orx-shapes",
 //  "orx-syphon",
 //  "orx-temporal-blur",
 //  "orx-time-operators,
 //  "orx-kinect-v1",
+
     "orx-panel"
 )
 
@@ -54,10 +58,10 @@ val openrndrFeatures = setOf(
 
 /*  Which version of OPENRNDR and ORX should be used? */
 val openrndrUseSnapshot = false
-val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.42"
+val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.43-rc.15"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.51"
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.52-rc.6"
 
 //<editor-fold desc="This is code for OPENRNDR, no need to edit this .. most of the times">
 val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
@@ -95,8 +99,8 @@ val kotlinVersion = "1.3.72"
 plugins {
     java
     kotlin("jvm") version("1.3.72")
-    id("com.github.johnrengelman.shadow") version ("5.2.0")
-    id("org.beryx.runtime") version ("1.8.1")
+    id("com.github.johnrengelman.shadow") version ("6.0.0")
+    id("org.beryx.runtime") version ("1.9.1")
 }
 
 repositories {
@@ -139,8 +143,8 @@ dependencies {
     implementation(openrndr("extensions"))
     implementation(openrndr("filter"))
 
-    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.6")
-    implementation("io.github.microutils", "kotlin-logging","1.7.9")
+    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.7")
+    implementation("io.github.microutils", "kotlin-logging","1.7.10")
 
     when(applicationLogging) {
         Logging.NONE -> {
@@ -150,9 +154,9 @@ dependencies {
             runtimeOnly("org.slf4j","slf4j-simple","1.7.30")
         }
         Logging.FULL -> {
-            runtimeOnly("org.apache.logging.log4j", "log4j-slf4j-impl", "2.13.1")
-            runtimeOnly("com.fasterxml.jackson.core", "jackson-databind", "2.10.3")
-            runtimeOnly("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml", "2.10.3")
+            runtimeOnly("org.apache.logging.log4j", "log4j-slf4j-impl", "2.13.3")
+            runtimeOnly("com.fasterxml.jackson.core", "jackson-databind", "2.11.1")
+            runtimeOnly("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml", "2.11.1")
         }
     }
 
