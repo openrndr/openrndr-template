@@ -14,7 +14,7 @@ fun main() = application {
 
     program {
         val image = loadImage("data/images/pm5544.png")
-        val font = loadFont("data/fonts/IBMPlexMono-Regular.ttf", 64.0)
+        val font = loadFont("data/fonts/default.otf", 64.0)
 
         extend {
             drawer.drawStyle.colorMatrix = tint(ColorRGBa.WHITE.shade(0.2))
