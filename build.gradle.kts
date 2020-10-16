@@ -5,7 +5,7 @@ import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
 /* the name of this project, default is the template version but you are free to change these */
 group = "org.openrndr.template"
-version = "0.3.13"
+version = "0.3.14"
 
 val applicationMainClass = "TemplateProgramKt"
 
@@ -58,10 +58,10 @@ val openrndrFeatures = setOf(
 
 /*  Which version of OPENRNDR and ORX should be used? */
 val openrndrUseSnapshot = false
-val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.43"
+val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.44"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.52"
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.53"
 
 //<editor-fold desc="This is code for OPENRNDR, no need to edit this .. most of the times">
 val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
@@ -94,13 +94,13 @@ enum class Logging {
 /*  What type of logging should this project use? */
 val applicationLogging = Logging.FULL
 
-val kotlinVersion = "1.3.72"
+val kotlinVersion = "1.4.0"
 
 plugins {
     java
-    kotlin("jvm") version("1.3.72")
-    id("com.github.johnrengelman.shadow") version ("6.0.0")
-    id("org.beryx.runtime") version ("1.9.1")
+    kotlin("jvm") version("1.4.0")
+    id("com.github.johnrengelman.shadow") version ("6.1.0")
+    id("org.beryx.runtime") version ("1.11.4")
 }
 
 repositories {
@@ -143,8 +143,8 @@ dependencies {
     implementation(openrndr("extensions"))
     implementation(openrndr("filter"))
 
-    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.7")
-    implementation("io.github.microutils", "kotlin-logging","1.7.10")
+    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.3.9")
+    implementation("io.github.microutils", "kotlin-logging","1.12.0")
 
     when(applicationLogging) {
         Logging.NONE -> {
