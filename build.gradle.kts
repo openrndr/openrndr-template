@@ -14,6 +14,7 @@ val orxFeatures = setOf(
 //  "orx-boofcv",
 //  "orx-camera",
 //  "orx-chataigne",
+//  "orx-color",
     "orx-compositor",
 //  "orx-dnk3",
 //  "orx-easing",
