@@ -19,7 +19,6 @@ val orxFeatures = setOf(
 //  "orx-dnk3",
 //  "orx-easing",
 //  "orx-file-watcher",
-//  "orx-parameters",
 //  "orx-filter-extension",
     "orx-fx",
 //  "orx-glslify",
@@ -30,6 +29,9 @@ val orxFeatures = setOf(
 //  "orx-interval-tree",
 //  "orx-jumpflood",
 //  "orx-kdtree",
+//  "orx-keyframer",      
+//  "orx-kinect-v1",
+//  "orx-kotlin-parser",
 //  "orx-mesh-generators",
 //  "orx-midi",
 //  "orx-no-clear",
@@ -38,20 +40,24 @@ val orxFeatures = setOf(
     "orx-olive",
 //  "orx-osc",
 //  "orx-palette",
+    "orx-panel",
+//  "orx-parameters",
 //  "orx-poisson-fill",
-//  "orx-rabbit-control,
+//  "orx-rabbit-control",
+//  "orx-realsense2",
 //  "orx-runway",
     "orx-shade-styles",
 //  "orx-shader-phrases",
 //  "orx-shapes",
 //  "orx-syphon",
 //  "orx-temporal-blur",
+//  "orx-tensorflow",    
 //  "orx-time-operators",
-//  "orx-kinect-v1",
-//  "orx-tensorflow",
-    
-    "orx-panel"
-)
+//  "orx-timer",
+//  "orx-triangulation",
+//  "orx-video-profiles",
+    null
+).filterNotNull()
 
 val ormlFeatures = setOf<String>(
 //    "orml-blazepose",
