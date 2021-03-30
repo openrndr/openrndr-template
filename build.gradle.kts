@@ -150,6 +150,10 @@ fun DependencyHandler.openrndr(module: String): Any {
     return "org.openrndr:openrndr-$module:$openrndrVersion"
 }
 
+fun DependencyHandler.openrndrJVM(module: String): Any {
+    return "org.openrndr:openrndr-$module-jvm:$openrndrVersion"
+}
+
 fun DependencyHandler.openrndrNatives(module: String): Any {
     return "org.openrndr:openrndr-$module-natives-$openrndrOs:$openrndrVersion"
 }
@@ -169,6 +173,8 @@ dependencies {
     implementation(openrndr("openal"))
     runtimeOnly(openrndrNatives("openal"))
     implementation(openrndr("core"))
+    implementation(openrndrJVM("math"))
+    implementation(openrndrJVM("color"))
     implementation(openrndr("svg"))
     implementation(openrndr("animatable"))
     implementation(openrndr("extensions"))
