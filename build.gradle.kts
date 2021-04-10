@@ -5,7 +5,7 @@ import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
 /* the name of this project, default is the template version but you are free to change these */
 group = "org.openrndr.template"
-version = "0.3.15"
+version = "0.3.16"
 
 val applicationMainClass = "TemplateProgramKt"
 
@@ -121,11 +121,11 @@ enum class Logging {
 /*  What type of logging should this project use? */
 val applicationLogging = Logging.FULL
 
-val kotlinVersion = "1.4.31"
+val kotlinVersion = "1.4.32"
 
 plugins {
     java
-    kotlin("jvm") version("1.4.31")
+    kotlin("jvm") version("1.4.32")
     id("com.github.johnrengelman.shadow") version ("6.1.0")
     id("org.beryx.runtime") version ("1.11.4")
 }
