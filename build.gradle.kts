@@ -5,7 +5,7 @@ import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
 /* the name of this project, default is the template version but you are free to change these */
 group = "org.openrndr.template"
-version = "0.3.16"
+version = "0.3.17"
 
 val applicationMainClass = "TemplateProgramKt"
 
@@ -135,7 +135,7 @@ repositories {
     if (openrndrUseSnapshot || orxUseSnapshot) {
         mavenLocal()
     }
-    maven(url = "https://dl.bintray.com/openrndr/openrndr")
+    maven(url = "https://maven.openrndr.org")
 }
 
 fun DependencyHandler.orx(module: String): Any {
