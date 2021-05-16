@@ -5,7 +5,7 @@ import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
 /* the name of this project, default is the template version but you are free to change these */
 group = "org.openrndr.template"
-version = "0.3.17"
+version = "0.3.18"
 
 val applicationMainClass = "TemplateProgramKt"
 
@@ -79,10 +79,10 @@ val openrndrFeatures = setOf(
 
 /*  Which version of OPENRNDR and ORX should be used? */
 val openrndrUseSnapshot = false
-val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.46"
+val openrndrVersion = if (openrndrUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.58"
 
 val orxUseSnapshot = false
-val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.56"
+val orxVersion = if (orxUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.58"
 
 val ormlUseSnapshot = false
 val ormlVersion = if (ormlUseSnapshot) "0.4.0-SNAPSHOT" else "0.3.0-rc.5"
@@ -121,11 +121,11 @@ enum class Logging {
 /*  What type of logging should this project use? */
 val applicationLogging = Logging.FULL
 
-val kotlinVersion = "1.4.32"
+val kotlinVersion = "1.5.0"
 
 plugins {
     java
-    kotlin("jvm") version("1.4.32")
+    kotlin("jvm") version("1.5.0")
     id("com.github.johnrengelman.shadow") version ("6.1.0")
     id("org.beryx.runtime") version ("1.11.4")
 }
@@ -174,8 +174,8 @@ dependencies {
     implementation(openrndr("extensions"))
     implementation(openrndr("filter"))
 
-    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.4.2")
-    implementation("io.github.microutils", "kotlin-logging-jvm","2.0.4")
+    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.5.0-RC")
+    implementation("io.github.microutils", "kotlin-logging-jvm","2.0.6")
 
     when(applicationLogging) {
         Logging.NONE -> {
