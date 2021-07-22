@@ -1,4 +1,8 @@
 # OPENRNDR template project
+
+Attention: you are using a template for OPENRNDR 0.4, which is currently not been released yet. This template assumes
+that you have build and published `OPENRNDR-0.5.1-SNAPSHOT` and `ORX-0.5.1-SNAPSHOT` to your local maven repository. 
+
 A feature rich template for creating OPENRNDR programs based on Gradle/Kts
 
 The template consists of a configuration for Gradle and an example OPENRNDR program. The Gradle configuration should serve as the
