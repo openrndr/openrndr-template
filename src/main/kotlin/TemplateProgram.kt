@@ -6,7 +6,7 @@ import org.openrndr.draw.tint
 import kotlin.math.cos
 import kotlin.math.sin
 
-suspend fun main() = application {
+fun main() = application {
     configure {
         width = 768
         height = 576
