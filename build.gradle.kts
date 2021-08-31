@@ -1,7 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
 /* the name of this project, default is the template version but you are free to change these */
 group = "org.openrndr.template"
@@ -77,7 +75,7 @@ val openrndrFeatures = setOf(
     "video"
 )
 
-/*  Which version of OPENRNDR and ORX should be used? */
+/*  Which version of OPENRNDR, ORX and ORML should be used? */
 val openrndrUseSnapshot = true
 val openrndrVersion = if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0"
 
@@ -90,42 +88,15 @@ val ormlVersion = if (ormlUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0"
 // choices are "orx-tensorflow-gpu", "orx-tensorflow-mkl", "orx-tensorflow"
 val orxTensorflowBackend = "orx-tensorflow-mkl"
 
-//<editor-fold desc="This is code for OPENRNDR, no need to edit this .. most of the times">
-val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
-
-val openrndrOs = if (project.hasProperty("targetPlatform")) {
-    val platform : String = project.property("targetPlatform") as String
-    if (platform !in supportedPlatforms) {
-        throw IllegalArgumentException("target platform not supported: $platform")
-    } else {
-        platform
-    }
-} else when (OperatingSystem.current()) {
-    OperatingSystem.WINDOWS -> "windows"
-    OperatingSystem.MAC_OS -> "macos"
-    OperatingSystem.LINUX -> when(val h = DefaultNativePlatform("current").architecture.name) {
-        "x86-64" -> "linux-x64"
-        "aarch64" -> "linux-arm64"
-        else ->throw IllegalArgumentException("architecture not supported: $h")
-    }
-    else -> throw IllegalArgumentException("os not supported")
-}
-//</editor-fold>
-
-enum class Logging {
-    NONE,
-    SIMPLE,
-    FULL
-}
+val openrndrOs = OS.getOsString(project)
 
 /*  What type of logging should this project use? */
 val applicationLogging = Logging.FULL
 
-val kotlinVersion = "1.5.21"
-
 plugins {
     java
-    kotlin("jvm") version("1.5.21")
+    kotlin("jvm") version (Versions.kotlin)
+    //kotlin("plugin.serialization") version "1.3.70"
     id("com.github.johnrengelman.shadow") version ("6.1.0")
     id("org.beryx.runtime") version ("1.11.4")
 }
@@ -139,7 +110,7 @@ repositories {
 }
 
 fun DependencyHandler.orx(module: String): Any {
-        return "org.openrndr.extra:$module:$orxVersion"
+    return "org.openrndr.extra:$module:$orxVersion"
 }
 
 fun DependencyHandler.orml(module: String): Any {
@@ -178,10 +149,10 @@ dependencies {
 
     when(applicationLogging) {
         Logging.NONE -> {
-            runtimeOnly("org.slf4j","slf4j-nop","1.7.30")
+            runtimeOnly("org.slf4j", "slf4j-nop", "1.7.30")
         }
         Logging.SIMPLE -> {
-            runtimeOnly("org.slf4j","slf4j-simple","1.7.30")
+            runtimeOnly("org.slf4j", "slf4j-simple", "1.7.30")
         }
         Logging.FULL -> {
             runtimeOnly("org.apache.logging.log4j", "log4j-slf4j-impl", "2.13.3")
@@ -198,7 +169,7 @@ dependencies {
     for (feature in orxFeatures) {
         implementation(orx(feature))
     }
-    
+
     for (feature in ormlFeatures) {
         implementation(orml(feature))
     }
@@ -212,7 +183,7 @@ dependencies {
     }
 
     if ("orx-olive" in orxFeatures) {
-        implementation("org.jetbrains.kotlin:kotlin-script-runtime:$kotlinVersion")
+        implementation("org.jetbrains.kotlin:kotlin-script-runtime:${Versions.kotlin}")
     }
 
     implementation(kotlin("stdlib-jdk8"))
@@ -242,23 +213,9 @@ tasks {
     }
     named<org.beryx.runtime.JPackageTask>("jpackage") {
         doLast {
-            when (OperatingSystem.current()) {
-                OperatingSystem.WINDOWS, OperatingSystem.LINUX -> {
-                    copy {
-                        from("data") {
-                            include("**/*")
-                        }
-                        into("build/jpackage/openrndr-application/data")
-                    }
-                }
-                OperatingSystem.MAC_OS -> {
-                    copy {
-                        from("data") {
-                            include("**/*")
-                        }
-                        into("build/jpackage/openrndr-application.app/data")
-                    }
-                }
+            copy {
+                from("data") { include("**/*") }
+                into(Paths.jpackageData())
             }
         }
     }
@@ -276,7 +233,7 @@ runtime {
     jpackage {
         imageName = "openrndr-application"
         skipInstaller = true
-        if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
+        if (OS.isMac()) {
             jvmArgs.add("-XstartOnFirstThread")
         }
     }
