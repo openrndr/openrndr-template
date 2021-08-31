@@ -88,7 +88,9 @@ val ormlVersion = if (ormlUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0"
 // choices are "orx-tensorflow-gpu", "orx-tensorflow-mkl", "orx-tensorflow"
 val orxTensorflowBackend = "orx-tensorflow-mkl"
 
-val openrndrOs = OS.getOsString(project)
+val dependency = Dependency(
+    project, openrndrVersion, orxVersion, ormlVersion
+)
 
 /*  What type of logging should this project use? */
 val applicationLogging = Logging.FULL
@@ -109,45 +111,26 @@ repositories {
     maven(url = "https://maven.openrndr.org")
 }
 
-fun DependencyHandler.orx(module: String): Any {
-    return "org.openrndr.extra:$module:$orxVersion"
-}
-
-fun DependencyHandler.orml(module: String): Any {
-    return "org.openrndr.orml:$module:$ormlVersion"
-}
-
-fun DependencyHandler.openrndr(module: String): Any {
-    return "org.openrndr:openrndr-$module:$openrndrVersion"
-}
-
-fun DependencyHandler.openrndrNatives(module: String): Any {
-    return "org.openrndr:openrndr-$module-natives-$openrndrOs:$openrndrVersion"
-}
-
-fun DependencyHandler.orxNatives(module: String): Any {
-    return "org.openrndr.extra:$module-natives-$openrndrOs:$orxVersion"
-}
-
 dependencies {
     /*  This is where you add additional (third-party) dependencies */
 
 //    implementation("org.jsoup:jsoup:1.12.2")
 //    implementation("com.google.code.gson:gson:2.8.6")
 
-    runtimeOnly(openrndr("gl3"))
-    runtimeOnly(openrndrNatives("gl3"))
-    implementation(openrndr("openal"))
-    runtimeOnly(openrndrNatives("openal"))
-    implementation(openrndr("application"))
-    implementation(openrndr("svg"))
-    implementation(openrndr("animatable"))
-    implementation(openrndr("extensions"))
-    implementation(openrndr("filter"))
-    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core","1.5.0")
-    implementation("io.github.microutils", "kotlin-logging-jvm","2.0.6")
+    runtimeOnly(dependency.openrndr("gl3"))
+    runtimeOnly(dependency.openrndrNatives("gl3"))
+    implementation(dependency.openrndr("openal"))
+    runtimeOnly(dependency.openrndrNatives("openal"))
+    implementation(dependency.openrndr("application"))
+    implementation(dependency.openrndr("svg"))
+    implementation(dependency.openrndr("animatable"))
+    implementation(dependency.openrndr("extensions"))
+    implementation(dependency.openrndr("filter"))
 
-    when(applicationLogging) {
+    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core", "1.5.0")
+    implementation("io.github.microutils", "kotlin-logging-jvm", "2.0.6")
+
+    when (applicationLogging) {
         Logging.NONE -> {
             runtimeOnly("org.slf4j", "slf4j-nop", "1.7.30")
         }
@@ -162,24 +145,24 @@ dependencies {
     }
 
     if ("video" in openrndrFeatures) {
-        implementation(openrndr("ffmpeg"))
-        runtimeOnly(openrndrNatives("ffmpeg"))
+        implementation(dependency.openrndr("ffmpeg"))
+        runtimeOnly(dependency.openrndrNatives("ffmpeg"))
     }
 
     for (feature in orxFeatures) {
-        implementation(orx(feature))
+        implementation(dependency.orx(feature))
     }
 
     for (feature in ormlFeatures) {
-        implementation(orml(feature))
+        implementation(dependency.orml(feature))
     }
 
     if ("orx-tensorflow" in orxFeatures) {
-        runtimeOnly("org.openrndr.extra:$orxTensorflowBackend-natives-$openrndrOs:$orxVersion")
+        runtimeOnly(dependency.orxNatives(orxTensorflowBackend))
     }
 
     if ("orx-kinect-v1" in orxFeatures) {
-        runtimeOnly(orxNatives("orx-kinect-v1"))
+        runtimeOnly(dependency.orxNatives("orx-kinect-v1"))
     }
 
     if ("orx-olive" in orxFeatures) {
@@ -222,7 +205,7 @@ tasks {
 }
 
 tasks.register<Zip>("jpackageZip") {
-    archiveFileName.set("openrndr-application-$openrndrOs.zip")
+    archiveFileName.set("openrndr-application-${OS.getOsString(project)}.zip")
     from("$buildDir/jpackage") {
         include("**/*")
     }
