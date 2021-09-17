@@ -3,27 +3,34 @@ import org.gradle.internal.os.OperatingSystem
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
 object OS {
-    private val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
+    private const val WINDOWS = "windows"
+    private const val MACOS = "macos"
+    private const val LINUX64 = "linux-x64"
+    private const val LINUXARM64 = "linux-arm64"
 
-    fun isMac() = OperatingSystem.current() == OperatingSystem.MAC_OS
+    private val supportedPlatforms =
+        setOf(WINDOWS, MACOS, LINUX64, LINUXARM64)
+
+    fun isMac() = OperatingSystem.current().isMacOsX
 
     // Returns one of the `supportPlatforms` or throws an exception
-    fun getOsString(project: Project) = if (project.hasProperty("targetPlatform")) {
-        val platform: String = project.property("targetPlatform") as String
-        if (platform !in supportedPlatforms) {
-            throw IllegalArgumentException("target platform not supported: $platform")
+    fun getOsString(project: Project) =
+        if (project.hasProperty("targetPlatform")) {
+            val platform = project.property("targetPlatform") as String
+            if (platform !in supportedPlatforms) {
+                throw IllegalArgumentException("target platform not supported: $platform")
+            } else {
+                platform
+            }
         } else {
-            platform
+            val curr = OperatingSystem.current()
+            if (curr.isWindows) WINDOWS
+            else if (curr.isMacOsX) MACOS
+            else if (curr.isLinux) when (val arch =
+                DefaultNativePlatform("current").architecture.name) {
+                "x86-64" -> LINUX64
+                "aarch64" -> LINUXARM64
+                else -> throw IllegalArgumentException("architecture not supported: $arch")
+            } else throw IllegalArgumentException("os not supported")
         }
-    } else when (OperatingSystem.current()) {
-        OperatingSystem.WINDOWS -> "windows"
-        OperatingSystem.MAC_OS -> "macos"
-        OperatingSystem.LINUX -> when (val arch =
-            DefaultNativePlatform("current").architecture.name) {
-            "x86-64" -> "linux-x64"
-            "aarch64" -> "linux-arm64"
-            else -> throw IllegalArgumentException("architecture not supported: $arch")
-        }
-        else -> throw IllegalArgumentException("os not supported")
-    }
 }

@@ -1,14 +1,21 @@
+import Versions.openrndrUseSnapshot
+import Versions.ormlUseSnapshot
+import Versions.orxUseSnapshot
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-/* the name of this project, default is the template version but you are free to change these */
+// The name of this project,
+// default is the template version
+// but you are free to change these
 group = "org.openrndr.template"
 version = "0.4.0"
 
 val applicationMainClass = "TemplateProgramKt"
 
-/*  Which additional (ORX) libraries should be added to this project. */
-val orxFeatures = setOf(
+val openrndrDependencies = OpenrndrDependencies(project)
+
+//  Additional (ORX) libraries to add to this project.
+openrndrDependencies.orxFeatures = listOfNotNull(
 //  "orx-boofcv",
 //  "orx-camera",
 //  "orx-chataigne",
@@ -27,7 +34,7 @@ val orxFeatures = setOf(
 //  "orx-interval-tree",
 //  "orx-jumpflood",
 //  "orx-kdtree",
-//  "orx-keyframer",      
+//  "orx-keyframer",
 //  "orx-kinect-v1",
 //  "orx-kotlin-parser",
 //  "orx-mesh-generators",
@@ -49,51 +56,46 @@ val orxFeatures = setOf(
 //  "orx-shapes",
 //  "orx-syphon",
 //  "orx-temporal-blur",
-//  "orx-tensorflow",    
+//  "orx-tensorflow",
 //  "orx-time-operators",
 //  "orx-timer",
 //  "orx-triangulation",
 //  "orx-video-profiles",
     null
-).filterNotNull()
-
-val ormlFeatures = setOf<String>(
-//    "orml-blazepose",
-//    "orml-dbface",
-//    "orml-facemesh",
-//    "orml-image-classifier",
-//    "orml-psenet",
-//    "orml-ssd",
-//    "orml-style-transfer",
-//    "orml-super-resolution",
-//    "orml-u2net"
 )
 
-
-/* Which OPENRNDR libraries should be added to this project? */
-val openrndrFeatures = setOf(
-    "video"
+//  Machine learning models to add to this project.
+openrndrDependencies.ormlFeatures = listOfNotNull(
+//  "orml-blazepose",
+//  "orml-dbface",
+//  "orml-facemesh",
+//  "orml-image-classifier",
+//  "orml-psenet",
+//  "orml-ssd",
+//  "orml-style-transfer",
+//  "orml-super-resolution",
+//  "orml-u2net",
+    null
 )
 
-/*  Which version of OPENRNDR, ORX and ORML should be used? */
-val openrndrUseSnapshot = true
-val openrndrVersion = if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0"
-
-val orxUseSnapshot = true
-val orxVersion = if (orxUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0"
-
-val ormlUseSnapshot = true
-val ormlVersion = if (ormlUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0"
-
-// choices are "orx-tensorflow-gpu", "orx-tensorflow-mkl", "orx-tensorflow"
-val orxTensorflowBackend = "orx-tensorflow-mkl"
-
-val dependency = Dependency(
-    project, openrndrVersion, orxVersion, ormlVersion
+// OPENRNDR libraries to add to this project.
+openrndrDependencies.openrndrFeatures = listOfNotNull(
+    "video",
+    null
 )
 
-/*  What type of logging should this project use? */
-val applicationLogging = Logging.FULL
+// Choose one of the Tensorflow machine learning backends:
+// "orx-tensorflow-gpu", "orx-tensorflow-mkl", "orx-tensorflow"
+openrndrDependencies.orxTensorflowBackend = "orx-tensorflow-mkl"
+
+// If you are developing OPENRNDR or want to test
+// coming features you can clone the corresponding repos,
+// build them locally and activate them here:
+openrndrUseSnapshot = true
+orxUseSnapshot = true
+ormlUseSnapshot = true
+
+val applicationLogging = Logging.Type.FULL
 
 plugins {
     java
@@ -111,63 +113,15 @@ repositories {
     maven(url = "https://maven.openrndr.org")
 }
 
+// This is where you add additional (third-party) dependencies
 dependencies {
-    /*  This is where you add additional (third-party) dependencies */
 
-//    implementation("org.jsoup:jsoup:1.12.2")
-//    implementation("com.google.code.gson:gson:2.8.6")
+    // implementation("org.jsoup:jsoup:1.12.2")
+    // implementation("com.google.code.gson:gson:2.8.6")
 
-    runtimeOnly(dependency.openrndr("gl3"))
-    runtimeOnly(dependency.openrndrNatives("gl3"))
-    implementation(dependency.openrndr("openal"))
-    runtimeOnly(dependency.openrndrNatives("openal"))
-    implementation(dependency.openrndr("application"))
-    implementation(dependency.openrndr("svg"))
-    implementation(dependency.openrndr("animatable"))
-    implementation(dependency.openrndr("extensions"))
-    implementation(dependency.openrndr("filter"))
-
-    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core", "1.5.0")
-    implementation("io.github.microutils", "kotlin-logging-jvm", "2.0.6")
-
-    when (applicationLogging) {
-        Logging.NONE -> {
-            runtimeOnly("org.slf4j", "slf4j-nop", "1.7.30")
-        }
-        Logging.SIMPLE -> {
-            runtimeOnly("org.slf4j", "slf4j-simple", "1.7.30")
-        }
-        Logging.FULL -> {
-            runtimeOnly("org.apache.logging.log4j", "log4j-slf4j-impl", "2.13.3")
-            runtimeOnly("com.fasterxml.jackson.core", "jackson-databind", "2.11.1")
-            runtimeOnly("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml", "2.11.1")
-        }
-    }
-
-    if ("video" in openrndrFeatures) {
-        implementation(dependency.openrndr("ffmpeg"))
-        runtimeOnly(dependency.openrndrNatives("ffmpeg"))
-    }
-
-    for (feature in orxFeatures) {
-        implementation(dependency.orx(feature))
-    }
-
-    for (feature in ormlFeatures) {
-        implementation(dependency.orml(feature))
-    }
-
-    if ("orx-tensorflow" in orxFeatures) {
-        runtimeOnly(dependency.orxNatives(orxTensorflowBackend))
-    }
-
-    if ("orx-kinect-v1" in orxFeatures) {
-        runtimeOnly(dependency.orxNatives("orx-kinect-v1"))
-    }
-
-    if ("orx-olive" in orxFeatures) {
-        implementation("org.jetbrains.kotlin:kotlin-script-runtime:${Versions.kotlin}")
-    }
+    openrndrDependencies.runtimeOnly().forEach { runtimeOnly(it) }
+    openrndrDependencies.implementation().forEach { implementation(it) }
+    Logging.runtimeOnly(applicationLogging).forEach { runtimeOnly(it) }
 
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("junit", "junit", "4.12")
@@ -175,13 +129,13 @@ dependencies {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-configure<JavaPluginConvention> {
+configure<JavaPluginExtension> {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
+
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
-
 
 project.setProperty("mainClassName", applicationMainClass)
 tasks {
@@ -221,12 +175,16 @@ runtime {
         }
     }
     options.empty()
-    options.add("--strip-debug")
-    options.add("--compress")
-    options.add("1")
-    options.add("--no-header-files")
-    options.add("--no-man-pages")
+    options.addAll(
+        "--strip-debug",
+        "--compress",
+        "1",
+        "--no-header-files",
+        "--no-man-pages"
+    )
     modules.empty()
-    modules.add("jdk.unsupported")
-    modules.add("java.management")
+    modules.addAll(
+        "jdk.unsupported",
+        "java.management"
+    )
 }
