@@ -1,13 +1,11 @@
 object Versions {
     const val kotlin = "1.5.30"
 
-    private const val defaultVersion = "0.4.0"
     private const val snapshotVersion = "0.5.1-SNAPSHOT"
 
-    // The following versions can be customized independently
-    var openrndr = defaultVersion
-    var orx = defaultVersion
-    var orml = defaultVersion
+    var openrndr = "0.3.58"
+    var orx = "0.3.58"
+    var orml = "0.3.0-rc.5"
 
     var openrndrUseSnapshot: Boolean = false
         set(value) {
@@ -26,4 +24,6 @@ object Versions {
             field = value
             if (value) orml = snapshotVersion
         }
+
+    fun usesSnapshot() = openrndrUseSnapshot || orxUseSnapshot || ormlUseSnapshot
 }
