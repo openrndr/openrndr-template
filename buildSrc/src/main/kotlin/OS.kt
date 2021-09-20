@@ -24,13 +24,16 @@ object OS {
             }
         } else {
             val curr = OperatingSystem.current()
-            if (curr.isWindows) WINDOWS
-            else if (curr.isMacOsX) MACOS
-            else if (curr.isLinux) when (val arch =
-                DefaultNativePlatform("current").architecture.name) {
-                "x86-64" -> LINUX64
-                "aarch64" -> LINUXARM64
-                else -> throw IllegalArgumentException("architecture not supported: $arch")
-            } else throw IllegalArgumentException("os not supported")
+            when {
+                curr.isWindows -> WINDOWS
+                curr.isMacOsX -> MACOS
+                curr.isLinux -> when (val arch =
+                    DefaultNativePlatform("current").architecture.name) {
+                    "x86-64" -> LINUX64
+                    "aarch64" -> LINUXARM64
+                    else -> throw IllegalArgumentException("architecture not supported: $arch")
+                }
+                else -> throw IllegalArgumentException("os not supported")
+            }
         }
 }
