@@ -37,7 +37,7 @@ class OpenrndrDependencies(project: Project) {
 
     fun implementation() = listOfNotNull(
         openrndr("openal"),
-        openrndr("application"),
+        openrndr("core"),
         openrndr("svg"),
         openrndr("animatable"),
         openrndr("extensions"),
