@@ -1,4 +1,4 @@
-# OPENRNDR template project
+# OPENRNDR template project 
 A feature rich template for creating OPENRNDR programs based on Gradle/Kts
 
 The template consists of a configuration for Gradle and an example OPENRNDR program. The Gradle configuration should serve as the
