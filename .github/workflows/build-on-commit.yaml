@@ -12,4 +12,4 @@ jobs:
         with:
           java-version: 14
       - name: Build sources
-        run: ./gradlew build
+        run: ./gradlew build 
