@@ -9,7 +9,7 @@ import org.openrndr.extra.olive.oliveProgram
  *  oliveProgram {} can be changed while the program is running.
  */
 
-suspend fun main() = application {
+fun main() = application {
     configure {
         width = 800
         height = 800
