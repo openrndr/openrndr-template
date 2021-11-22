@@ -4,13 +4,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.jetbrains.kotlin.utils.addToStdlib.ifTrue
 
-/* the name of this project, default is the template version but you are free to change these */
 group = "org.openrndr.template"
 version = "0.4.0"
 
 val applicationMainClass = "TemplateProgramKt"
 
-/*  Which additional (ORX) libraries should be added to this project. */
+/**  ## additional ORX features to be added to this project */
 val orxFeatures = setOf(
 //  "orx-boofcv",
 //  "orx-camera",
@@ -60,6 +59,7 @@ val orxFeatures = setOf(
     null
 ).filterNotNull()
 
+/** ## additional ORML features to be added to this project */
 val ormlFeatures = setOf<String>(
 //    "orml-blazepose",
 //    "orml-dbface",
@@ -72,12 +72,12 @@ val ormlFeatures = setOf<String>(
 //    "orml-u2net"
 )
 
-/* Which OPENRNDR libraries should be added to this project? */
+/** ## additional OPENRNDR features to be added to this project */
 val openrndrFeatures = setOf(
     "video"
 )
 
-/*  What type of logging should this project use? */
+/** ## configure the type of logging this project uses */
 enum class Logging { NONE, SIMPLE, FULL }
 
 val applicationLogging = Logging.FULL
@@ -183,19 +183,10 @@ runtime {
     jpackage {
         imageName = "openrndr-application"
         skipInstaller = true
-        if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
-            jvmArgs.add("-XstartOnFirstThread")
-        }
+        if (OperatingSystem.current() == OperatingSystem.MAC_OS) jvmArgs.add("-XstartOnFirstThread")
     }
-    options.empty()
-    options.add("--strip-debug")
-    options.add("--compress")
-    options.add("1")
-    options.add("--no-header-files")
-    options.add("--no-man-pages")
-    modules.empty()
-    modules.add("jdk.unsupported")
-    modules.add("java.management")
+    options.set(listOf("--strip-debug", "--compress", "1", "--no--header-files", "--no-man-pages"))
+    modules.set(listOf("jdk.unsupported", "java.management"))
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
