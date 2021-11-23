@@ -16,6 +16,7 @@ dependencyResolutionManagement {
             alias("kotlin-jvm").toPluginId("org.jetbrains.kotlin.jvm").version("1.6.0")
             alias("shadow").toPluginId("com.github.johnrengelman.shadow").version("7.1.0")
             alias("runtime").toPluginId("org.beryx.runtime").version("1.12.7")
+            alias("gitarchive-tomarkdown").toPluginId("org.openrndr.extra.gitarchiver.tomarkdown").versionRef("orx")
 
             alias("kotlin-script-runtime").to("org.jetbrains.kotlin", "kotlin-script-runtime").versionRef("kotlin")
 
@@ -40,5 +41,12 @@ dependencyResolutionManagement {
             alias("gson").to("com.google.code.gson:gson:2.8.7")
             alias("csv").to("com.github.doyaaaaaken:kotlin-csv-jvm:1.2.0")
         }
+    }
+}
+
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
     }
 }
