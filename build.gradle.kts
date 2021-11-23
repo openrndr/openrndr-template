@@ -89,6 +89,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.shadow)
     alias(libs.plugins.runtime)
+    alias(libs.plugins.gitarchive.tomarkdown).apply(false)
 }
 
 repositories {
@@ -187,6 +188,12 @@ runtime {
     }
     options.set(listOf("--strip-debug", "--compress", "1", "--no--header-files", "--no-man-pages"))
     modules.set(listOf("jdk.unsupported", "java.management"))
+}
+
+// ------------------------------------------------------------------------------------------------------------------ //
+
+tasks.register<org.openrndr.extra.gitarchiver.GitArchiveToMarkdown>("gitArchiveToMarkDown") {
+    historySize.set(20)
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
