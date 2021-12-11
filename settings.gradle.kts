@@ -28,7 +28,7 @@ dependencyResolutionManagement {
             alias("jackson-databind").to("com.fasterxml.jackson.core", "jackson-databind").versionRef("jackson")
             alias("jackson-json").to("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml").versionRef("jackson")
 
-            version("log4j", "2.14.1")
+            version("log4j", "2.15.0")
             alias("log4j-slf4j").to("org.apache.logging.log4j", "log4j-slf4j-impl").versionRef("log4j")
 
             version("kotlinx-coroutines", "1.5.2")
