@@ -185,7 +185,7 @@ dependencies {
             runtimeOnly("org.slf4j","slf4j-simple","1.7.30")
         }
         Logging.FULL -> {
-            runtimeOnly("org.apache.logging.log4j", "log4j-slf4j-impl", "2.15.0")
+            runtimeOnly("org.apache.logging.log4j", "log4j-slf4j-impl", "2.17.0")
             runtimeOnly("com.fasterxml.jackson.core", "jackson-databind", "2.11.1")
             runtimeOnly("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml", "2.11.1")
         }
