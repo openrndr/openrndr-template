@@ -1,16 +1,16 @@
 enableFeaturePreview("VERSION_CATALOGS")
 rootProject.name = "openrndr-template"
 
-val openrndrUseSnapshot = true
-val orxUseSnapshot = true
+val openrndrUseSnapshot = false
+val orxUseSnapshot = false
 val ormlUseSnapshot = true
 
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
             version("kotlin", "1.6.0")
-            version("openrndr", if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0")
-            version("orx", if (orxUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0")
+            version("openrndr", if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0-rc.5")
+            version("orx", if (orxUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0-rc.5")
             version("orml", if (ormlUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0")
 
             alias("kotlin-jvm").toPluginId("org.jetbrains.kotlin.jvm").version("1.6.0")
