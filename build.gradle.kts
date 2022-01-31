@@ -187,7 +187,7 @@ runtime {
         skipInstaller = true
         if (OperatingSystem.current() == OperatingSystem.MAC_OS) jvmArgs.add("-XstartOnFirstThread")
     }
-    options.set(listOf("--strip-debug", "--compress", "1", "--no--header-files", "--no-man-pages"))
+    options.set(listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages"))
     modules.set(listOf("jdk.unsupported", "java.management"))
 }
 
