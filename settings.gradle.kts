@@ -8,12 +8,12 @@ val ormlUseSnapshot = true
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            version("kotlin", "1.6.0")
-            version("openrndr", if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0-rc.5")
-            version("orx", if (orxUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0-rc.5")
+            version("kotlin", "1.6.10")
+            version("openrndr", if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0-rc.6")
+            version("orx", if (orxUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0-rc.7")
             version("orml", if (ormlUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0")
 
-            alias("kotlin-jvm").toPluginId("org.jetbrains.kotlin.jvm").version("1.6.0")
+            alias("kotlin-jvm").toPluginId("org.jetbrains.kotlin.jvm").version("1.6.10")
             alias("shadow").toPluginId("com.github.johnrengelman.shadow").version("7.1.0")
             alias("runtime").toPluginId("org.beryx.runtime").version("1.12.7")
             alias("gitarchive-tomarkdown").toPluginId("org.openrndr.extra.gitarchiver.tomarkdown").versionRef("orx")
