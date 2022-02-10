@@ -217,7 +217,10 @@ class Openrndr {
         }
     } else when (OperatingSystem.current()) {
         OperatingSystem.WINDOWS -> "windows"
-        OperatingSystem.MAC_OS -> "macos"
+        OperatingSystem.MAC_OS -> when (val h = DefaultNativePlatform("current").architecture.name) {
+            "aarch64" -> "macos-arm64"
+            else -> "macos"
+        }
         OperatingSystem.LINUX -> when (val h = DefaultNativePlatform("current").architecture.name) {
             "x86-64" -> "linux-x64"
             "aarch64" -> "linux-arm64"
@@ -263,5 +266,5 @@ class Openrndr {
         }
     }
 }
-
+println("this is the architecture we found: ${DefaultNativePlatform("current").architecture.name}")
 val openrndr = Openrndr()
