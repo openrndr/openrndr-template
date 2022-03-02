@@ -28,17 +28,17 @@ dependencyResolutionManagement {
             alias("jackson-databind").to("com.fasterxml.jackson.core", "jackson-databind").versionRef("jackson")
             alias("jackson-json").to("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml").versionRef("jackson")
 
-            version("log4j", "2.17.0")
+            version("log4j", "2.17.2")
             alias("log4j-slf4j").to("org.apache.logging.log4j", "log4j-slf4j-impl").versionRef("log4j")
 
-            version("kotlinx-coroutines", "1.5.2")
+            version("kotlinx-coroutines", "1.6.0")
             alias("kotlinx-coroutines-core").to("org.jetbrains.kotlinx", "kotlinx-coroutines-core").versionRef("kotlinx-coroutines")
 
-            alias("kotlin-logging").to("io.github.microutils:kotlin-logging-jvm:2.0.10")
+            alias("kotlin-logging").to("io.github.microutils:kotlin-logging-jvm:2.1.21")
             alias("junit").to("junit:junit:4.13.2")
 
             alias("jsoup").to("org.jsoup:jsoup:1.14.3")
-            alias("gson").to("com.google.code.gson:gson:2.8.7")
+            alias("gson").to("com.google.code.gson:gson:2.9.0")
             alias("csv").to("com.github.doyaaaaaken:kotlin-csv-jvm:1.2.0")
         }
     }
