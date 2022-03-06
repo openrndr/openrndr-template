@@ -204,8 +204,8 @@ class Openrndr {
     val orxVersion = libs.versions.orx.get()
     val ormlVersion = libs.versions.orml.get()
 
-    // choices are "orx-tensorflow-gpu", "orx-tensorflow-mkl", "orx-tensorflow"
-    val orxTensorflowBackend = "orx-tensorflow-mkl"
+    // choices are "orx-tensorflow-gpu", "orx-tensorflow"
+    val orxTensorflowBackend = "orx-tensorflow"
 
     val os = if (project.hasProperty("targetPlatform")) {
         val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")

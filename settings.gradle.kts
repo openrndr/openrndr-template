@@ -14,18 +14,18 @@ dependencyResolutionManagement {
             version("orml", if (ormlUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0")
 
             plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").version("1.6.10")
-            plugin("shadow", "com.github.johnrengelman.shadow").version("7.1.0")
+            plugin("shadow", "com.github.johnrengelman.shadow").version("7.1.2")
             plugin("runtime", "org.beryx.runtime").version("1.12.7")
 
             plugin("gitarchive-tomarkdown", "org.openrndr.extra.gitarchiver.tomarkdown").versionRef("orx")
 
             library("kotlin-script-runtime", "org.jetbrains.kotlin", "kotlin-script-runtime").versionRef("kotlin")
 
-            version("slf4j", "1.7.32")
+            version("slf4j", "1.7.36")
             library("slf4j-nop", "org.sl4j", "slf4j-nop").versionRef("slf4j")
             library("slf4j-simple", "org.sl4j", "slf4j-simple").versionRef("slf4j")
 
-            version("jackson", "2.11.1")
+            version("jackson", "2.13.1")
             library("jackson-databind", "com.fasterxml.jackson.core", "jackson-databind").versionRef("jackson")
             library("jackson-json", "com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml").versionRef("jackson")
 
