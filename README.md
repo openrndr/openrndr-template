@@ -16,7 +16,7 @@ You will find some [basic instructions](https://guide.openrndr.org/#/02_Getting_
  - `jpackageZip` creates a zip with a stand-alone executable for the current platform (works with Java 14 only)
 
 ## Cross builds
-To create runnable jars for a platform different from the platform you use to build one uses `./gradlew jar --PtargetPlatform=<platform>`. The supported platforms are `windows`, `macos`, `linux-x64` and `linux-arm64`. Note that the `linux-arm64` platform will only work with OPENRNDR snapshot builds from master and OPENRNDR 0.3.39 (a future version).
+To create runnable jars for a platform different from the platform you use to build one uses `./gradlew jar --PtargetPlatform=<platform>`. The supported platforms are `windows`, `macos`, `linux-x64` and `linux-arm64`. 
 
 ## Github Actions
 
