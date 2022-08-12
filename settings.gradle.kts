@@ -8,12 +8,12 @@ val ormlUseSnapshot = true
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            version("kotlin", "1.6.21")
+            version("kotlin", "1.7.10")
             version("openrndr", if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0")
             version("orx", if (orxUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0-1")
             version("orml", if (ormlUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0")
 
-            plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").version("1.6.21")
+            plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").versionRef("kotlin")
             plugin("shadow", "com.github.johnrengelman.shadow").version("7.1.2")
             plugin("runtime", "org.beryx.runtime").version("1.12.7")
 
