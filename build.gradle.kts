@@ -1,8 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.internal.os.OperatingSystem
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
-import org.jetbrains.kotlin.utils.addToStdlib.ifTrue
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = "org.openrndr.template"
 version = "0.4.0"
@@ -10,7 +9,7 @@ version = "0.4.0"
 val applicationMainClass = "TemplateProgramKt"
 
 /**  ## additional ORX features to be added to this project */
-val orxFeatures = setOf(
+val orxFeatures = setOf<String>(
 //  "orx-boofcv",
 //  "orx-camera",
 //  "orx-chataigne",
@@ -58,8 +57,7 @@ val orxFeatures = setOf(
 //  "orx-timer",
 //  "orx-triangulation",
 //  "orx-video-profiles",
-    null
-).filterNotNull()
+)
 
 /** ## additional ORML features to be added to this project */
 val ormlFeatures = setOf<String>(
@@ -71,7 +69,7 @@ val ormlFeatures = setOf<String>(
 //    "orml-ssd",
 //    "orml-style-transfer",
 //    "orml-super-resolution",
-//    "orml-u2net"
+//    "orml-u2net",
 )
 
 /** ## additional OPENRNDR features to be added to this project */
@@ -86,6 +84,7 @@ val applicationLogging = Logging.FULL
 
 // ------------------------------------------------------------------------------------------------------------------ //
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     java
     alias(libs.plugins.kotlin.jvm)
@@ -126,11 +125,12 @@ dependencies {
 
 // ------------------------------------------------------------------------------------------------------------------ //
 
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
@@ -238,7 +238,9 @@ class Openrndr {
 
     init {
         repositories {
-            listOf(openrndrVersion, orxVersion, ormlVersion).any { it.contains("SNAPSHOT") }.ifTrue { mavenLocal() }
+            if (listOf(openrndrVersion, orxVersion, ormlVersion).any { "SNAPSHOT" in it }) {
+                mavenLocal()
+            }
             maven(url = "https://maven.openrndr.org")
         }
         dependencies {
