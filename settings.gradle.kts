@@ -42,9 +42,9 @@ dependencyResolutionManagement {
             library("kotlin-logging", "io.github.microutils:kotlin-logging-jvm:2.1.21")
             library("junit", "junit:junit:4.13.2")
 
-            library("jsoup", "org.jsoup:jsoup:1.14.3")
-            library("gson", "com.google.code.gson:gson:2.9.0")
-            library("csv", "com.github.doyaaaaaken:kotlin-csv-jvm:1.2.0")
+            library("jsoup", "org.jsoup:jsoup:1.15.2")
+            library("gson", "com.google.code.gson:gson:2.9.1")
+            library("csv", "com.github.doyaaaaaken:kotlin-csv-jvm:1.5.1")
         }
     }
 }
