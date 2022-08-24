@@ -9,7 +9,7 @@ dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
             version("kotlin", "1.7.10")
-            version("openrndr", if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.0")
+            version("openrndr", if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.1")
             version("orx", if (orxUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.1")
             version("orml", if (ormlUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.1")
 
