@@ -219,7 +219,7 @@ class Openrndr {
     } else when (OperatingSystem.current()) {
         OperatingSystem.WINDOWS -> "windows"
         OperatingSystem.MAC_OS -> when (val h = DefaultNativePlatform("current").architecture.name) {
-            "arm-v8" -> "macos-arm64"
+            "aarch64", "arm-v8" -> "macos-arm64"
             else -> "macos"
         }
         OperatingSystem.LINUX -> when (val h = DefaultNativePlatform("current").architecture.name) {
