@@ -22,6 +22,7 @@ dependencyResolutionManagement {
             library("kotlin-script-runtime", "org.jetbrains.kotlin", "kotlin-script-runtime").versionRef("kotlin")
 
             version("slf4j", "1.7.36")
+            library("slf4j-api", "org.slf4j", "slf4j-api").versionRef("slf4j")
             library("slf4j-nop", "org.slf4j", "slf4j-nop").versionRef("slf4j")
             library("slf4j-simple", "org.slf4j", "slf4j-simple").versionRef("slf4j")
 
