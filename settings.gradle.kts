@@ -22,8 +22,8 @@ dependencyResolutionManagement {
             library("kotlin-script-runtime", "org.jetbrains.kotlin", "kotlin-script-runtime").versionRef("kotlin")
 
             version("slf4j", "1.7.36")
-            library("slf4j-nop", "org.sl4j", "slf4j-nop").versionRef("slf4j")
-            library("slf4j-simple", "org.sl4j", "slf4j-simple").versionRef("slf4j")
+            library("slf4j-nop", "org.slf4j", "slf4j-nop").versionRef("slf4j")
+            library("slf4j-simple", "org.slf4j", "slf4j-simple").versionRef("slf4j")
 
             version("jackson", "2.13.3")
             library("jackson-databind", "com.fasterxml.jackson.core", "jackson-databind").versionRef("jackson")
