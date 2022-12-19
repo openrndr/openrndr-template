@@ -192,7 +192,10 @@ runtime {
     jpackage {
         imageName = "openrndr-application"
         skipInstaller = true
-        if (OperatingSystem.current() == OperatingSystem.MAC_OS) jvmArgs.add("-XstartOnFirstThread")
+        if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
+            jvmArgs.add("-XstartOnFirstThread")
+            jvmArgs.add("-Duser.dir=${"$"}APPDIR/../Resources")
+        }
     }
     options.set(listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages"))
     modules.set(listOf("jdk.unsupported", "java.management"))
