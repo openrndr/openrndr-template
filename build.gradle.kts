@@ -11,7 +11,7 @@ val applicationMainClass = "TemplateProgramKt"
 /**  ## additional ORX features to be added to this project */
 val orxFeatures = setOf<String>(
 //  "orx-boofcv",
-//  "orx-camera",
+    "orx-camera",
 //  "orx-chataigne",
     "orx-color",
     "orx-compositor",
@@ -22,7 +22,7 @@ val orxFeatures = setOf<String>(
     "orx-fx",
 //  "orx-glslify",
 //  "orx-gradient-descent",
-    "orx-git-archiver",
+//    "orx-git-archiver",
     "orx-gui",
     "orx-image-fit",
 //  "orx-integral-image",
@@ -35,7 +35,7 @@ val orxFeatures = setOf<String>(
 //  "orx-mesh-generators",
 //  "orx-midi",
 //  "orx-minim",
-//  "orx-no-clear",
+    "orx-no-clear",
     "orx-noise",
 //  "orx-obj-loader",
     "orx-olive",
@@ -56,7 +56,8 @@ val orxFeatures = setOf<String>(
 //  "orx-time-operators",
 //  "orx-timer",
 //  "orx-triangulation",
-//  "orx-video-profiles",
+    "orx-video-profiles",
+    "orx-view-box",
 )
 
 /** ## additional ORML features to be added to this project */

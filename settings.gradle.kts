@@ -9,13 +9,13 @@ dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
             version("kotlin", "1.7.21")
-            version("openrndr", if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.1")
-            version("orx", if (orxUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.1")
+            version("openrndr", if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.2-rc.3")
+            version("orx", if (orxUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.2-rc.3")
             version("orml", if (ormlUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.1")
 
             plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").versionRef("kotlin")
             plugin("shadow", "com.github.johnrengelman.shadow").version("7.1.2")
-            plugin("runtime", "org.beryx.runtime").version("1.12.7")
+            plugin("runtime", "org.beryx.runtime").version("1.13.0")
 
             plugin("gitarchive-tomarkdown", "org.openrndr.extra.gitarchiver.tomarkdown").versionRef("orx")
 
@@ -44,7 +44,7 @@ dependencyResolutionManagement {
             library("junit", "junit:junit:4.13.2")
 
             library("jsoup", "org.jsoup:jsoup:1.15.3")
-            library("gson", "com.google.code.gson:gson:2.9.1")
+            library("gson", "com.google.code.gson:gson:2.10.1")
             library("csv", "com.github.doyaaaaaken:kotlin-csv-jvm:1.7.0")
         }
     }
