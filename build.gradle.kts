@@ -280,3 +280,20 @@ class Openrndr {
     }
 }
 val openrndr = Openrndr()
+
+if (properties["openrndr.tasks"] == "true") {
+    task("create executable jar for $applicationMainClass") {
+        group = " \uD83E\uDD8C OPENRNDR"
+        dependsOn("jar")
+    }
+
+    task("run $applicationMainClass") {
+        group = " \uD83E\uDD8C OPENRNDR"
+        dependsOn("run")
+    }
+
+    task("create standalone executable for $applicationMainClass") {
+        group = " \uD83E\uDD8C OPENRNDR"
+        dependsOn("jpackageZip")
+    }
+}
