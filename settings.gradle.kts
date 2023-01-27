@@ -8,9 +8,9 @@ val ormlUseSnapshot = true
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            version("kotlin", "1.7.21")
-            version("openrndr", if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.2-rc.3")
-            version("orx", if (orxUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.2-rc.3")
+            version("kotlin", "1.8.0")
+            version("openrndr", if (openrndrUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.2")
+            version("orx", if (orxUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.2")
             version("orml", if (ormlUseSnapshot) "0.5.1-SNAPSHOT" else "0.4.1")
 
             plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").versionRef("kotlin")
@@ -21,7 +21,7 @@ dependencyResolutionManagement {
 
             library("kotlin-script-runtime", "org.jetbrains.kotlin", "kotlin-script-runtime").versionRef("kotlin")
 
-            version("slf4j", "1.7.36")
+            version("slf4j", "2.0.6")
             library("slf4j-api", "org.slf4j", "slf4j-api").versionRef("slf4j")
             library("slf4j-nop", "org.slf4j", "slf4j-nop").versionRef("slf4j")
             library("slf4j-simple", "org.slf4j", "slf4j-simple").versionRef("slf4j")
@@ -31,7 +31,8 @@ dependencyResolutionManagement {
             library("jackson-json", "com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml").versionRef("jackson")
 
             version("log4j", "2.19.0")
-            library("log4j-slf4j", "org.apache.logging.log4j", "log4j-slf4j-impl").versionRef("log4j")
+            library("log4j-slf4j2", "org.apache.logging.log4j", "log4j-slf4j2-impl").versionRef("log4j")
+            library("log4j-core", "org.apache.logging.log4j", "log4j-core").versionRef("log4j")
 
             version("kotlinx-coroutines", "1.6.4")
             library(
@@ -40,7 +41,7 @@ dependencyResolutionManagement {
                 "kotlinx-coroutines-core"
             ).versionRef("kotlinx-coroutines")
 
-            library("kotlin-logging", "io.github.microutils:kotlin-logging-jvm:2.1.23")
+            library("kotlin-logging", "io.github.microutils:kotlin-logging-jvm:3.0.4")
             library("junit", "junit:junit:4.13.2")
 
             library("jsoup", "org.jsoup:jsoup:1.15.3")

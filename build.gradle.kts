@@ -116,7 +116,8 @@ dependencies {
             runtimeOnly(libs.slf4j.simple)
         }
         Logging.FULL -> {
-            runtimeOnly(libs.log4j.slf4j)
+            runtimeOnly(libs.log4j.slf4j2)
+            runtimeOnly(libs.log4j.core)
             runtimeOnly(libs.jackson.databind)
             runtimeOnly(libs.jackson.json)
         }
