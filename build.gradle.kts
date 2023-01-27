@@ -149,7 +149,7 @@ tasks {
             exclude(dependency("org.openrndr:openrndr-gl3:.*"))
             exclude(dependency("org.jetbrains.kotlin:kotlin-reflect:.*"))
             exclude(dependency("org.slf4j:slf4j-simple:.*"))
-            exclude(dependency("org.apache.logging.log4j:log4j-slf4j-impl:.*"))
+            exclude(dependency("org.apache.logging.log4j:log4j-slf4j2-impl:.*"))
             exclude(dependency("com.fasterxml.jackson.core:jackson-databind:.*"))
             exclude(dependency("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:.*"))
         }
