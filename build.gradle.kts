@@ -139,6 +139,13 @@ tasks.withType<KotlinCompile> {
 // ------------------------------------------------------------------------------------------------------------------ //
 
 project.setProperty("mainClassName", applicationMainClass)
+
+application {
+    if (hasProperty("application")) {
+        mainClass.set("${property("application")}Kt")
+    }
+}
+
 tasks {
     named<ShadowJar>("shadowJar") {
         manifest {
