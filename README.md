@@ -10,12 +10,22 @@ If you are looking at this from IntelliJ IDEA you can start by expanding the _pr
 You will find some [basic instructions](https://guide.openrndr.org/setUpYourFirstProgram.html) in the [OPENRNDR guide](https://guide.openrndr.org)
 
 ## Gradle tasks
+
  - `run` runs the TemplateProgram
  - `jar` creates an executable platform specific jar file with all dependencies
  - `jpackageZip` creates a zip with a stand-alone executable for the current platform (works with Java 14 only)
 
 ## Cross builds
+
 To create runnable jars for a platform different from the platform you use to build one uses `./gradlew jar --PtargetPlatform=<platform>`. The supported platforms are `windows`, `macos`, `linux-x64` and `linux-arm64`. 
+
+## Run other Kotlin programs from the command line
+
+By default the `run` task runs the program called `TemplateProgram.kt`.
+If you have other programs under your src/ folder and want
+to run them from the command line use
+`./gradlew -Papplication=MyProgram` to run `MyProgram.kt`.
+A full package name can be specified like this: `-Papplication=foo.bar.MyProgram`.
 
 ## Github Actions
 
