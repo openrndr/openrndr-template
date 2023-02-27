@@ -141,8 +141,8 @@ tasks.withType<KotlinCompile> {
 project.setProperty("mainClassName", applicationMainClass)
 
 application {
-    if (hasProperty("application")) {
-        mainClass.set("${property("application")}Kt")
+    if (hasProperty("openrndr.application")) {
+        mainClass.set("${property("openrndr.application")}")
     }
 }
 
