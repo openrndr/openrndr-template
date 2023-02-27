@@ -21,11 +21,15 @@ To create runnable jars for a platform different from the platform you use to bu
 
 ## Run other Kotlin programs from the command line
 
-By default the `run` task runs the program called `TemplateProgram.kt`.
-If you have other programs under your src/ folder and want
-to run them from the command line use
-`./gradlew -Papplication=MyProgram` to run `MyProgram.kt`.
-A full package name can be specified like this: `-Papplication=foo.bar.MyProgram`.
+By default `./gradlew run` runs a program called `TemplateProgram.kt` but a different one can be provided as an argument:
+
+To run `src/main/kotlin/myProgram.kt`
+
+    ./gradlew -Popenrndr.application=MyProgramKt
+
+To run `src/main/kotlin/foo/bar/myProgram.kt` (assuming `package foo.bar` in myProgram.kt)
+
+    ./gradlew -Popenrndr.application=foo.bar.MyProgramKt
 
 ## Github Actions
 
