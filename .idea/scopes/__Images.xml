@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name=" ★ Images" pattern="file:*.png||file:*.jpg||file:*.dds||file:*.exr" />
+</component>
