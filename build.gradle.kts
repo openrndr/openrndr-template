@@ -177,7 +177,7 @@ tasks {
                         from("data") {
                             include("**/*")
                         }
-                        into("build/jpackage/openrndr-application.app/data")
+                        into("build/jpackage/openrndr-application.app/Content/Resources/data")
                     }
                 }
             }
