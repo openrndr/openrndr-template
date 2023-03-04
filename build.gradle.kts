@@ -95,6 +95,7 @@ plugins {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -255,12 +256,6 @@ class Openrndr {
     fun orxNatives(module: String) = "org.openrndr.extra:$module-natives-$os:$orxVersion"
 
     init {
-        repositories {
-            if (listOf(openrndrVersion, orxVersion, ormlVersion).any { "SNAPSHOT" in it }) {
-                mavenLocal()
-            }
-            maven(url = "https://maven.openrndr.org")
-        }
         dependencies {
             runtimeOnly(openrndr("gl3"))
             runtimeOnly(openrndrNatives("gl3"))
