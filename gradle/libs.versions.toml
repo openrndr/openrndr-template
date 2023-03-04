@@ -1,12 +1,12 @@
 [versions]
-kotlin = "1.8.0"
+kotlin = "1.8.10"
 openrndr = "0.4.2"
 orx = "0.4.2"
 orml = "0.4.1"
 
 slf4j = "2.0.6"
-log4j = "2.19.0"
-jackson = "2.14.1"
+log4j = "2.20.0"
+jackson = "2.14.2"
 
 [libraries]
 kotlin-script-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-script-runtime", version.ref = "kotlin" }
@@ -22,9 +22,9 @@ jackson-json = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dat
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.6.4" }
 kotlin-logging = { group = "io.github.microutils", name = "kotlin-logging", version = "3.0.4" }
 junit = { group = "junit", name = "junit", version = "4.13.2" }
-jsoup = { group = "org.jsoup", name = "jsoup", version = "1.15.3" }
+jsoup = { group = "org.jsoup", name = "jsoup", version = "1.15.4" }
 gson = { group = "com.google.code.gson", name = "gson", version = "2.10.1" }
-csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version = "1.7.0" }
+csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version = "1.8.0" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
