@@ -19,6 +19,21 @@ You will find some [basic instructions](https://guide.openrndr.org/setUpYourFirs
 
 To create runnable jars for a platform different from the platform you use to build one uses `./gradlew jar --PtargetPlatform=<platform>`. The supported platforms are `windows`, `macos`, `linux-x64` and `linux-arm64`. 
 
+## Updating OPENRNDR, ORX and other dependencies
+
+The openrndr-template depends on various packages including the core [openrndr](https://github.com/openrndr/openrndr/) and the [orx](https://github.com/openrndr/orx/) extensions.
+
+The version numbers of these dependencies are specified in the [libs.versions.toml](https://github.com/openrndr/openrndr-template/blob/master/gradle/libs.versions.toml) file. If you want to learn about file format visit the [Gradle documentation](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml) website.
+
+Newer versions of OPENRNDR and ORX bring useful features and bug fixes. In the Maven repository you can find a list with [openrndr versions](https://mvnrepository.com/artifact/org.openrndr/openrndr-application) and [orx versions](https://mvnrepository.com/artifact/org.openrndr.extra/orx-noise). To use the most recent versions copy the version numbers at the top of those lists into the toml file, for example:
+
+    openrndr = "0.4.3-alpha3"
+    orx = "0.4.3-alpha3"
+
+You can add other dependencies you project may need to the [build.gradle.kts](https://github.com/openrndr/openrndr-template/blob/16eb227741de1a4062a6e19c7c2b3761a62d4602/build.gradle.kts#L102) file. 
+
+Remember to reload the Gradle configuration after changing any dependencies.
+
 ## Run other Kotlin programs from the command line
 
 By default `./gradlew run` runs a program called `TemplateProgram.kt` but a different one can be provided as an argument:
