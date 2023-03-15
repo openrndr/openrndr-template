@@ -21,18 +21,18 @@ To create runnable jars for a platform different from the platform you use to bu
 
 ## Updating OPENRNDR, ORX and other dependencies
 
-The openrndr-template depends on various packages including the core [openrndr](https://github.com/openrndr/openrndr/) and the [orx](https://github.com/openrndr/orx/) extensions.
-
-The version numbers of these dependencies are specified in the [libs.versions.toml](gradle/libs.versions.toml) file. If you want to learn about file format visit the [Gradle documentation](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml) website.
+The openrndr-template depends on various packages including the core [openrndr](https://github.com/openrndr/openrndr/) and the [orx](https://github.com/openrndr/orx/) extensions. The version numbers of these dependencies are specified in your [libs.versions.toml](gradle/libs.versions.toml) file. If you want to learn about file format visit the [Gradle documentation](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml) website.
 
 Newer versions of OPENRNDR and ORX bring useful features and bug fixes. The most recent versions are
-![openrndr version](https://maven-badges.herokuapp.com/maven-central/org.openrndr/openrndr/badge.svg) (openrndr) and 
-![orx version](https://maven-badges.herokuapp.com/maven-central/org.openrndr/openrndr/badge.svg) (orx). To use these versions update the toml file. For example:
+<br>![openrndr version](https://maven-badges.herokuapp.com/maven-central/org.openrndr/openrndr/badge.svg) for OPENRNDR. 
+<br>![orx version](https://maven-badges.herokuapp.com/maven-central/org.openrndr.extra/orx-parameters-jvm/badge.svg) for ORX.
 
-    openrndr = "0.4.3-alpha3"
+You can use those versions numbers in your toml file. They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
+
+    openrndr = "0.4.3-alpha4"
     orx = "0.4.3-alpha3"
 
-You can add other dependencies your project may need to the [build.gradle.kts](https://github.com/openrndr/openrndr-template/blob/16eb227741de1a4062a6e19c7c2b3761a62d4602/build.gradle.kts#L102) file. 
+You can add other dependencies needed by your project to your [build.gradle.kts](build.gradle.kts) file, inside the `dependencies { }` block. 
 
 Remember to reload the Gradle configuration after changing any dependencies.
 
