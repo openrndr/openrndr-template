@@ -177,7 +177,7 @@ tasks {
                         from("data") {
                             include("**/*")
                         }
-                        into("build/jpackage/openrndr-application.app/Content/Resources/data")
+                        into("build/jpackage/openrndr-application.app/Contents/Resources/data")
                     }
                 }
             }
@@ -207,7 +207,7 @@ runtime {
         }
     }
     options.set(listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages"))
-    modules.set(listOf("jdk.unsupported", "java.management"))
+    modules.set(listOf("jdk.unsupported", "java.management", "java.desktop"))
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
