@@ -1,11 +1,11 @@
 # OPENRNDR template project
 
-A feature rich template for creating OPENRNDR programs based on Gradle/Kts
+A feature rich template for creating OPENRNDR programs based on [Gradle/Kts](https://en.wikipedia.org/wiki/Gradle).
 
-The template consists of a configuration for Gradle and an example OPENRNDR program. The Gradle configuration should serve as the
+The template consists of a configuration for Gradle and two example OPENRNDR programs. The Gradle configuration should serve as the
 go-to starting point for writing OPENRNDR-based software.
 
-If you are looking at this from IntelliJ IDEA you can start by expanding the _project_ tab on the left. You will find a template program in `src/main/kotlin/TemplateProgram.kt`
+If you are looking at this from IntelliJ IDEA you can start by expanding the _project_ tab on the left. You will find a template program in `src/main/kotlin/TemplateProgram.kt` and a live-coding example in `src/main/kotlin/TemplateLiveProgram.kt`.
 
 You will find some [basic instructions](https://guide.openrndr.org/setUpYourFirstProgram.html) in the [OPENRNDR guide](https://guide.openrndr.org)
 
@@ -17,7 +17,7 @@ You will find some [basic instructions](https://guide.openrndr.org/setUpYourFirs
 
 ## Cross builds
 
-To create runnable jars for a platform different from the platform you use to build one uses `./gradlew jar --PtargetPlatform=<platform>`. The supported platforms are `windows`, `macos`, `linux-x64` and `linux-arm64`. 
+To create a runnable jar for a platform different from your current platform, use `./gradlew jar -PtargetPlatform=<platform>`, where `<platform>` is either `windows`, `macos`, `linux-x64`, or `linux-arm64`. 
 
 ## Updating OPENRNDR, ORX and other dependencies
 
@@ -27,7 +27,7 @@ Newer versions of OPENRNDR and ORX bring useful features and bug fixes. The most
 <br>![openrndr version](https://maven-badges.herokuapp.com/maven-central/org.openrndr/openrndr/badge.svg) for OPENRNDR. 
 <br>![orx version](https://maven-badges.herokuapp.com/maven-central/org.openrndr.extra/orx-parameters-jvm/badge.svg) for ORX.
 
-You can use those versions numbers in your toml file. They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
+You can use those version numbers in your toml file. They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
 
     openrndr = "0.4.3-alpha4"
     orx = "0.4.3-alpha3"
