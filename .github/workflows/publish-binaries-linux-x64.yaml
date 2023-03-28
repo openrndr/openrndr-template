@@ -3,8 +3,6 @@ name: Publish Linux/x64 binaries
 on:
   push:
     tags:
-      - v0.*
-      - v0.*.*
       - v1.*
       - v1.*.*
 

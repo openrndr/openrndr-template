@@ -30,7 +30,7 @@ Newer versions of OPENRNDR and ORX bring useful features and bug fixes. The most
 You can use those version numbers in your toml file. They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
 
     openrndr = "0.4.3-alpha4"
-    orx = "0.4.3-alpha3"
+    orx = "0.4.3-alpha4"
 
 You can add other dependencies needed by your project to your [build.gradle.kts](build.gradle.kts) file, inside the `dependencies { }` block. 
 
@@ -50,6 +50,19 @@ To run `src/main/kotlin/foo/bar/myProgram.kt` (assuming `package foo.bar` in myP
 
 ## Github Actions
 
-This repository contains a number of Github Actions in `./github/workflows`. 
-The actions enable a basic build run on commit, plus publication actions that are executed when
-a commit is tagged with a version number like `v0.*` or `v1.*`.
+This repository contains a number of Github Actions under `./github/workflows`.
+
+[.github/build-on-commit.yaml](build-on-commit.yaml) runs a basic build on every commit, 
+which can help detect issues in the source code.
+
+[.github/publish-binaries.yaml](publish-binaries.yaml) publishes binaries for Linux, Mac and Windows 
+any time a commit is tagged with a version number like `v1.*`. 
+
+For example, we can create and push a tag with these git commands:
+
+    git tag -a v1.0.0 -m "v1.0.0"
+    git push origin v1.0.0
+
+The progress of the running actions can be followed under the Actions tab in GitHub. 
+Once complete, the executables will be found under the Releases section.
+

@@ -3,8 +3,6 @@ name: Publish macOS binaries
 on:
   push:
     tags:
-      - v0.*
-      - v0.*.*
       - v1.*
       - v1.*.*
 

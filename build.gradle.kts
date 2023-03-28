@@ -4,7 +4,7 @@ import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = "org.openrndr.template"
-version = "0.4.0"
+version = "1.0.0"
 
 val applicationMainClass = "TemplateProgramKt"
 
