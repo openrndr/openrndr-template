@@ -8,6 +8,9 @@ on:
       - v1.*
       - v1.*.*
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,6 +30,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
-          replaceArtifacts: false
+          replacesArtifacts: false
           body: Fully automated release
           artifacts: "./build/distributions/openrndr-application-linux-x64.zip"
