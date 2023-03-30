@@ -1,0 +1,58 @@
+name: Publish macOS binaries
+
+on:
+  push:
+    tags:
+      - v1.*
+      - v1.*.*
+
+permissions:
+  contents: write
+
+# Required to make env var work on Windows
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}          
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Build with Gradle
+        run: ./gradlew jpackageZip
+
+
+      - run: echo "OR_TARGET_NAME=linux-x64" >> $GITHUB_ENV
+        if: matrix.os == 'ubuntu-latest'
+
+      - run: echo "OR_TARGET_NAME=macos" >> $GITHUB_ENV
+        if: matrix.os == 'macos-latest'
+
+      - run: echo "OR_TARGET_NAME=windows" >> $GITHUB_ENV
+        if: matrix.os == 'windows-latest'
+
+      - name: Rename jpackage zip
+        run: mv ./build/distributions/openrndr-application.zip ./build/distributions/openrndr-application-${{env.OR_TARGET_NAME}}.zip
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1.12.0
+        id: create_release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
+          replacesArtifacts: false
+          body: Fully automated release
+          artifacts: "./build/distributions/openrndr-application-${{env.OR_TARGET_NAME}}.zip"
+
