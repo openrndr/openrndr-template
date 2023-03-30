@@ -1,4 +1,4 @@
-name: Publish macOS binaries
+name: Publish binaries
 
 on:
   push:
