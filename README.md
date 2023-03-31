@@ -52,10 +52,10 @@ To run `src/main/kotlin/foo/bar/myProgram.kt` (assuming `package foo.bar` in myP
 
 This repository contains a number of Github Actions under `./github/workflows`.
 
-[.github/build-on-commit.yaml](build-on-commit.yaml) runs a basic build on every commit, 
+[build-on-commit.yaml](.github/workflows/build-on-commit.yaml) runs a basic build on every commit, 
 which can help detect issues in the source code.
 
-[.github/publish-binaries.yaml](publish-binaries.yaml) publishes binaries for Linux, Mac and Windows 
+[publish-binaries.yaml](.github/workflows/publish-binaries.yaml) publishes binaries for Linux, Mac and Windows 
 any time a commit is tagged with a version number like `v1.*`. 
 
 For example, we can create and push a tag with these git commands:
