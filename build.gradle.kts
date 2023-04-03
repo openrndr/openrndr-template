@@ -265,6 +265,7 @@ class Openrndr {
             implementation(openrndr("animatable"))
             implementation(openrndr("extensions"))
             implementation(openrndr("filter"))
+            implementation(openrndr("dialogs"))
             if ("video" in openrndrFeatures) {
                 implementation(openrndr("ffmpeg"))
                 runtimeOnly(openrndrNatives("ffmpeg"))
