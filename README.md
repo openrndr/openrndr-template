@@ -42,11 +42,11 @@ By default `./gradlew run` runs a program called `TemplateProgram.kt` but a diff
 
 To run `src/main/kotlin/myProgram.kt`
 
-    ./gradlew -Popenrndr.application=MyProgramKt
+    ./gradlew run -Popenrndr.application=MyProgramKt
 
 To run `src/main/kotlin/foo/bar/myProgram.kt` (assuming `package foo.bar` in myProgram.kt)
 
-    ./gradlew -Popenrndr.application=foo.bar.MyProgramKt
+    ./gradlew run -Popenrndr.application=foo.bar.MyProgramKt
 
 ## Github Actions
 
