@@ -287,7 +287,7 @@ val openrndr = Openrndr()
 if (properties["openrndr.tasks"] == "true") {
     task("create executable jar for $applicationMainClass") {
         group = " \uD83E\uDD8C OPENRNDR"
-        dependsOn("jar")
+        dependsOn("shadowJar")
     }
 
     task("run $applicationMainClass") {
