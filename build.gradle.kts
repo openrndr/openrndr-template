@@ -163,23 +163,16 @@ tasks {
     }
     named<org.beryx.runtime.JPackageTask>("jpackage") {
         doLast {
-            when (OperatingSystem.current()) {
-                OperatingSystem.WINDOWS, OperatingSystem.LINUX -> {
-                    copy {
-                        from("data") {
-                            include("**/*")
-                        }
-                        into("build/jpackage/openrndr-application/data")
-                    }
+            val destPath = if(OperatingSystem.current().isMacOsX)
+                "build/jpackage/openrndr-application.app/Contents/Resources/data"
+            else
+                "build/jpackage/openrndr-application/data"
+
+            copy {
+                from("data") {
+                    include("**/*")
                 }
-                OperatingSystem.MAC_OS -> {
-                    copy {
-                        from("data") {
-                            include("**/*")
-                        }
-                        into("build/jpackage/openrndr-application.app/Contents/Resources/data")
-                    }
-                }
+                into(destPath)
             }
         }
     }
@@ -201,7 +194,7 @@ runtime {
     jpackage {
         imageName = "openrndr-application"
         skipInstaller = true
-        if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
+        if (OperatingSystem.current().isMacOsX) {
             jvmArgs.add("-XstartOnFirstThread")
             jvmArgs.add("-Duser.dir=${"$"}APPDIR/../Resources")
         }
@@ -226,6 +219,8 @@ class Openrndr {
     // choices are "orx-tensorflow-gpu", "orx-tensorflow"
     val orxTensorflowBackend = "orx-tensorflow"
 
+    val currArch = DefaultNativePlatform("current").architecture.name
+    val currOs = OperatingSystem.current()
     val os = if (project.hasProperty("targetPlatform")) {
         val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
         val platform: String = project.property("targetPlatform") as String
@@ -234,18 +229,18 @@ class Openrndr {
         } else {
             platform
         }
-    } else when (OperatingSystem.current()) {
-        OperatingSystem.WINDOWS -> "windows"
-        OperatingSystem.MAC_OS -> when (val h = DefaultNativePlatform("current").architecture.name) {
+    } else when {
+        currOs.isWindows -> "windows"
+        currOs.isMacOsX -> when (currArch) {
             "aarch64", "arm-v8" -> "macos-arm64"
             else -> "macos"
         }
-        OperatingSystem.LINUX -> when (val h = DefaultNativePlatform("current").architecture.name) {
+        currOs.isLinux -> when (currArch) {
             "x86-64" -> "linux-x64"
             "aarch64" -> "linux-arm64"
-            else -> throw IllegalArgumentException("architecture not supported: $h")
+            else -> throw IllegalArgumentException("architecture not supported: $currArch")
         }
-        else -> throw IllegalArgumentException("os not supported")
+        else -> throw IllegalArgumentException("os not supported: ${currOs.name}")
     }
 
     fun orx(module: String) = "org.openrndr.extra:$module:$orxVersion"
