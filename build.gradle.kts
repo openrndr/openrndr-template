@@ -57,7 +57,7 @@ val orxFeatures = setOf<String>(
     "orx-shapes",
 //  "orx-syphon",
 //  "orx-temporal-blur",
-//  "orx-tensorflow",    
+//  "orx-tensorflow",
 //  "orx-time-operators",
 //  "orx-timer",
 //  "orx-triangulation",
@@ -189,7 +189,7 @@ tasks {
 
 tasks.register<Zip>("jpackageZip") {
     archiveFileName.set("openrndr-application.zip")
-    from("$buildDir/jpackage") {
+    from("${layout.buildDirectory.get()}/jpackage") {
         include("**/*")
     }
 }
