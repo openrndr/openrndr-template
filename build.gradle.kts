@@ -221,19 +221,22 @@ tasks.register<org.openrndr.extra.gitarchiver.GitArchiveToMarkdown>("gitArchiveT
 
 tasks {
 
-    val nonStableKeywords = listOf("alpha", "beta", "rc")
-
-    fun isNonStable(
-        version: String
-    ) = nonStableKeywords.any {
-        version.lowercase().contains(it)
-    }
-
     dependencyUpdates {
+
         gradleReleaseChannel = "current"
+
+        val nonStableKeywords = listOf("alpha", "beta", "rc")
+
+        fun isNonStable(
+            version: String
+        ) = nonStableKeywords.any {
+            version.lowercase().contains(it)
+        }
+
         rejectVersionIf {
             isNonStable(candidate.version) && !isNonStable(currentVersion)
         }
+
     }
 
 }
