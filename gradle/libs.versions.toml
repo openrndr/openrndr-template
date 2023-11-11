@@ -1,12 +1,12 @@
 [versions]
-kotlin = "1.9.10"
+kotlin = "1.9.20"
 openrndr = "0.4.4-alpha4"
 orx = "0.4.4-alpha4"
 orml = "0.4.1"
 
 slf4j = "2.0.9"
-log4j = "2.20.0"
-jackson = "2.14.2"
+log4j = "2.21.1"
+jackson = "2.15.3"
 
 [libraries]
 kotlin-script-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-script-runtime", version.ref = "kotlin" }
@@ -28,6 +28,6 @@ csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version = "1.
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-shadow = { id = "com.github.johnrengelman.shadow", version = "7.1.2" }
+shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
 runtime = { id = "org.beryx.runtime", version = "1.13.0" }
 gitarchive-tomarkdown = { id = "org.openrndr.extra.gitarchiver.tomarkdown", version.ref = "orx" }
