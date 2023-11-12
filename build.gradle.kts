@@ -98,6 +98,7 @@ plugins {
     alias(libs.plugins.shadow)
     alias(libs.plugins.runtime)
     alias(libs.plugins.gitarchive.tomarkdown).apply(false)
+    alias(libs.plugins.versions)
 }
 
 repositories {
@@ -214,6 +215,30 @@ runtime {
 
 tasks.register<org.openrndr.extra.gitarchiver.GitArchiveToMarkdown>("gitArchiveToMarkDown") {
     historySize.set(20)
+}
+
+// ------------------------------------------------------------------------------------------------------------------ //
+
+tasks {
+
+    dependencyUpdates {
+
+        gradleReleaseChannel = "current"
+
+        val nonStableKeywords = listOf("alpha", "beta", "rc")
+
+        fun isNonStable(
+            version: String
+        ) = nonStableKeywords.any {
+            version.lowercase().contains(it)
+        }
+
+        rejectVersionIf {
+            isNonStable(candidate.version) && !isNonStable(currentVersion)
+        }
+
+    }
+
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
