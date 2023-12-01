@@ -27,12 +27,12 @@ Newer versions of OPENRNDR and ORX bring useful features and bug fixes. The most
 <br>![openrndr version](https://maven-badges.herokuapp.com/maven-central/org.openrndr/openrndr-application/badge.svg) for OPENRNDR. 
 <br>![orx version](https://maven-badges.herokuapp.com/maven-central/org.openrndr.extra/orx-parameters-jvm/badge.svg) for ORX.
 
-You can use those version numbers in your toml file. They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
+Switch to the [next-version branch](https://github.com/openrndr/openrndr-template/tree/next-version) or enter these version numbers in your toml file. They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
 
     openrndr = "0.4.3-alpha4"
-    orx = "0.4.3-alpha4"
+        orx = "0.4.3-alpha4"
 
-You can add other dependencies needed by your project to your [build.gradle.kts](build.gradle.kts) file, inside the `dependencies { }` block. 
+You can add other dependencies needed by your project to your [build.gradle.kts](build.gradle.kts) file, inside the dependencies { }` block. 
 
 Remember to reload the Gradle configuration after changing any dependencies.
 
