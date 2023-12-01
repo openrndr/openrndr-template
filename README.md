@@ -32,7 +32,7 @@ Switch to the [next-version branch](https://github.com/openrndr/openrndr-templat
     openrndr = "0.4.3-alpha4"
         orx = "0.4.3-alpha4"
 
-You can add other dependencies needed by your project to your [build.gradle.kts](build.gradle.kts) file, inside the dependencies { }` block. 
+You can add other dependencies needed by your project to your [build.gradle.kts](build.gradle.kts) file, inside the `dependencies { }` block. 
 
 Remember to reload the Gradle configuration after changing any dependencies.
 
