@@ -6,3 +6,6 @@ out
 video/
 screenshots/
 gui-parameters/
+ffmpegOutput.txt
+ShaderError.glsl
+
