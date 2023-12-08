@@ -17,13 +17,14 @@ val orxFeatures = setOf<String>(
     "orx-compositor",
 //  "orx-compute-graph",
 //  "orx-compute-graph-nodes",
+    "orx-delegate-magic",
 //  "orx-dnk3",
 //  "orx-easing",
 //  "orx-expression-evaluator",
+    "orx-envelopes",
 //  "orx-file-watcher",
     "orx-fx",
 //  "orx-git-archiver",
-//  "orx-glslify",
 //  "orx-gradient-descent",
     "orx-gui",
 //  "orx-hash-grid",
@@ -220,9 +221,7 @@ tasks.register<org.openrndr.extra.gitarchiver.GitArchiveToMarkdown>("gitArchiveT
 // ------------------------------------------------------------------------------------------------------------------ //
 
 tasks {
-
     dependencyUpdates {
-
         gradleReleaseChannel = "current"
 
         val nonStableKeywords = listOf("alpha", "beta", "rc")
@@ -236,9 +235,7 @@ tasks {
         rejectVersionIf {
             isNonStable(candidate.version) && !isNonStable(currentVersion)
         }
-
     }
-
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
