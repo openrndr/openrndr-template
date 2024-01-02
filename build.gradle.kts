@@ -333,7 +333,7 @@ if (properties["openrndr.tasks"] == "true") {
             "Code" to "file:*.kt||file:*.frag||file:*.vert||file:*.glsl",
             "Text" to "file:*.txt||file:*.md||file:*.xml||file:*.json",
             "Gradle" to "file[*buildSrc*]:*/||file:*gradle.*||file:*.gradle||file:*/gradle-wrapper.properties||file:*.toml",
-            "Media" to "file:*.png||file:*.jpg||file:*.dds||file:*.exr||file:*.mp3||file:*.wav||file:*.mp4||file:*.mov"
+            "Media" to "file:*.png||file:*.jpg||file:*.dds||file:*.exr||file:*.mp3||file:*.wav||file:*.mp4||file:*.mov||file:*.svg"
         )
         files.forEach { (name, pattern) ->
             val file = File(scopesFolder, "__$name.xml")
