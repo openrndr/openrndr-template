@@ -17,13 +17,14 @@ val orxFeatures = setOf<String>(
     "orx-compositor",
 //  "orx-compute-graph",
 //  "orx-compute-graph-nodes",
+    "orx-delegate-magic",
 //  "orx-dnk3",
 //  "orx-easing",
+    "orx-envelopes",
 //  "orx-expression-evaluator",
 //  "orx-file-watcher",
     "orx-fx",
 //  "orx-git-archiver",
-//  "orx-glslify",
 //  "orx-gradient-descent",
     "orx-gui",
 //  "orx-hash-grid",
@@ -48,6 +49,7 @@ val orxFeatures = setOf<String>(
     "orx-panel",
 //  "orx-parameters",
 //  "orx-poisson-fill",
+//  "orx-property-watchers",
 //  "orx-quadtree",
 //  "orx-rabbit-control",
 //  "orx-realsense2",
@@ -57,7 +59,7 @@ val orxFeatures = setOf<String>(
     "orx-shapes",
 //  "orx-syphon",
 //  "orx-temporal-blur",
-//  "orx-tensorflow",    
+//  "orx-tensorflow",
 //  "orx-time-operators",
 //  "orx-timer",
 //  "orx-triangulation",
@@ -190,7 +192,7 @@ tasks {
 
 tasks.register<Zip>("jpackageZip") {
     archiveFileName.set("openrndr-application.zip")
-    from("$buildDir/jpackage") {
+    from("${layout.buildDirectory.get()}/jpackage") {
         include("**/*")
     }
 }
@@ -220,9 +222,7 @@ tasks.register<org.openrndr.extra.gitarchiver.GitArchiveToMarkdown>("gitArchiveT
 // ------------------------------------------------------------------------------------------------------------------ //
 
 tasks {
-
     dependencyUpdates {
-
         gradleReleaseChannel = "current"
 
         val nonStableKeywords = listOf("alpha", "beta", "rc")
@@ -236,9 +236,7 @@ tasks {
         rejectVersionIf {
             isNonStable(candidate.version) && !isNonStable(currentVersion)
         }
-
     }
-
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
@@ -336,7 +334,7 @@ if (properties["openrndr.tasks"] == "true") {
             "Code" to "file:*.kt||file:*.frag||file:*.vert||file:*.glsl",
             "Text" to "file:*.txt||file:*.md||file:*.xml||file:*.json",
             "Gradle" to "file[*buildSrc*]:*/||file:*gradle.*||file:*.gradle||file:*/gradle-wrapper.properties||file:*.toml",
-            "Images" to "file:*.png||file:*.jpg||file:*.dds||file:*.exr"
+            "Media" to "file:*.png||file:*.jpg||file:*.dds||file:*.exr||file:*.mp3||file:*.wav||file:*.mp4||file:*.mov||file:*.svg"
         )
         files.forEach { (name, pattern) ->
             val file = File(scopesFolder, "__$name.xml")
