@@ -4,7 +4,7 @@ openrndr = "0.4.4"
 orx = "0.4.4"
 orml = "0.4.1"
 
-slf4j = "2.0.10"
+slf4j = "2.0.11"
 log4j = "2.22.1"
 jackson = "2.16.1"
 
@@ -20,7 +20,7 @@ jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-datab
 jackson-json = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version.ref = "jackson" }
 
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.7.3" }
-kotlin-logging = { group = "io.github.microutils", name = "kotlin-logging", version = "3.0.5" }
+kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version = "6.0.2" }
 junit = { group = "junit", name = "junit", version = "4.13.2" }
 jsoup = { group = "org.jsoup", name = "jsoup", version = "1.17.1" }
 gson = { group = "com.google.code.gson", name = "gson", version = "2.10.1" }
