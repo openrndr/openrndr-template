@@ -114,6 +114,17 @@ dependencies {
 //    implementation(libs.gson)
 //    implementation(libs.csv)
 
+    /* ORSL dependencies */
+
+//    implementation(libs.orsl.shader.generator)
+//    implementation(libs.orsl.extension.color)
+//    implementation(libs.orsl.extension.easing)
+//    implementation(libs.orsl.extension.gradient)
+//    implementation(libs.orsl.extension.noise)
+//    implementation(libs.orsl.extension.pbr)
+//    implementation(libs.orsl.extension.raymarching)
+//    implementation(libs.orsl.extension.sdf)
+
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.slf4j.api)
     implementation(libs.kotlin.logging)

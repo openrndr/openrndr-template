@@ -1,7 +1,8 @@
 [versions]
 kotlin = "1.9.22"
-openrndr = "0.4.4"
-orx = "0.4.4"
+openrndr = "0.4.5-alpha1"
+orx = "0.4.5-alpha1"
+orsl = "0.4.5-alpha1"
 orml = "0.4.1"
 
 slf4j = "2.0.11"
@@ -18,6 +19,15 @@ log4j-slf4j2 = { group = "org.apache.logging.log4j", name = "log4j-slf4j2-impl",
 log4j-core = { group = "org.apache.logging.log4j", name = "log4j-core", version.ref = "log4j" }
 jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson" }
 jackson-json = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version.ref = "jackson" }
+
+orsl-shader-generator = { group = "org.openrndr.extra", name = "orsl-shader-generator", version.ref = "orsl" }
+orsl-extension-color = { group = "org.openrndr.extra", name = "orsl-extension-color", version.ref = "orsl" }
+orsl-extension-easing = { group = "org.openrndr.extra", name = "orsl-extension-easing", version.ref = "orsl" }
+orsl-extension-gradient = { group = "org.openrndr.extra", name = "orsl-extension-gradient", version.ref = "orsl" }
+orsl-extension-noise = { group = "org.openrndr.extra", name = "orsl-extension-noise", version.ref = "orsl" }
+orsl-extension-pbr = { group = "org.openrndr.extra", name = "orsl-extension-pbr", version.ref = "orsl" }
+orsl-extension-raymarching = { group = "org.openrndr.extra", name = "orsl-extension-raymarching", version.ref = "orsl" }
+orsl-extension-sdf = { group = "org.openrndr.extra", name = "orsl-extension-sdf", version.ref = "orsl" }
 
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.7.3" }
 kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version = "6.0.2" }
