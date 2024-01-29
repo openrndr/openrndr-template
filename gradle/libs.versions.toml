@@ -30,7 +30,7 @@ orsl-extension-raymarching = { group = "org.openrndr.extra", name = "orsl-extens
 orsl-extension-sdf = { group = "org.openrndr.extra", name = "orsl-extension-sdf", version.ref = "orsl" }
 
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.7.3" }
-kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version = "6.0.2" }
+kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version = "6.0.3" }
 junit = { group = "junit", name = "junit", version = "4.13.2" }
 jsoup = { group = "org.jsoup", name = "jsoup", version = "1.17.1" }
 gson = { group = "com.google.code.gson", name = "gson", version = "2.10.1" }
@@ -41,5 +41,5 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
 runtime = { id = "org.beryx.runtime", version = "1.13.0" }
 gitarchive-tomarkdown = { id = "org.openrndr.extra.gitarchiver.tomarkdown", version.ref = "orx" }
-versions = { id = "com.github.ben-manes.versions", version = "0.50.0" }
+versions = { id = "com.github.ben-manes.versions", version = "0.51.0" }
 
