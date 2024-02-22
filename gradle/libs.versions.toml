@@ -6,7 +6,7 @@ orsl = "0.4.5-alpha1"
 orml = "0.4.1"
 
 slf4j = "2.0.12"
-log4j = "2.22.1"
+log4j = "2.23.0"
 jackson = "2.16.1"
 
 [libraries]
@@ -39,7 +39,7 @@ csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version = "1.
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
-runtime = { id = "org.beryx.runtime", version = "1.13.0" }
+runtime = { id = "org.beryx.runtime", version = "1.13.1" }
 gitarchive-tomarkdown = { id = "org.openrndr.extra.gitarchiver.tomarkdown", version.ref = "orx" }
 versions = { id = "com.github.ben-manes.versions", version = "0.51.0" }
 
