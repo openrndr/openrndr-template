@@ -1,15 +1,16 @@
 [versions]
-kotlin = "1.9.22"
-openrndr = "0.4.4"
-orx = "0.4.4"
+kotlin = "1.9.23"
+openrndr = "0.4.5-alpha2"
+orx = "0.4.5-alpha2"
 orml = "0.4.1"
 
-slf4j = "2.0.10"
-log4j = "2.22.1"
-jackson = "2.16.1"
+slf4j = "2.0.12"
+log4j = "2.23.1"
+jackson = "2.16.2"
 
 [libraries]
 kotlin-script-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-script-runtime", version.ref = "kotlin" }
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
 slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
 slf4j-nop = { group = "org.slf4j", name = "slf4j-nop", version.ref = "slf4j" }
@@ -20,16 +21,51 @@ jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-datab
 jackson-json = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version.ref = "jackson" }
 
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.7.3" }
-kotlin-logging = { group = "io.github.microutils", name = "kotlin-logging", version = "3.0.5" }
+kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version = "6.0.3" }
 junit = { group = "junit", name = "junit", version = "4.13.2" }
-jsoup = { group = "org.jsoup", name = "jsoup", version = "1.17.1" }
+jsoup = { group = "org.jsoup", name = "jsoup", version = "1.17.2" }
 gson = { group = "com.google.code.gson", name = "gson", version = "2.10.1" }
-csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version = "1.9.2" }
+csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version = "1.9.3" }
+
+openrndr-animatable = { group = "org.openrndr", name = "openrndr-animatable", version.ref = "openrndr" }
+openrndr-application = { group = "org.openrndr", name = "openrndr-application", version.ref = "openrndr" }
+openrndr-binpack = { group = "org.openrndr", name = "openrndr-binpack", version.ref = "openrndr" }
+openrndr-dialogs = { group = "org.openrndr", name = "openrndr-dialogs", version.ref = "openrndr" }
+openrndr-event = { group = "org.openrndr", name = "openrndr-event", version.ref = "openrndr" }
+openrndr-extensions = { group = "org.openrndr", name = "openrndr-extensions", version.ref = "openrndr" }
+openrndr-filter = { group = "org.openrndr", name = "openrndr-filter", version.ref = "openrndr" }
+openrndr-gl3 = { group = "org.openrndr", name = "openrndr-gl3", version.ref = "openrndr" }
+openrndr-math = { group = "org.openrndr", name = "openrndr-math", version.ref = "openrndr" }
+openrndr-svg = { group = "org.openrndr", name = "openrndr-svg", version.ref = "openrndr" }
+openrndr-ffmpeg = { group = "org.openrndr", name = "openrndr-ffmpeg", version.ref = "openrndr" }
+openrndr-nullgl = { group = "org.openrndr", name = "openrndr-nullgl", version.ref = "openrndr" }
+
+
+orx-camera = { group = "org.openrndr.extra", name = "orx-camera", version.ref = "orx" }
+orx-color = { group = "org.openrndr.extra", name = "orx-color", version.ref = "orx" }
+orx-compositor = { group = "org.openrndr.extra", name = "orx-compositor", version.ref = "orx" }
+orx-delegate-magic = { group = "org.openrndr.extra", name = " orx-delegate-magic", version.ref = "orx" }
+orx-envelopes = { group = "org.openrndr.extra", name = "orx-envelopes", version.ref = "orx" }
+orx-fx = { group = "org.openrndr.extra", name = "orx-fx", version.ref = "orx" }
+orx-gui = { group = "org.openrndr.extra", name = "orx-gui", version.ref = "orx" }
+orx-image-fit = { group = "org.openrndr.extra", name = "orx-image-fit", version.ref = "orx" }
+orx-no-clear = { group = "org.openrndr.extra", name = "orx-no-clear", version.ref = "orx" }
+orx-noise = { group = "org.openrndr.extra", name = "orx-noise", version.ref = "orx" }
+orx-olive = { group = "org.openrndr.extra", name = "orx-olive", version.ref = "orx" }
+orx-panel = { group = "org.openrndr.extra", name = "orx-panel", version.ref = "orx" }
+orx-shade-styles = { group = "org.openrndr.extra", name = "orx-shade-styles", version.ref = "orx" }
+orx-shapes = { group = "org.openrndr.extra", name = "orx-shapes", version.ref = "orx" }
+orx-video-profiles = { group = "org.openrndr.extra", name = "orx-video-profiles", version.ref = "orx" }
+orx-view-box = { group = "org.openrndr.extra", name = "orx-view-box", version.ref = "orx" }
+shadow-gradle-plugin = { group = "com.github.johnrengelman", name = "shadow", version = "8.1.1" }
+runtime-gradle-plugin = { group = "org.beryx", name = "badass-runtime-plugin", version = "1.13.0" }
+
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+
 shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
-runtime = { id = "org.beryx.runtime", version = "1.13.0" }
+runtime = { id = "org.beryx.runtime", version = "1.13.1" }
 gitarchive-tomarkdown = { id = "org.openrndr.extra.gitarchiver.tomarkdown", version.ref = "orx" }
 versions = { id = "com.github.ben-manes.versions", version = "0.50.0" }
 
