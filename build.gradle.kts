@@ -14,7 +14,7 @@ val orxFeatures = setOf<String>(
     "orx-camera",
 //  "orx-chataigne",
     "orx-color",
-////    "orx-composition",
+//  "orx-composition",
     "orx-compositor",
 //  "orx-compute-graph",
 //  "orx-compute-graph-nodes",
@@ -60,7 +60,7 @@ val orxFeatures = setOf<String>(
     "orx-shade-styles",
 //  "orx-shader-phrases",
     "orx-shapes",
-////    "orx-svg",
+//  "orx-svg",
 //  "orx-syphon",
 //  "orx-temporal-blur",
 //  "orx-tensorflow",
@@ -302,7 +302,6 @@ class Openrndr {
             implementation(openrndr("openal"))
             runtimeOnly(openrndrNatives("openal"))
             implementation(openrndr("application"))
-            implementation(openrndr("svg"))
             implementation(openrndr("animatable"))
             implementation(openrndr("extensions"))
             implementation(openrndr("filter"))
