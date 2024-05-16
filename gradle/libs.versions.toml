@@ -34,7 +34,7 @@ kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version =
 junit = { group = "junit", name = "junit", version = "4.13.2" }
 jsoup = { group = "org.jsoup", name = "jsoup", version = "1.17.1" }
 gson = { group = "com.google.code.gson", name = "gson", version = "2.10.1" }
-csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version = "1.9.2" }
+csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version = "1.9.3" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
