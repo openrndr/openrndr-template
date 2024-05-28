@@ -11,7 +11,9 @@ openrndr {
     orxFeatures = setOf(
         libs.orx.olive,
         libs.orx.color,
-        libs.orx.gui
+        libs.orx.shapes,
+        libs.orx.gui,
+        libs.orx.svg
     )
     openrndrFeatures = setOf(
         libs.openrndr.ffmpeg,

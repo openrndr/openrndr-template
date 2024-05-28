@@ -66,4 +66,3 @@ runtime {
     options.set(listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages"))
     modules.set(listOf("jdk.unsupported", "java.management", "java.desktop"))
 }
-

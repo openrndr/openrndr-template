@@ -1,12 +1,14 @@
 [versions]
-kotlin = "1.9.23"
-openrndr = "0.4.5-alpha2"
-orx = "0.4.5-alpha2"
+kotlin = "2.0.0"
+openrndr = "0.4.5-SNAPSHOT"
+orx = "0.4.5-SNAPSHOT"
 orml = "0.4.1"
+jvmTarget = "11"
 
-slf4j = "2.0.12"
+
+slf4j = "2.0.13"
 log4j = "2.23.1"
-jackson = "2.16.2"
+jackson = "2.17.1"
 
 [libraries]
 kotlin-script-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-script-runtime", version.ref = "kotlin" }
@@ -20,11 +22,11 @@ log4j-core = { group = "org.apache.logging.log4j", name = "log4j-core", version.
 jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson" }
 jackson-json = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version.ref = "jackson" }
 
-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.7.3" }
-kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version = "6.0.3" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.8.1" }
+kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version = "6.0.9" }
 junit = { group = "junit", name = "junit", version = "4.13.2" }
 jsoup = { group = "org.jsoup", name = "jsoup", version = "1.17.2" }
-gson = { group = "com.google.code.gson", name = "gson", version = "2.10.1" }
+gson = { group = "com.google.code.gson", name = "gson", version = "2.11.1" }
 csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version = "1.9.3" }
 
 openrndr-animatable = { group = "org.openrndr", name = "openrndr-animatable", version.ref = "openrndr" }
@@ -36,7 +38,6 @@ openrndr-extensions = { group = "org.openrndr", name = "openrndr-extensions", ve
 openrndr-filter = { group = "org.openrndr", name = "openrndr-filter", version.ref = "openrndr" }
 openrndr-gl3 = { group = "org.openrndr", name = "openrndr-gl3", version.ref = "openrndr" }
 openrndr-math = { group = "org.openrndr", name = "openrndr-math", version.ref = "openrndr" }
-openrndr-svg = { group = "org.openrndr", name = "openrndr-svg", version.ref = "openrndr" }
 openrndr-ffmpeg = { group = "org.openrndr", name = "openrndr-ffmpeg", version.ref = "openrndr" }
 openrndr-nullgl = { group = "org.openrndr", name = "openrndr-nullgl", version.ref = "openrndr" }
 
@@ -55,8 +56,11 @@ orx-olive = { group = "org.openrndr.extra", name = "orx-olive", version.ref = "o
 orx-panel = { group = "org.openrndr.extra", name = "orx-panel", version.ref = "orx" }
 orx-shade-styles = { group = "org.openrndr.extra", name = "orx-shade-styles", version.ref = "orx" }
 orx-shapes = { group = "org.openrndr.extra", name = "orx-shapes", version.ref = "orx" }
+orx-svg = { group = "org.openrndr.extra", name = "orx-svg", version.ref = "orx" }
+
 orx-video-profiles = { group = "org.openrndr.extra", name = "orx-video-profiles", version.ref = "orx" }
 orx-view-box = { group = "org.openrndr.extra", name = "orx-view-box", version.ref = "orx" }
+
 shadow-gradle-plugin = { group = "com.github.johnrengelman", name = "shadow", version = "8.1.1" }
 runtime-gradle-plugin = { group = "org.beryx", name = "badass-runtime-plugin", version = "1.13.0" }
 
@@ -68,4 +72,3 @@ shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
 runtime = { id = "org.beryx.runtime", version = "1.13.1" }
 gitarchive-tomarkdown = { id = "org.openrndr.extra.gitarchiver.tomarkdown", version.ref = "orx" }
 versions = { id = "com.github.ben-manes.versions", version = "0.50.0" }
-
