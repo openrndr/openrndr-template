@@ -18,8 +18,12 @@ plugins {
 
 
 tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "17"
+    }
     compilerOptions {
         jvmTarget.set(JvmTarget.valueOf("JVM_${libs.versions.jvmTarget.get()}"))
+        freeCompilerArgs.add("-Xjdk-release=${libs.versions.jvmTarget.get()}")
     }
 }
 

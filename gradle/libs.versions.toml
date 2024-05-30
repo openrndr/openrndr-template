@@ -3,7 +3,7 @@ kotlin = "2.0.0"
 openrndr = "0.4.5-SNAPSHOT"
 orx = "0.4.5-SNAPSHOT"
 orml = "0.4.1"
-jvmTarget = "11"
+jvmTarget = "17"
 
 
 slf4j = "2.0.13"
