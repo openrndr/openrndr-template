@@ -1,11 +1,11 @@
 [versions]
-kotlin = "2.0.0"
+kotlin = "2.0.10"
 openrndr = "0.4.5-alpha5"
 orx = "0.4.5-alpha5"
 orsl = "0.4.5-alpha3"
 orml = "0.4.1"
 
-slf4j = "2.0.13"
+slf4j = "2.0.15"
 log4j = "2.23.1"
 jackson = "2.17.2"
 
