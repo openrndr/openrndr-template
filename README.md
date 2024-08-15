@@ -21,16 +21,22 @@ To create a runnable jar for a platform different from your current platform, us
 
 ## Updating OPENRNDR, ORX and other dependencies
 
-The openrndr-template depends on various packages including the core [openrndr](https://github.com/openrndr/openrndr/) and the [orx](https://github.com/openrndr/orx/) extensions. The version numbers of these dependencies are specified in your [libs.versions.toml](gradle/libs.versions.toml) file. If you want to learn about file format visit the [Gradle documentation](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml) website.
+The openrndr-template depends on various packages including the core [openrndr](https://github.com/openrndr/openrndr/) and the [orx](https://github.com/openrndr/orx/) extensions and
+provides the optional [orsl](https://github.com/openrndr/orsl/) shader helper modules.
+The version numbers of these dependencies are specified in your [libs.versions.toml](gradle/libs.versions.toml) file. 
+If you want to learn about file format visit the [Gradle documentation](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml) website.
 
-Newer versions of OPENRNDR and ORX bring useful features and bug fixes. The most recent versions are
+Newer versions bring useful features and bug fixes. The most recent versions are
 <br>![openrndr version](https://maven-badges.herokuapp.com/maven-central/org.openrndr/openrndr-application/badge.svg) for OPENRNDR. 
 <br>![orx version](https://maven-badges.herokuapp.com/maven-central/org.openrndr.extra/orx-parameters-jvm/badge.svg) for ORX.
+<br>![orsl version](https://maven-badges.herokuapp.com/maven-central/org.openrndr.orsl/orsl-shader-generator-jvm/badge.svg) for ORSL.
 
-Switch to the [next-version branch](https://github.com/openrndr/openrndr-template/tree/next-version) or enter these version numbers in your toml file. They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
+Switch to the [next-version branch](https://github.com/openrndr/openrndr-template/tree/next-version) or enter these version numbers in your toml file. 
+They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
 
-    openrndr = "0.4.3-alpha4"
-        orx = "0.4.3-alpha4"
+    openrndr = "0.4.5-alpha5"
+         orx = "0.4.5-alpha5"
+        orsl = "0.4.5-alpha5"
 
 You can add other dependencies needed by your project to your [build.gradle.kts](build.gradle.kts) file, inside the `dependencies { }` block. 
 
