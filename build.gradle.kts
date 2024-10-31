@@ -1,8 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = "org.openrndr.template"
 version = "1.0.0"
@@ -15,18 +14,14 @@ val orxFeatures = setOf<String>(
     "orx-camera",
 //  "orx-chataigne",
     "orx-color",
-//  "orx-composition",
     "orx-compositor",
 //  "orx-compute-graph",
 //  "orx-compute-graph-nodes",
     "orx-delegate-magic",
-    "orx-depth-camera-calibrator",
 //  "orx-dnk3",
 //  "orx-easing",
     "orx-envelopes",
 //  "orx-expression-evaluator",
-//  "orx-fcurve",
-//  "orx-fft",
 //  "orx-file-watcher",
     "orx-fx",
 //  "orx-git-archiver",
@@ -39,7 +34,7 @@ val orxFeatures = setOf<String>(
 //  "orx-jumpflood",
 //  "orx-kdtree",
 //  "orx-keyframer",
-    "orx-kinect-v1",
+//  "orx-kinect-v1",
 //  "orx-kotlin-parser",
 //  "orx-marching-squares",
 //  "orx-mesh-generators",
@@ -62,11 +57,9 @@ val orxFeatures = setOf<String>(
     "orx-shade-styles",
 //  "orx-shader-phrases",
     "orx-shapes",
-//  "orx-svg",
 //  "orx-syphon",
 //  "orx-temporal-blur",
 //  "orx-tensorflow",
-//  "orx-text-writer",
 //  "orx-time-operators",
 //  "orx-timer",
 //  "orx-triangulation",
@@ -121,17 +114,6 @@ dependencies {
 //    implementation(libs.gson)
 //    implementation(libs.csv)
 
-    /* ORSL dependencies */
-
-//    implementation(libs.orsl.shader.generator)
-//    implementation(libs.orsl.extension.color)
-//    implementation(libs.orsl.extension.easing)
-//    implementation(libs.orsl.extension.gradient)
-//    implementation(libs.orsl.extension.noise)
-//    implementation(libs.orsl.extension.pbr)
-//    implementation(libs.orsl.extension.raymarching)
-//    implementation(libs.orsl.extension.sdf)
-
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.slf4j.api)
     implementation(libs.kotlin.logging)
@@ -157,15 +139,11 @@ dependencies {
 // ------------------------------------------------------------------------------------------------------------------ //
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
-kotlin {
-    compilerOptions {
-        languageVersion = KotlinVersion.KOTLIN_2_0
-        apiVersion = KotlinVersion.KOTLIN_2_0
-        jvmTarget = JvmTarget.JVM_17
-    }
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "11"
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
@@ -174,7 +152,7 @@ project.setProperty("mainClassName", applicationMainClass)
 
 application {
     if (hasProperty("openrndr.application")) {
-        mainClass = "${property("openrndr.application")}"
+        mainClass.set("${property("openrndr.application")}")
     }
 }
 
@@ -213,7 +191,7 @@ tasks {
 // ------------------------------------------------------------------------------------------------------------------ //
 
 tasks.register<Zip>("jpackageZip") {
-    archiveFileName = "openrndr-application.zip"
+    archiveFileName.set("openrndr-application.zip")
     from("${layout.buildDirectory.get()}/jpackage") {
         include("**/*")
     }
@@ -231,14 +209,14 @@ runtime {
             jvmArgs.add("-Duser.dir=${"$"}APPDIR/../Resources")
         }
     }
-    options = listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages")
-    modules = listOf("jdk.unsupported", "java.management", "java.desktop")
+    options.set(listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages"))
+    modules.set(listOf("jdk.unsupported", "java.management", "java.desktop"))
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
 
 tasks.register<org.openrndr.extra.gitarchiver.GitArchiveToMarkdown>("gitArchiveToMarkDown") {
-    historySize = 20
+    historySize.set(20)
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
@@ -308,6 +286,7 @@ class Openrndr {
             implementation(openrndr("openal"))
             runtimeOnly(openrndrNatives("openal"))
             implementation(openrndr("application"))
+            implementation(openrndr("svg"))
             implementation(openrndr("animatable"))
             implementation(openrndr("extensions"))
             implementation(openrndr("filter"))
