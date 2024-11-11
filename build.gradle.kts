@@ -107,6 +107,7 @@ plugins {
     alias(libs.plugins.runtime)
     alias(libs.plugins.gitarchive.tomarkdown).apply(false)
     alias(libs.plugins.versions)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 repositories {
@@ -117,7 +118,6 @@ repositories {
 dependencies {
 
 //    implementation(libs.jsoup)
-//    implementation(libs.gson)
 //    implementation(libs.csv)
 
     /* ORSL dependencies */
@@ -132,6 +132,8 @@ dependencies {
 //    implementation(libs.orsl.extension.sdf)
 
     implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.serialization.core)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.slf4j.api)
     implementation(libs.kotlin.logging)
 
