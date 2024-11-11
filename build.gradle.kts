@@ -163,9 +163,9 @@ java {
 }
 kotlin {
     compilerOptions {
-        languageVersion.set(KotlinVersion.KOTLIN_2_0)
-        apiVersion.set(KotlinVersion.KOTLIN_2_0)
-        jvmTarget.set(JvmTarget.JVM_17)
+        languageVersion = KotlinVersion.KOTLIN_2_0
+        apiVersion = KotlinVersion.KOTLIN_2_0
+        jvmTarget = JvmTarget.JVM_17
     }
 }
 
@@ -175,7 +175,7 @@ project.setProperty("mainClassName", applicationMainClass)
 
 application {
     if (hasProperty("openrndr.application")) {
-        mainClass.set("${property("openrndr.application")}")
+        mainClass = "${property("openrndr.application")}"
     }
 }
 
@@ -214,7 +214,7 @@ tasks {
 // ------------------------------------------------------------------------------------------------------------------ //
 
 tasks.register<Zip>("jpackageZip") {
-    archiveFileName.set("openrndr-application.zip")
+    archiveFileName = "openrndr-application.zip"
     from("${layout.buildDirectory.get()}/jpackage") {
         include("**/*")
     }
@@ -232,14 +232,14 @@ runtime {
             jvmArgs.add("-Duser.dir=${"$"}APPDIR/../Resources")
         }
     }
-    options.set(listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages"))
-    modules.set(listOf("jdk.unsupported", "java.management", "java.desktop"))
+    options = listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages")
+    modules = listOf("jdk.unsupported", "java.management", "java.desktop")
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
 
 tasks.register<org.openrndr.extra.gitarchiver.GitArchiveToMarkdown>("gitArchiveToMarkDown") {
-    historySize.set(20)
+    historySize = 20
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
