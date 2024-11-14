@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.0.21"
-openrndr = "0.4.5-alpha5"
-orx = "0.4.5-alpha5"
+openrndr = "0.4.5-alpha6"
+orx = "0.4.5-alpha6"
 orsl = "0.4.5-alpha5"
 orml = "0.4.1"
 
