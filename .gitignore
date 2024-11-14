@@ -3,6 +3,7 @@ build
 out
 .idea
 .gradle
+.kotlin
 video/
 screenshots/
 gui-parameters/
