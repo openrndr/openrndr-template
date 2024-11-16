@@ -12,7 +12,7 @@ You will find some [basic instructions](https://guide.openrndr.org/setUpYourFirs
 ## Gradle tasks
 
  - `./gradlew run` runs the TemplateProgram (Use `gradlew.bat run` under Windows)
- - `./gradlew shadowJar` creates an executable platform specific jar file with all dependencies. Run the resulting program by typing `java -jar build/libs/openrndr-template-1.0.0-all.jar` in a terminal from the project root.
+ - `./gradlew shadowJar` creates an executable platform specific jar file with all dependencies. Run the resulting program by typing `java -jar build/libs/openrndr-template-1.0.0-all.jar` in a terminal from the project root. If your project contains multiple `main` methods, specify which one to run with `java -cp build/libs/openrndr-template-1.0.0-all.jar MyProgramKt`, where `MyProgramKt` can also be `foo.bar.MyProgramKt` if it's in the package `foo.bar`.
  - `./gradlew jpackageZip` creates a zip with a stand-alone executable for the current platform (works with Java 14 only)
 
 ## Cross builds
@@ -21,20 +21,20 @@ To create a runnable jar for a platform different from your current platform, us
 
 ## Updating OPENRNDR, ORX and other dependencies
 
-The openrndr-template depends on various packages including the core [openrndr](https://github.com/openrndr/openrndr/) and the [orx](https://github.com/openrndr/orx/) extensions. The version numbers of these dependencies are specified in your [libs.versions.toml](gradle/libs.versions.toml) file. If you want to learn about file format visit the [Gradle documentation](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml) website.
+The openrndr-template depends on various packages including the core [openrndr](https://github.com/openrndr/openrndr/) and the [orx](https://github.com/openrndr/orx/) extensions. The version numbers of these dependencies are specified in your [libs.versions.toml](gradle/libs.versions.toml) file. Learn more about this file in the [Gradle documentation](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml) website.
 
 Newer versions of OPENRNDR and ORX bring useful features and bug fixes. The most recent versions are
 <br>![openrndr version](https://maven-badges.herokuapp.com/maven-central/org.openrndr/openrndr-application/badge.svg) for OPENRNDR. 
 <br>![orx version](https://maven-badges.herokuapp.com/maven-central/org.openrndr.extra/orx-parameters-jvm/badge.svg) for ORX.
 
-Switch to the [next-version branch](https://github.com/openrndr/openrndr-template/tree/next-version) or enter these version numbers in your toml file. They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
+Switch to the [next-version branch](https://github.com/openrndr/openrndr-template/tree/next-version) or enter these versions manually in your toml file. They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
 
     openrndr = "0.4.3-alpha4"
         orx = "0.4.3-alpha4"
 
 You can add other dependencies needed by your project to your [build.gradle.kts](build.gradle.kts) file, inside the `dependencies { }` block. 
 
-Remember to reload the Gradle configuration after changing any dependencies.
+⚠️ Remember to reload the Gradle configuration after changing any dependencies.
 
 ## Run other Kotlin programs from the command line
 
@@ -50,19 +50,16 @@ To run `src/main/kotlin/foo/bar/myProgram.kt` (assuming `package foo.bar` in myP
 
 ## Github Actions
 
-This repository contains a number of Github Actions under `./github/workflows`.
+This repository contains various Github Actions under `./github/workflows`:
 
-[build-on-commit.yaml](.github/workflows/build-on-commit.yaml) runs a basic build on every commit, 
+- [build-on-commit.yaml](.github/workflows/build-on-commit.yaml) runs a basic build on every commit, 
 which can help detect issues in the source code.
 
-[publish-binaries.yaml](.github/workflows/publish-binaries.yaml) publishes binaries for Linux, Mac and Windows 
-any time a commit is tagged with a version number like `v1.*`. 
-
-For example, we can create and push a tag with these git commands:
-
+- [publish-binaries.yaml](.github/workflows/publish-binaries.yaml) publishes binaries for Linux, Mac and Windows 
+any time a commit is tagged with a version number like `v1.*`. For example, we can create and push a tag with these git commands:
+    ```
     git tag -a v1.0.0 -m "v1.0.0"
     git push origin v1.0.0
+    ```
 
-The progress of the running actions can be followed under the Actions tab in GitHub. 
-Once complete, the executables will be found under the Releases section.
-
+    You can follow the progress of the action under the Actions tab in GitHub. Once complete, the executables will appear under the Releases section.
