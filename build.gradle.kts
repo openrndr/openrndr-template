@@ -192,6 +192,7 @@ tasks {
             exclude(dependency("org.apache.logging.log4j:log4j-slf4j2-impl:.*"))
             exclude(dependency("com.fasterxml.jackson.core:jackson-databind:.*"))
             exclude(dependency("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:.*"))
+            exclude(dependency("org.bytedeco:.*"))
         }
     }
     named<org.beryx.runtime.JPackageTask>("jpackage") {
