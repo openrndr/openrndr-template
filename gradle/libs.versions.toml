@@ -29,7 +29,7 @@ orsl-extension-pbr = { group = "org.openrndr.extra", name = "orsl-extension-pbr"
 orsl-extension-raymarching = { group = "org.openrndr.extra", name = "orsl-extension-raymarching", version.ref = "orsl" }
 orsl-extension-sdf = { group = "org.openrndr.extra", name = "orsl-extension-sdf", version.ref = "orsl" }
 
-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.9.0" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.10.1" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.7.3" }
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version = "1.7.3" }
 kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version = "7.0.3" }
