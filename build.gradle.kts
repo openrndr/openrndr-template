@@ -41,6 +41,7 @@ val orxFeatures = setOf<String>(
 //  "orx-kinect-v1",
 //  "orx-kotlin-parser",
 //  "orx-marching-squares",
+//  "orx-math",
 //  "orx-mesh-generators",
 //  "orx-midi",
 //  "orx-minim",
