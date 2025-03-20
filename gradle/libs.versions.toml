@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.1.10"
+kotlin = "2.1.20"
 openrndr = "0.4.5-alpha8"
 orx = "0.4.5-alpha8"
 orsl = "0.4.5-alpha5"
