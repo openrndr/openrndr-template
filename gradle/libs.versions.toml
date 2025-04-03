@@ -4,10 +4,18 @@ openrndr = "0.4.5-alpha8"
 orx = "0.4.5-alpha8"
 orsl = "0.4.5-alpha5"
 orml = "0.4.1"
-
 slf4j = "2.0.17"
 log4j = "2.23.1"
 jackson = "2.17.2"
+junit = "4.13.2"
+kotlinxCoroutines = "1.10.1"
+kotlinxSerialization = "1.8.1"
+kotlinLogging = "7.0.6"
+kotlinCsvJvm = "1.9.3"
+jsoup = "1.17.1"
+shadow = "8.1.1"
+runtime = "1.13.1"
+versions = "0.52.0"
 
 [libraries]
 kotlin-script-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-script-runtime", version.ref = "kotlin" }
@@ -29,18 +37,18 @@ orsl-extension-pbr = { group = "org.openrndr.extra", name = "orsl-extension-pbr"
 orsl-extension-raymarching = { group = "org.openrndr.extra", name = "orsl-extension-raymarching", version.ref = "orsl" }
 orsl-extension-sdf = { group = "org.openrndr.extra", name = "orsl-extension-sdf", version.ref = "orsl" }
 
-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.10.1" }
-kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.8.0" }
-kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version = "1.8.0" }
-kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version = "7.0.5" }
-junit = { group = "junit", name = "junit", version = "4.13.2" }
-jsoup = { group = "org.jsoup", name = "jsoup", version = "1.17.1" }
-csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version = "1.9.3" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinxSerialization" }
+kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version.ref = "kotlinLogging" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
+csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version.ref = "kotlinCsvJvm" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
-runtime = { id = "org.beryx.runtime", version = "1.13.1" }
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+runtime = { id = "org.beryx.runtime", version.ref = "runtime" }
 gitarchive-tomarkdown = { id = "org.openrndr.extra.gitarchiver.tomarkdown", version.ref = "orx" }
-versions = { id = "com.github.ben-manes.versions", version = "0.52.0" }
+versions = { id = "com.github.ben-manes.versions", version.ref = "versions" }
