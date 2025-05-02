@@ -142,9 +142,11 @@ dependencies {
         Logging.NONE -> {
             runtimeOnly(libs.slf4j.nop)
         }
+
         Logging.SIMPLE -> {
             runtimeOnly(libs.slf4j.simple)
         }
+
         Logging.FULL -> {
             runtimeOnly(libs.log4j.slf4j2)
             runtimeOnly(libs.log4j.core)
@@ -172,12 +174,11 @@ kotlin {
 
 // ------------------------------------------------------------------------------------------------------------------ //
 
-project.setProperty("mainClassName", applicationMainClass)
-
 application {
-    if (hasProperty("openrndr.application")) {
-        mainClass = "${property("openrndr.application")}"
-    }
+    mainClass = if (hasProperty("openrndr.application"))
+        "${property("openrndr.application")}"
+    else
+        applicationMainClass
 }
 
 tasks {
@@ -198,7 +199,7 @@ tasks {
     }
     named<org.beryx.runtime.JPackageTask>("jpackage") {
         doLast {
-            val destPath = if(OperatingSystem.current().isMacOsX)
+            val destPath = if (OperatingSystem.current().isMacOsX)
                 "build/jpackage/openrndr-application.app/Contents/Resources/data"
             else
                 "build/jpackage/openrndr-application/data"
@@ -290,11 +291,13 @@ class Openrndr {
             "aarch64", "arm-v8" -> "macos-arm64"
             else -> "macos"
         }
+
         currOs.isLinux -> when (currArch) {
             "x86-64" -> "linux-x64"
             "aarch64" -> "linux-arm64"
             else -> throw IllegalArgumentException("architecture not supported: $currArch")
         }
+
         else -> throw IllegalArgumentException("os not supported: ${currOs.name}")
     }
 
@@ -331,25 +334,26 @@ class Openrndr {
         }
     }
 }
+
 val openrndr = Openrndr()
 
 if (properties["openrndr.tasks"] == "true") {
-    task("create executable jar for $applicationMainClass") {
+    tasks.register("create executable jar for $applicationMainClass") {
         group = " \uD83E\uDD8C OPENRNDR"
         dependsOn("shadowJar")
     }
 
-    task("run $applicationMainClass") {
+    tasks.register("run $applicationMainClass") {
         group = " \uD83E\uDD8C OPENRNDR"
         dependsOn("run")
     }
 
-    task("create standalone executable for $applicationMainClass") {
+    tasks.register("create standalone executable for $applicationMainClass") {
         group = " \uD83E\uDD8C OPENRNDR"
         dependsOn("jpackageZip")
     }
 
-    task("add IDE file scopes") {
+    tasks.register("add IDE file scopes") {
         group = " \uD83E\uDD8C OPENRNDR"
         val scopesFolder = File("${project.projectDir}/.idea/scopes")
         scopesFolder.mkdirs()
