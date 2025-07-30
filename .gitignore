@@ -3,6 +3,7 @@ build
 out
 .idea
 .gradle
+.lwjgl
 video/
 screenshots/
 gui-parameters/
