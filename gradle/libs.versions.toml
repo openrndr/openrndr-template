@@ -10,11 +10,11 @@ jackson = "2.17.2"
 junit = "4.13.2"
 kotlinxCoroutines = "1.10.2"
 kotlinxSerialization = "1.9.0"
-kotlinLogging = "7.0.7"
+kotlinLogging = "7.0.10"
 kotlinCsvJvm = "1.9.3"
 jsoup = "1.17.1"
-shadow = "8.1.1"
-runtime = "1.13.1"
+shadow = "8.3.8"
+jpackage = "1.7.3"
 versions = "0.52.0"
 
 [libraries]
@@ -48,7 +48,7 @@ csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version.ref =
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
-runtime = { id = "org.beryx.runtime", version.ref = "runtime" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+jpackage = { id = "org.panteleyev.jpackageplugin", version.ref = "jpackage"}
 gitarchive-tomarkdown = { id = "org.openrndr.extra.gitarchiver.tomarkdown", version.ref = "orx" }
 versions = { id = "com.github.ben-manes.versions", version.ref = "versions" }

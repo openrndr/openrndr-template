@@ -103,9 +103,10 @@ val applicationLogging = Logging.FULL
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     java
+    application
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.shadow)
-    alias(libs.plugins.runtime)
+    alias(libs.plugins.jpackage)
     alias(libs.plugins.gitarchive.tomarkdown).apply(false)
     alias(libs.plugins.versions)
     alias(libs.plugins.kotlin.serialization)
@@ -197,7 +198,12 @@ tasks {
             exclude(dependency("org.bytedeco:.*"))
         }
     }
-    named<org.beryx.runtime.JPackageTask>("jpackage") {
+}
+
+// ------------------------------------------------------------------------------------------------------------------ //
+
+tasks {
+    named("jpackage") {
         doLast {
             val destPath = if (OperatingSystem.current().isMacOsX)
                 "build/jpackage/openrndr-application.app/Contents/Resources/data"
@@ -216,13 +222,14 @@ tasks {
 
 // ------------------------------------------------------------------------------------------------------------------ //
 
-tasks.register<Zip>("jpackageZip") {
-    archiveFileName = "openrndr-application.zip"
-    from("${layout.buildDirectory.get()}/jpackage") {
-        include("**/*")
+    register<Zip>("jpackageZip") {
+        archiveFileName = "openrndr-application.zip"
+        from("${layout.buildDirectory.get()}/jpackage") {
+            include("**/*")
+        }
+        dependsOn("jpackage")
     }
 }
-tasks.findByName("jpackageZip")?.dependsOn("jpackage")
 
 // ------------------------------------------------------------------------------------------------------------------ //
 
@@ -232,7 +239,7 @@ runtime {
         skipInstaller = true
         if (OperatingSystem.current().isMacOsX) {
             jvmArgs.add("-XstartOnFirstThread")
-            jvmArgs.add("-Duser.dir=${"$"}APPDIR/../Resources")
+            jvmArgs.add($$"-Duser.dir=$APPDIR/../Resources")
         }
     }
     options = listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages")
