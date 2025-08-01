@@ -3,6 +3,7 @@ import org.gradle.internal.os.OperatingSystem
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.panteleyev.jpackage.ImageType
 
 group = "org.openrndr.template"
 version = "1.0.0"
@@ -205,45 +206,63 @@ tasks {
 tasks {
     named("jpackage") {
         doLast {
-            val destPath = if (OperatingSystem.current().isMacOsX)
-                "build/jpackage/openrndr-application.app/Contents/Resources/data"
+            val destPath = "build/jpackage/" + if (OperatingSystem.current().isMacOsX)
+                "openrndr-application.app/Contents/Resources/data"
             else
-                "build/jpackage/openrndr-application/data"
+                "openrndr-application/data"
 
             copy {
-                from("data") {
-                    include("**/*")
-                }
+                from("data") { include("**/*") }
                 into(destPath)
             }
         }
     }
-}
-
-// ------------------------------------------------------------------------------------------------------------------ //
 
     register<Zip>("jpackageZip") {
         archiveFileName = "openrndr-application.zip"
         from("${layout.buildDirectory.get()}/jpackage") {
             include("**/*")
         }
+        isPreserveFileTimestamps = true
+        isReproducibleFileOrder = true
+        useFileSystemPermissions()
         dependsOn("jpackage")
     }
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
 
-runtime {
-    jpackage {
-        imageName = "openrndr-application"
-        skipInstaller = true
-        if (OperatingSystem.current().isMacOsX) {
-            jvmArgs.add("-XstartOnFirstThread")
-            jvmArgs.add($$"-Duser.dir=$APPDIR/../Resources")
-        }
+tasks.register("copyDependencies", Copy::class) {
+    from(configurations.runtimeClasspath).into(layout.buildDirectory.dir("jars"))
+}
+
+tasks.register("copyJar", Copy::class) {
+    from(tasks.jar).into(layout.buildDirectory.dir("jars"))
+}
+
+tasks.jpackage {
+    dependsOn("build", "copyDependencies", "copyJar")
+
+    appName = "openrndr-application"
+    mac {
+        javaOptions = listOf(
+            "-XstartOnFirstThread",
+            $$"-Duser.dir=$APPDIR/../Resources"
+        )
     }
-    options = listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages")
-    modules = listOf("jdk.unsupported", "java.management", "java.desktop")
+    windows {
+    }
+    linux {
+        type = ImageType.APP_IMAGE
+    }
+    input = layout.buildDirectory.dir("jars")
+    destination = layout.buildDirectory.dir("jpackage")
+
+    mainJar = tasks.jar.get().archiveFileName.get()
+    mainClass = applicationMainClass
+
+    addModules = listOf("jdk.unsupported", "java.management", "java.desktop")
+    jLinkOptions = listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages")
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
