@@ -18,6 +18,10 @@ You will find some [basic instructions](https://guide.openrndr.org/setUpYourFirs
  - `./gradlew jpackageZip` creates a zip with a stand-alone executable for the current platform (works with Java 14 only). Run it like this: `cd build/jpackage/openrndr-application/ && bin/openrndr-application`.
  - `./gradlew dependencyUpydates` checks whether any dependencies have newer versions.
 
+## Tips and issues
+
+See the [wiki](https://github.com/openrndr/openrndr-template/wiki)
+
 ## Cross builds
 
 To create a runnable jar for a platform different from your current platform, use `./gradlew jar -PtargetPlatform=<platform>`, where `<platform>` is either `windows`, `macos`, `linux-x64`, or `linux-arm64`. 
