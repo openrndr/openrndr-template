@@ -15,7 +15,7 @@ You will find some [basic instructions](https://guide.openrndr.org/setUpYourFirs
  - `./gradlew run -Popenrndr.application=MyProgramKt` runs `src/main/kotlin/myProgram.kt`
  - `./gradlew run -Popenrndr.application=foo.bar.MyProgramKt` runs `src/main/kotlin/foo/bar/myProgram.kt` (assuming `package foo.bar` is used in myProgram.kt)
  - `./gradlew shadowJar` creates an executable platform specific jar file with all dependencies. Run the resulting program by typing `java -jar build/libs/openrndr-template-1.0.0-all.jar` in a terminal from the project root. If your project contains multiple `main` methods, specify which one to run with `java -cp build/libs/openrndr-template-1.0.0-all.jar MyProgramKt`, where `MyProgramKt` can also be `foo.bar.MyProgramKt` if it's in the package `foo.bar`.
- - `./gradlew jpackageZip` creates a zip with a stand-alone executable for the current platform (works with Java 14 only). Run it like this: `cd build/jpackage/openrndr-application/ && bin/openrndr-application`.
+ - `./gradlew jpackageZip` creates a zip with a stand-alone executable for the current platform (requires Java 17 or newer). Run it like this: `cd build/jpackage/openrndr-application/ && bin/openrndr-application`.
  - `./gradlew dependencyUpydates` checks whether any dependencies have newer versions.
 
 ## Tips and issues
