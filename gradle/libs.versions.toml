@@ -1,9 +1,14 @@
 [versions]
+jvmTarget = "17"
 kotlin = "2.2.10"
+kotlinApi = "2.2"
+kotlinLanguage = "2.2"
+
 openrndr = "0.5.0-SNAPSHOT"
 orx = "0.5.0-SNAPSHOT"
 orsl = "0.4.5-alpha5"
 orml = "0.4.1"
+
 slf4j = "2.0.17"
 log4j = "2.23.1"
 jackson = "2.17.2"
@@ -28,9 +33,9 @@ log4j-core = { group = "org.apache.logging.log4j", name = "log4j-core", version.
 jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson" }
 jackson-json = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version.ref = "jackson" }
 
-shadow-gradle-plugin = { group = "com.gradleup.shadow", name = "com.gradleup.shadow.gradle.plugin", version.ref = "shadow"}
-runtime-gradle-plugin = { group = "org.beryx.runtime", name = "org.beryx.runtime.gradle.plugin", version.ref = "runtime"}
-kotlin-gradle-plugin = { group = "org.jetbrains.kotlin.jvm", name = "org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin"}
+shadow-gradle-plugin = { group = "com.gradleup.shadow", name = "com.gradleup.shadow.gradle.plugin", version.ref = "shadow" }
+runtime-gradle-plugin = { group = "org.beryx.runtime", name = "org.beryx.runtime.gradle.plugin", version.ref = "runtime" }
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin.jvm", name = "org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
 xversions-gradle-plugin = { group = "com.github.ben-manes.versions", name = "com.github.ben-manes.versions.gradle.plugin", version.ref = "versions" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }

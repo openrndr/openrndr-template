@@ -3,6 +3,8 @@ import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
+val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+
 plugins {
     java
     kotlin("jvm")
@@ -15,15 +17,15 @@ repositories {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.valueOf("VERSION_${libs.findVersion("jvmTarget").get().displayName}")
+    sourceCompatibility = JavaVersion.valueOf("VERSION_${libs.findVersion("jvmTarget").get().displayName}")
 }
 
 kotlin {
     compilerOptions {
-        languageVersion = KotlinVersion.KOTLIN_2_0
-        apiVersion = KotlinVersion.KOTLIN_2_0
-        jvmTarget = JvmTarget.JVM_17
+        apiVersion.set(KotlinVersion.valueOf("KOTLIN_${libs.findVersion("kotlinApi").get().displayName.replace(".", "_")}"))
+        languageVersion.set(KotlinVersion.valueOf("KOTLIN_${libs.findVersion("kotlinLanguage").get().displayName.replace(".", "_")}"))
+        jvmTarget.set(JvmTarget.valueOf("JVM_${libs.findVersion("jvmTarget").get().displayName}"))
     }
 }
 

@@ -16,7 +16,6 @@ dependencies {
     implementation(openrndr.ffmpeg)
     implementation(orx.bundles.basic)
     implementation(orx.olive)
-
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.kotlinx.serialization.json)
