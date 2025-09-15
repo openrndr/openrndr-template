@@ -22,10 +22,6 @@ You will find some [basic instructions](https://guide.openrndr.org/setUpYourFirs
 
 See the [wiki](https://github.com/openrndr/openrndr-template/wiki)
 
-## Cross builds
-
-To create a runnable jar for a platform different from your current platform, use `./gradlew jar -PtargetPlatform=<platform>`, where `<platform>` is either `windows`, `macos`, `linux-x64`, or `linux-arm64`. 
-
 ## Updating OPENRNDR, ORX and other dependencies
 
 The openrndr-template depends on various packages including the core [openrndr](https://github.com/openrndr/openrndr/) and the [orx](https://github.com/openrndr/orx/) extensions and
@@ -64,3 +60,8 @@ any time a commit is tagged with a version number like `v1.*`. For example, we c
     ```
 
     You can follow the progress of the action under the Actions tab in GitHub. Once complete, the executables will appear under the Releases section.
+
+## Building libraries
+
+This template can be used to create library projects. In [build.gradle.kts](build.gradle.kts) one removes the `convention.distribute-application` plugin and adds the `convention.publish-library` plugin. This automatically
+sets up the `maven-publish` plugin, which adds the `publishToMavenLocal` task. The plugin also adds a `demo` sourceSet with runtime dependencies set to go. Demos can be placed in `src/demo/kotlin` and started right away.

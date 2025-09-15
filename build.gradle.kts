@@ -5,13 +5,17 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     id("conventions.kotlin-jvm")
     id("conventions.openrndr-tasks")
-    id("conventions.distribution")
+//    id("conventions.distribute-application")
+    id("conventions.publish-library")
 }
 
 dependencies {
     implementation(openrndr.application)
     implementation(openrndr.draw)
     runtimeOnly(openrndr.gl3)
+
+    implementation(openrndr.dialogs)
+    implementation(openrndr.orextensions)
 
     implementation(openrndr.ffmpeg)
     implementation(orx.bundles.basic)
