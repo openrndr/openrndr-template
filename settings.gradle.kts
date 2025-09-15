@@ -1,8 +1,4 @@
-import groovy.xml.dom.DOMCategory.attributes
-
 rootProject.name = "openrndr-template"
-
-ext.set("applicationMainClass", "TemplateProgramKt")
 
 pluginManagement {
     repositories {
