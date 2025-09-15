@@ -5,8 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     id("conventions.kotlin-jvm")
     id("conventions.openrndr-tasks")
-//    id("conventions.distribute-application")
-    id("conventions.publish-library")
+    id("conventions.distribute-application")
 }
 
 dependencies {
