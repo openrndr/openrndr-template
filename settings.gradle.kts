@@ -1,4 +1,4 @@
-rootProject.name = "openrndr-template"
+rootProject.name = extra["project.name"]?.toString() ?: error("project.name not set")
 
 pluginManagement {
     repositories {

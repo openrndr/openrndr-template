@@ -1,5 +1,5 @@
-group = "org.openrndr.template"
-version = "1.0.0"
+group = property("project.group") ?: error("project.group not set")
+version = property("project.version") ?: error("project.version not set")
 
 plugins {
     alias(libs.plugins.kotlin.serialization)
