@@ -7,25 +7,16 @@ plugins {
     java
     kotlin("jvm")
     `maven-publish`
-
 }
 
 val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 val openrndr = extensions.getByType<VersionCatalogsExtension>().named("openrndr")
 
 val demo = sourceSets.create("demo")
-
 val main = sourceSets.getByName("main")
 val mainImplementation = project.configurations.getByName(main.implementationConfigurationName)
-
-
 val demoImplementation = project.configurations.getByName(demo.implementationConfigurationName)
-//demoImplementation.dependencies.addAll(mainImplementation.dependencies)
-//
-//val demo by sourceSets.creating {
-//
-//
-//}
+
 demoImplementation.extendsFrom(mainImplementation)
 
 dependencies {
@@ -40,7 +31,6 @@ publishing {
             artifactId = property("project.name")?.toString() ?: error("project.name not set")
             description = property("project.name")?.toString() ?: error("project.name not set")
             version = property("project.version")?.toString() ?: error("project.version not set")
-
         }
     }
 }
