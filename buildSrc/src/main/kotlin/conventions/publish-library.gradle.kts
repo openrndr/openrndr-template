@@ -14,12 +14,12 @@ val openrndr = extensions.getByType<VersionCatalogsExtension>().named("openrndr"
 
 val demo = sourceSets.create("demo")
 val main = sourceSets.getByName("main")
-val mainImplementation = project.configurations.getByName(main.implementationConfigurationName)
-val demoImplementation = project.configurations.getByName(demo.implementationConfigurationName)
 
-demoImplementation.extendsFrom(mainImplementation)
+demo.compileClasspath += main.compileClasspath
+demo.runtimeClasspath += main.runtimeClasspath
 demo.compileClasspath += main.output
 demo.runtimeClasspath += main.output
+
 dependencies {
     "demoRuntimeOnly"(openrndr.findLibrary("gl3").get())
 }
