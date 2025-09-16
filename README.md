@@ -63,5 +63,7 @@ any time a commit is tagged with a version number like `v1.*`. For example, we c
 
 ## Building libraries
 
-This template can be used to create library projects. In [build.gradle.kts](build.gradle.kts) one removes the `convention.distribute-application` plugin and adds the `convention.publish-library` plugin. This automatically
-sets up the `maven-publish` plugin, which adds the `publishToMavenLocal` task. The plugin also adds a `demo` sourceSet with runtime dependencies set to go. Demos can be placed in `src/demo/kotlin` and started right away.
+This template can be used to create a library with your classes and extensions and reuse them across projects or share them with other people. 
+To publish the project as a library, open [build.gradle.kts](build.gradle.kts) and replace the `conventions.distribute-application` plugin with `conventions.publish-library`. 
+This automatically sets up the `maven-publish` plugin, which adds the `publishToMavenLocal` task. 
+The plugin also adds a `demo` sourceSet with runtime dependencies set to go. Demos can be placed in `src/demo/kotlin` and started right away.
