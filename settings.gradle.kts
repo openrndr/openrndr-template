@@ -11,7 +11,10 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         mavenLocal {
-            include("org.openrndr")
+            content {
+                includeGroup("org.openrndr")
+                includeGroup("org.openrndr.extra")
+            }
         }
     }
 

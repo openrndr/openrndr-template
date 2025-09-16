@@ -1,9 +1,14 @@
+rootProject.name = "buildSrc"
+
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
         gradlePluginPortal()
         mavenLocal {
-            include("org.openrndr")
+            content {
+                includeGroup("org.openrndr")
+                includeGroup("org.openrndr.extra")
+            }
         }
     }
 
