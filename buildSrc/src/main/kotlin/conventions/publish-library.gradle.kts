@@ -18,6 +18,7 @@ val mainImplementation = project.configurations.getByName(main.implementationCon
 val demoImplementation = project.configurations.getByName(demo.implementationConfigurationName)
 
 demoImplementation.extendsFrom(mainImplementation)
+demo.compileClasspath += main.output
 
 dependencies {
     "demoRuntimeOnly"(openrndr.findLibrary("gl3").get())
