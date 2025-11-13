@@ -9,7 +9,7 @@ plugins {
 }
 
 dependencies {
-    implementation(openrndr.application)
+    implementation(openrndr.application.glfw)
     implementation(openrndr.draw)
     runtimeOnly(openrndr.gl3)
 

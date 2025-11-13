@@ -1,11 +1,11 @@
 [versions]
 jvmTarget = "17"
-kotlin = "2.2.10"
+kotlin = "2.2.21"
 kotlinApi = "2.2"
 kotlinLanguage = "2.2"
 
-openrndr = "0.5.0-alpha1"
-orx = "0.5.0-alpha1"
+openrndr = "0.5.0-alpha2"
+orx = "0.5.0-alpha2"
 orsl = "0.4.5-alpha5"
 orml = "0.4.1"
 
