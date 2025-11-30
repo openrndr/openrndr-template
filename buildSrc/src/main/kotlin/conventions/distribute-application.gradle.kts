@@ -1,4 +1,5 @@
 package conventions
+
 import org.gradle.internal.os.OperatingSystem
 import kotlin.collections.set
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
@@ -8,7 +9,7 @@ plugins {
     id("org.beryx.runtime")
 }
 
-val applicationMainClass: String by properties
+val applicationMainClass = providers.gradleProperty("applicationMainClass").get()
 
 application {
     mainClass = if (hasProperty("openrndr.application"))
@@ -25,6 +26,8 @@ tasks {
         }
         minimize {
             exclude(dependency("org.openrndr:openrndr-gl3:.*"))
+            exclude(dependency("org.openrndr:openrndr-application-glfw"))
+            exclude(dependency("org.openrndr:openrndr-application-sdl"))
             exclude(dependency("org.jetbrains.kotlin:kotlin-reflect:.*"))
             exclude(dependency("org.slf4j:slf4j-simple:.*"))
             exclude(dependency("org.apache.logging.log4j:log4j-slf4j2-impl:.*"))
@@ -55,7 +58,19 @@ tasks {
         from("${layout.buildDirectory.get()}/jpackage") {
             include("**/*")
         }
+        filesMatching("**/bin/*") {
+            permissions {
+                unix("0755")
+            }
+        }
         dependsOn("jpackage")
+    }
+}
+
+// Workaround until jpackage is configuration-cache compatible
+listOf("jre", "jpackageZip", "jpackageImage", "jpackage").forEach {
+    tasks.named(it).configure {
+        notCompatibleWithConfigurationCache("org.beryx.runtime plugin is not configuration-cache compatible")
     }
 }
 
@@ -65,9 +80,9 @@ runtime {
         skipInstaller = true
         if (OperatingSystem.current().isMacOsX) {
             jvmArgs.add("-XstartOnFirstThread")
-            jvmArgs.add("-Duser.dir=${"$"}APPDIR/../Resources")
+            jvmArgs.add($$"-Duser.dir=$APPDIR/../Resources")
         }
     }
-    options = listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages")
+    options = listOf("--strip-debug", "--compress", "zip-6", "--no-header-files", "--no-man-pages")
     modules = listOf("jdk.unsupported", "java.management", "java.desktop")
 }

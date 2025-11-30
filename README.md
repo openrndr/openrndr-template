@@ -9,6 +9,21 @@ If you are looking at this from IntelliJ IDEA you can start by expanding the _pr
 
 You will find some [basic instructions](https://guide.openrndr.org/setUpYourFirstProgram.html) in the [OPENRNDR guide](https://guide.openrndr.org).
 
+## Properties
+
+The file [gradle.properties](gradle.properties) holds properties that are used in the build script.
+
+- `openrndr.allowLocalSnapshots` - when set to `true`, enables the use of locally built OPENRNDR and ORX dependencies
+  from your local Maven repository (`~/.m2/repository`). This is useful for testing local changes to OPENRNDR or ORX
+  before they are published. Default is `false`.
+- `openrndr.allowSonatypeSnapshots` - when set to `true`, enables the use of snapshot versions of OPENRNDR and ORX from
+  the Sonatype snapshots repository. Snapshots are pre-release versions that may contain the latest features and bug
+  fixes but are not yet stable. Default is `true`.
+
+### Listing properties
+- `./gradlew properties` prints the values of all properties that are used in the build script.
+ - `./gradlew properties --all` prints the values of all properties that are used in the build script and all subprojects.
+
 ## Gradle tasks
 
  - `./gradlew run` runs `TemplateProgram.kt` (Use `gradlew.bat run` under Windows)
@@ -36,14 +51,12 @@ Learn more about this file in the [Gradle documentation](https://docs.gradle.org
 Newer versions bring useful features and bug fixes. The most recent versions are<br>
 ![Maven Central Version](https://img.shields.io/maven-central/v/org.openrndr/openrndr-math-jvm?label=OPENRNDR&color=%23FFC0CB) 
 ![Maven Central Version](https://img.shields.io/maven-central/v/org.openrndr.extra/orx-noise-jvm?label=ORX&color=%23FFC0CB)
-![Maven Central Version](https://img.shields.io/maven-central/v/org.openrndr.orsl/orsl-shader-generator-jvm?label=ORSL&color=%23FFC0CB).
 
 Switch to the [next-version branch](https://github.com/openrndr/openrndr-template/tree/next-version) or enter these versions manually in your toml file. 
 They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
 
-    openrndr = "0.4.5-alpha5"
-         orx = "0.4.5-alpha5"
-        orsl = "0.4.5-alpha5"
+    openrndr = "0.5.0"
+         orx = "0.5.0"
 
 You can add other dependencies needed by your project to your [build.gradle.kts](build.gradle.kts) file, inside the `dependencies { }` block. 
 

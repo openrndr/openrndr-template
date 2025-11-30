@@ -1,4 +1,6 @@
 package conventions
+
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
@@ -10,10 +12,29 @@ plugins {
     kotlin("jvm")
     id("com.github.ben-manes.versions")
 }
+val allowSonatypeSnapshots = providers.gradleProperty("openrndr.allowSonatypeSnapshots")
+val allowLocalSnapshots = providers.gradleProperty("openrndr.allowLocalSnapshots")
 
 repositories {
     mavenCentral()
-    mavenLocal()
+    if (allowLocalSnapshots.get() == "true") {
+        mavenLocal {
+            content {
+                includeGroup("org.openrndr")
+                includeGroup("org.openrndr.extra")
+            }
+        }
+    }
+
+    if (allowSonatypeSnapshots.get() == "true") {
+        maven("https://central.sonatype.com/repository/maven-snapshots/") {
+            name = "Central Portal Snapshots"
+            content {
+                includeGroup("org.openrndr")
+                includeGroup("org.openrndr.extra")
+            }
+        }
+    }
 }
 
 java {
@@ -23,8 +44,23 @@ java {
 
 kotlin {
     compilerOptions {
-        apiVersion.set(KotlinVersion.valueOf("KOTLIN_${libs.findVersion("kotlinApi").get().displayName.replace(".", "_")}"))
-        languageVersion.set(KotlinVersion.valueOf("KOTLIN_${libs.findVersion("kotlinLanguage").get().displayName.replace(".", "_")}"))
+        apiVersion.set(
+            KotlinVersion.valueOf(
+                "KOTLIN_${
+                    libs.findVersion("kotlinApi").get().displayName.replace(
+                        ".",
+                        "_"
+                    )
+                }"
+            )
+        )
+        languageVersion.set(
+            KotlinVersion.valueOf(
+                "KOTLIN_${
+                    libs.findVersion("kotlinLanguage").get().displayName.replace(".", "_")
+                }"
+            )
+        )
         jvmTarget.set(JvmTarget.valueOf("JVM_${libs.findVersion("jvmTarget").get().displayName}"))
     }
 }
@@ -54,18 +90,16 @@ fun Project.addHostMachineAttributesToRuntimeConfigurations() {
 addHostMachineAttributesToRuntimeConfigurations()
 
 
-tasks {
-    dependencyUpdates {
-        gradleReleaseChannel = "current"
+tasks.withType<DependencyUpdatesTask> {
+    gradleReleaseChannel = "current"
 
-        val nonStableKeywords = listOf("alpha", "beta", "rc")
+    val nonStableKeywords = listOf("alpha", "beta", "rc")
 
-        fun isNonStable(version: String) = nonStableKeywords.any {
-            version.lowercase().contains(it)
-        }
+    fun isNonStable(version: String) = nonStableKeywords.any {
+        version.lowercase().contains(it)
+    }
 
-        rejectVersionIf {
-            isNonStable(candidate.version) && !isNonStable(currentVersion)
-        }
+    rejectVersionIf {
+        isNonStable(candidate.version) && !isNonStable(currentVersion)
     }
 }

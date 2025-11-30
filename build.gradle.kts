@@ -10,11 +10,12 @@ plugins {
 
 dependencies {
     implementation(openrndr.bundles.basic)
-    runtimeOnly(openrndr.bundles.runtime.glfw)
+    implementation(openrndr.bundles.video)
+    runtimeOnly(openrndr.bundles.runtime.sdl)
+//    runtimeOnly(openrndr.bundles.runtime.glfw)
     runtimeOnly(openrndr.gl3)
     implementation(openrndr.dialogs)
     implementation(openrndr.orextensions)
-    implementation(openrndr.ffmpeg)
 
     implementation(orx.bundles.basic)
     implementation(orx.olive)
