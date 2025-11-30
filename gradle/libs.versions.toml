@@ -1,6 +1,6 @@
 [versions]
 jvmTarget = "17"
-kotlin = "2.2.20"
+kotlin = "2.2.21"
 kotlinApi = "2.2"
 kotlinLanguage = "2.2"
 
