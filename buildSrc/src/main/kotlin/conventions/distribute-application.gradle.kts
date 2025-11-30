@@ -25,6 +25,7 @@ tasks {
         }
         minimize {
             exclude(dependency("org.openrndr:openrndr-gl3:.*"))
+            exclude(dependency("org.openrndr:openrndr-application-glfw"))
             exclude(dependency("org.jetbrains.kotlin:kotlin-reflect:.*"))
             exclude(dependency("org.slf4j:slf4j-simple:.*"))
             exclude(dependency("org.apache.logging.log4j:log4j-slf4j2-impl:.*"))
