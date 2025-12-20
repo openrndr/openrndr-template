@@ -66,9 +66,9 @@ runtime {
         skipInstaller = true
         if (OperatingSystem.current().isMacOsX) {
             jvmArgs.add("-XstartOnFirstThread")
-            jvmArgs.add("-Duser.dir=${"$"}APPDIR/../Resources")
+            jvmArgs.add($$"-Duser.dir=$APPDIR/../Resources")
         }
     }
-    options = listOf("--strip-debug", "--compress", "1", "--no-header-files", "--no-man-pages")
+    options = listOf("--strip-debug", "--compress", "zip-6", "--no-header-files", "--no-man-pages")
     modules = listOf("jdk.unsupported", "java.management", "java.desktop")
 }
