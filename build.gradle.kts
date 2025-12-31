@@ -11,6 +11,7 @@ plugins {
 dependencies {
     implementation(openrndr.application.glfw)
     implementation(openrndr.draw)
+    implementation(openrndr.openal)
     runtimeOnly(openrndr.gl3)
 
     implementation(openrndr.dialogs)
