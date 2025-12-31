@@ -15,6 +15,7 @@ dependencies {
     implementation(openrndr.dialogs)
     implementation(openrndr.orextensions)
     implementation(openrndr.ffmpeg)
+    implementation(openrndr.openal)
 
     implementation(orx.bundles.basic)
     implementation(orx.olive)
