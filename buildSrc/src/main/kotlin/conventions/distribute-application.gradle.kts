@@ -56,6 +56,11 @@ tasks {
         from("${layout.buildDirectory.get()}/jpackage") {
             include("**/*")
         }
+        filesMatching("**/bin/*") {
+            permissions {
+                unix("0755")
+            }
+        }
         dependsOn("jpackage")
     }
 }
