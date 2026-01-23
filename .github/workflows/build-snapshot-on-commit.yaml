@@ -1,0 +1,63 @@
+name: Build snapshot on commit
+on:
+  push:
+    branches:
+      - snapshot
+
+defaults:
+  run:
+    working-directory: ./template
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout OPENRNDR repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          repository: openrndr/openrndr
+          path: ./openrndr
+          ref: master
+
+      - name: Checkout ORX repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          repository: openrndr/orx
+          path: ./orx
+          ref: master
+
+      - name: Checkout current repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          repository: openrndr/openrndr-template
+          path: ./template
+          ref: snapshot
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Set swap space
+        uses: pierotofy/set-swap-space@v1.0
+        with:
+          swap-size-gb: 8
+
+      - name: Build OPENRNDR
+        working-directory: ./openrndr
+        run: ./gradlew publishToMavenLocal snapshot
+
+      - name: Build ORX
+        working-directory: ./orx
+        run: ./gradlew publishToMavenLocal snapshot
+
+      - name: Build template
+        working-directory: ./template
+        run: ./gradlew build
+
