@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - snapshot
+
+defaults:
+  run:
+    working-directory: ./template
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,6 +30,11 @@ jobs:
 
       - name: Checkout current repository
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          repository: openrndr/openrndr-template
+          path: ./template
+          ref: snapshot
 
       - uses: actions/setup-java@v5
         with:
@@ -48,5 +58,6 @@ jobs:
         run: ./gradlew publishToMavenLocal snapshot
 
       - name: Build template
-        working-directory: ./
+        working-directory: ./template
         run: ./gradlew build
+
