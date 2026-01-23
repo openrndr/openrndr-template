@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - next-version
+      - snapshot
 jobs:
   build:
     runs-on: ubuntu-latest
