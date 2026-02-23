@@ -11,8 +11,8 @@ plugins {
 dependencies {
     implementation(openrndr.bundles.basic)
     implementation(openrndr.bundles.video)
-    //runtimeOnly(openrndr.bundles.runtime.sdl)
-    runtimeOnly(openrndr.bundles.runtime.glfw)
+    runtimeOnly(openrndr.bundles.runtime.sdl)
+//    runtimeOnly(openrndr.bundles.runtime.glfw)
     runtimeOnly(openrndr.gl3)
     implementation(openrndr.dialogs)
     implementation(openrndr.orextensions)
