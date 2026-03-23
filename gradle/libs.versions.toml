@@ -1,6 +1,6 @@
 [versions]
 jvmTarget = "17"
-kotlin = "2.3.10"
+kotlin = "2.3.20"
 kotlinApi = "2.2"
 kotlinLanguage = "2.2"
 
@@ -15,10 +15,10 @@ jackson = "2.17.2"
 junit = "4.13.2"
 kotlinxCoroutines = "1.10.2"
 kotlinxSerialization = "1.10.0"
-kotlinLogging = "7.0.14"
+kotlinLogging = "8.0.01"
 kotlinCsvJvm = "1.9.3"
 jsoup = "1.17.1"
-shadow = "9.3.0"
+shadow = "9.4.0"
 runtime = "2.0.1"
 versions = "0.53.0"
 
@@ -56,4 +56,4 @@ versions = { id = "com.github.ben-manes.versions", version.ref = "versions" }
 [bundles]
 logging-none = ["slf4j-nop"]
 logging-simple = ["slf4j-simple"]
-loggin-full = ["log4j-slf4j2", "log4j-core", "jackson-databind", "jackson-json"]
+logging-full = ["log4j-slf4j2", "log4j-core", "jackson-databind", "jackson-json"]
