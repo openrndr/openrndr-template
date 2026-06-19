@@ -1,6 +1,6 @@
 package conventions
 
-val applicationMainClass by properties
+val applicationMainClass = providers.gradleProperty("applicationMainClass").get()
 tasks.register("create executable jar for $applicationMainClass") {
     group = " \uD83E\uDD8C OPENRNDR"
     dependsOn("shadowJar")

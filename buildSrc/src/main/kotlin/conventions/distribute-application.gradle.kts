@@ -8,7 +8,7 @@ plugins {
     id("org.beryx.runtime")
 }
 
-val applicationMainClass: String by properties
+val applicationMainClass = providers.gradleProperty("applicationMainClass").get()
 
 application {
     mainClass = if (hasProperty("openrndr.application"))

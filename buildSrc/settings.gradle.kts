@@ -34,6 +34,5 @@ dependencyResolutionManagement {
 pluginManagement {
     repositories {
         gradlePluginPortal()
-
     }
 }
