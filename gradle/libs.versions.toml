@@ -1,6 +1,6 @@
 [versions]
 jvmTarget = "17"
-kotlin = "2.3.21"
+kotlin = "2.4.0"
 kotlinApi = "2.2"
 kotlinLanguage = "2.2"
 
@@ -15,7 +15,7 @@ jackson = "2.17.2"
 junit = "4.13.2"
 kotlinxCoroutines = "1.11.0"
 kotlinxSerialization = "1.11.0"
-kotlinLogging = "8.0.03"
+kotlinLogging = "8.0.4"
 kotlinCsvJvm = "1.9.3"
 jsoup = "1.17.1"
 shadow = "9.4.0"
