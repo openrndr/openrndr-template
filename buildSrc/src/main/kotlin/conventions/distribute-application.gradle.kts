@@ -1,4 +1,5 @@
 package conventions
+
 import org.gradle.internal.os.OperatingSystem
 import kotlin.collections.set
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
