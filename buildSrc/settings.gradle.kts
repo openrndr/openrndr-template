@@ -13,14 +13,15 @@ dependencyResolutionManagement {
     }
 
     versionCatalogs {
+        val versionsTomlFile = settingsDir.parentFile.resolve("gradle/libs.versions.toml")
         create("libs") {
-            from(files("../gradle/libs.versions.toml"))
+            from(files(versionsTomlFile))
         }
         // We use a regex to get the openrndr/orx versions from the primary catalog as there is no public Gradle API to parse catalogs.
         val orRegEx = Regex("^openrndr[ ]*=[ ]*(?:\\{[ ]*require[ ]*=[ ]*)?\"(.*)\"[ ]*(?:\\})?", RegexOption.MULTILINE)
         val orxRegEx = Regex("^orx[ ]*=[ ]*(?:\\{[ ]*require[ ]*=[ ]*)?\"(.*)\"[ ]*(?:\\})?", RegexOption.MULTILINE)
-        val openrndrVersion = orRegEx.find(File(rootDir,"../gradle/libs.versions.toml").readText())?.groupValues?.get(1) ?: error("can't find openrndr version")
-        val orxVersion = orxRegEx.find(File(rootDir,"../gradle/libs.versions.toml").readText())?.groupValues?.get(1) ?: error("can't find orx version")
+        val openrndrVersion = orRegEx.find(versionsTomlFile.readText())?.groupValues?.get(1) ?: error("can't find openrndr version")
+        val orxVersion = orxRegEx.find(versionsTomlFile.readText())?.groupValues?.get(1) ?: error("can't find orx version")
 
         create("orx") {
             from("org.openrndr.extra:orx-module-catalog:$orxVersion")
