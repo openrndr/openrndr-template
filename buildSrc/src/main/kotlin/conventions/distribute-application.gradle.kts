@@ -67,6 +67,13 @@ tasks {
     }
 }
 
+// Workaround until jpackage is configuration-cache compatible
+listOf("jre", "jpackageZip", "jpackageImage", "jpackage").forEach {
+    tasks.named(it).configure {
+        notCompatibleWithConfigurationCache("org.beryx.runtime plugin is not configuration-cache compatible")
+    }
+}
+
 runtime {
     jpackage {
         imageName = "openrndr-application"
