@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout OPENRNDR repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           repository: openrndr/openrndr
@@ -21,7 +21,7 @@ jobs:
           ref: master
 
       - name: Checkout ORX repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           repository: openrndr/orx
@@ -29,20 +29,20 @@ jobs:
           ref: master
 
       - name: Checkout current repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           repository: openrndr/openrndr-template
           path: ./template
           ref: snapshot
 
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: 21
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Set swap space
         uses: pierotofy/set-swap-space@v1.0
