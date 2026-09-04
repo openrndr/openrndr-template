@@ -9,6 +9,21 @@ If you are looking at this from IntelliJ IDEA you can start by expanding the _pr
 
 You will find some [basic instructions](https://guide.openrndr.org/setUpYourFirstProgram.html) in the [OPENRNDR guide](https://guide.openrndr.org).
 
+## Properties
+
+The file [gradle.properties](gradle.properties) holds properties that are used in the build script.
+
+- `openrndr.allowLocalSnapshots` - when set to `true`, enables the use of locally built OPENRNDR and ORX dependencies
+  from your local Maven repository (`~/.m2/repository`). This is useful for testing local changes to OPENRNDR or ORX
+  before they are published. Default is `false`.
+- `openrndr.allowSonatypeSnapshots` - when set to `true`, enables the use of snapshot versions of OPENRNDR and ORX from
+  the Sonatype snapshots repository. Snapshots are pre-release versions that may contain the latest features and bug
+  fixes but are not yet stable. Default is `true`.
+
+### Listing properties
+- `./gradlew properties` prints the values of all properties that are used in the build script.
+ - `./gradlew properties --all` prints the values of all properties that are used in the build script and all subprojects.
+
 ## Gradle tasks
 
  - `./gradlew run` runs `TemplateProgram.kt` (Use `gradlew.bat run` under Windows)
