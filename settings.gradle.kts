@@ -7,16 +7,33 @@ pluginManagement {
     }
 }
 
+val allowSonatypeSnapshots = providers.gradleProperty("openrndr.allowSonatypeSnapshots")
+val allowLocalSnapshots = providers.gradleProperty("openrndr.allowLocalSnapshots")
+
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
-        mavenLocal {
-            content {
-                includeGroup("org.openrndr")
-                includeGroup("org.openrndr.extra")
+        if (allowLocalSnapshots.get() == "true") {
+            mavenLocal {
+                content {
+                    includeGroup("org.openrndr")
+                    includeGroup("org.openrndr.extra")
+                }
+            }
+        }
+
+        if (allowSonatypeSnapshots.get() == "true") {
+            maven("https://central.sonatype.com/repository/maven-snapshots/") {
+                name = "Central Portal Snapshots"
+
+                content {
+                    includeGroup("org.openrndr")
+                    includeGroup("org.openrndr.extra")
+                }
             }
         }
     }
+
 
     versionCatalogs {
         // We use a regex to get the openrndr/orx versions from the primary catalog as there is no public Gradle API to parse catalogs.
