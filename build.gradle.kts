@@ -4,6 +4,7 @@ version = property("project.version") ?: error("project.version not set")
 plugins {
     alias(libs.plugins.kotlin.serialization)
     id("conventions.kotlin-jvm")
+    id("conventions.template-tasks")
     id("conventions.openrndr-tasks")
     id("conventions.distribute-application")
 }
