@@ -18,7 +18,7 @@ The file [gradle.properties](gradle.properties) holds properties that are used i
   before they are published. Default is `false`.
 - `openrndr.allowSonatypeSnapshots` - when set to `true`, enables the use of snapshot versions of OPENRNDR and ORX from
   the Sonatype snapshots repository. Snapshots are pre-release versions that may contain the latest features and bug
-  fixes but are not yet stable. Default is `true`.
+  fixes but are not yet stable. Default is `false`.
 
 ### Listing properties
 - `./gradlew properties` prints the values of all properties that are used in the build script.
