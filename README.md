@@ -52,12 +52,6 @@ Newer versions bring useful features and bug fixes. The most recent versions are
 ![Maven Central Version](https://img.shields.io/maven-central/v/org.openrndr/openrndr-math-jvm?label=OPENRNDR&color=%23FFC0CB) 
 ![Maven Central Version](https://img.shields.io/maven-central/v/org.openrndr.extra/orx-noise-jvm?label=ORX&color=%23FFC0CB)
 
-Switch to the [next-version branch](https://github.com/openrndr/openrndr-template/tree/next-version) or enter these versions manually in your toml file. 
-They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
-
-    openrndr = "0.5.0"
-         orx = "0.5.0"
-
 You can add other dependencies needed by your project to your [build.gradle.kts](build.gradle.kts) file, inside the `dependencies { }` block. 
 
 ⚠️ Remember to reload the Gradle configuration after changing any dependencies.
