@@ -1,5 +1,8 @@
 # OPENRNDR template project
 
+> **Note:** This is a legacy version of the template intended for use with OPENRNDR 0.4.x. For newer versions of
+> OPENRNDR, please use the template in the [`master` branch](https://github.com/openrndr/openrndr-template/tree/master).
+
 A feature rich template for creating OPENRNDR programs based on [Gradle/Kts](https://en.wikipedia.org/wiki/Gradle).
 
 The template consists of a configuration for Gradle and two example OPENRNDR programs. The Gradle configuration should serve as the
@@ -41,9 +44,9 @@ Newer versions bring useful features and bug fixes. The most recent versions are
 Switch to the [next-version branch](https://github.com/openrndr/openrndr-template/tree/next-version) or enter these versions manually in your toml file. 
 They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
 
-    openrndr = "0.4.5-alpha5"
-         orx = "0.4.5-alpha5"
-        orsl = "0.4.5-alpha5"
+    openrndr = "0.4.5"
+         orx = "0.4.5"
+        orsl = "0.4.5"
 
 You can add other dependencies needed by your project to your [build.gradle.kts](build.gradle.kts) file, inside the `dependencies { }` block. 
 
