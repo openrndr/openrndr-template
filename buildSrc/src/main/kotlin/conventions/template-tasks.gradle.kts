@@ -122,7 +122,7 @@ tasks.register("openrndrRelease") {
 }
 
 tasks.register("openrndrLocalSnapshot") {
-    group = "openrndr tempalte"
+    group = "openrndr template"
     description = "Switch to OPENRNDR and ORX Sonatype snapshot versions"
 
     doLast {
