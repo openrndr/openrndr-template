@@ -75,9 +75,47 @@ any time a commit is tagged with a version number like `v1.*`. For example, we c
 
     You can follow the progress of the action under the Actions tab in GitHub. Once complete, the executables will appear under the Releases section.
 
-## Building libraries
+## Building reusable libraries
 
-This template can be used to create a library with your classes and extensions and reuse them across projects or share them with other people. 
-To publish the project as a library, open [build.gradle.kts](build.gradle.kts) and replace the `conventions.distribute-application` plugin with `conventions.publish-library`. 
-This automatically sets up the `maven-publish` plugin, which adds the `publishToMavenLocal` task. 
-The plugin also adds a `demo` sourceSet with runtime dependencies set to go. Demos can be placed in `src/demo/kotlin` and started right away.
+This template can be used in two modes depending on which plugin is loaded in the `plugins { ... }` section in 
+[build.gradle.kts](build.gradle.kts):
+
+1. `id("conventions.distribute-application")`. The default approach. The project is used to create one or more 
+    audiovisual programs, which can be built and shared with others or run as installations.
+2. `id("conventions.publish-library")`. With this mode, the template becomes a collection of helper classes and functions
+    that you or other people can use in other template-based projects. The `publish-library` convention sets up the 
+    `maven-publish` plugin, which adds the `publishToMavenLocal` task and a `demo` sourceSet with runtime dependencies 
+    set to go. Demos can be placed under `src/demo/kotlin` and launched right away.
+
+When getting started, you probably want to leave this setting in the default mode. Once you start to work on multiple
+projects and want to share code across them, it may be convenient to create a library of reusable code.
+
+Assume you have cloned three copies of the `openrndr-template` repo and named them `myLibrary`, `project1` and `project2`.
+
+* In `myLibrary`, `build.gradle.kts` should use `id("conventions.publish-library")` instead of `id("conventions.distribute-application")`.
+  * Fill `gradle.properties` with something like
+    ```bash
+    # Choose a good name for your library
+    project.name=mySuperLibrary
+    # Choose any group name (no need to use github) 
+    project.group=com.github.myUserName
+    # Your main branch often starts with main- or master-
+    project.version=main-SNAPSHOT
+    ```
+  * Write reusable helper classes and functions under `src/main/kotlin/...`.
+  * Optionally, write runnable OPENRNDR programs demonstrating the use of the helper classes and functions to `src/demo/kotlin/...`.
+    A demo is worth 1000 images.
+  * Run `./gradlew publishToMavenLocal -Prelease.version=main-SNAPSHOT` to publish your library locally.
+* In `project1`, `build.gradle.kts` should use `id("conventions.distribute-application")`
+  * Add `implementation("com.github.myUserName:mySuperLibrary:main-SNAPSHOT")` to the `dependencies { ... }` block in `build.gradle.kts`
+    (match whatever names you used in `gradle.properties` in `myLibrary`).
+  * Reload Gradle.
+  * Use your helper classes and functions in programs under `src/main/kotlin/`.
+* In `project2`, `build.gradle.kts` should use `id("conventions.distribute-application")`
+  * Add `implementation("com.github.myUserName:mySuperLibrary:main-SNAPSHOT")` to the `dependencies { ... }` block in `build.gradle.kts`
+    (match whatever names you used in `gradle.properties` in `myLibrary`).
+  * Reload Gradle.
+  * Use your helper classes and functions in programs under `src/main/kotlin/`.
+
+If you commit and push `myLibrary` online, you can use [jitpack](https://jitpack.io/) to easily make your library 
+available to others. More experienced users can publish it to Maven Central.
