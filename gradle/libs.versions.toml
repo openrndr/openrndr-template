@@ -7,7 +7,7 @@ kotlinLanguage = "2.4"
 openrndr = "0.5.0"
 orx = "0.5.0"
 
-slf4j = "2.0.18"
+slf4j = "2.0.19"
 log4j = "2.23.1"
 jackson = "2.17.2"
 junit = "4.13.2"
@@ -15,10 +15,10 @@ kotlinxCoroutines = "1.11.0"
 kotlinxSerialization = "1.11.0"
 kotlinLogging = "8.0.4"
 kotlinCsvJvm = "1.9.3"
-jsoup = "1.17.1"
+jsoup = "1.23.2"
 shadow = "9.4.0"
 runtime = "2.0.1"
-versions = "0.54.0"
+versions = "0.64.0"
 
 [libraries]
 kotlin-script-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-script-runtime", version.ref = "kotlin" }
@@ -34,7 +34,7 @@ jackson-json = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dat
 shadow-gradle-plugin = { group = "com.gradleup.shadow", name = "com.gradleup.shadow.gradle.plugin", version.ref = "shadow" }
 runtime-gradle-plugin = { group = "org.beryx.runtime", name = "org.beryx.runtime.gradle.plugin", version.ref = "runtime" }
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin.jvm", name = "org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
-xversions-gradle-plugin = { group = "com.github.ben-manes.versions", name = "com.github.ben-manes.versions.gradle.plugin", version.ref = "versions" }
+xversions-gradle-plugin = { group = "io.github.ben-manes.versions", name = "io.github.ben-manes.versions.gradle.plugin", version.ref = "versions" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinxSerialization" }
@@ -49,7 +49,7 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 runtime = { id = "org.beryx.runtime", version.ref = "runtime" }
 gitarchive-tomarkdown = { id = "org.openrndr.extra.gitarchiver.tomarkdown", version.ref = "orx" }
-versions = { id = "com.github.ben-manes.versions", version.ref = "versions" }
+versions = { id = "io.github.ben-manes.versions", version.ref = "versions" }
 
 [bundles]
 logging-none = ["slf4j-nop"]
