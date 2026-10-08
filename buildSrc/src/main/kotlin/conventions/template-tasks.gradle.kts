@@ -1,6 +1,27 @@
 package conventions
 
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.kotlin.dsl.getByType
 import java.io.BufferedReader
+import kotlin.jvm.optionals.getOrNull
+
+private fun logVersions(openrndrVersion: String, orxVersion: String, remoteSnapshots: Boolean, localSnapshots: Boolean) {
+    val releases = buildList {
+        if(localSnapshots) add("local snapshots")
+        if(remoteSnapshots) add("remote snapshots")
+    }.joinToString(" and ").ifEmpty { "release" }
+
+    logger.lifecycle("Active OPENRNDR: $openrndrVersion | ORX: $orxVersion ($releases)")
+}
+
+run {
+    val libs = project.extensions.getByType<VersionCatalogsExtension>().named("libs")
+    val openrndrVersion = libs.findVersion("openrndr").getOrNull()?.requiredVersion ?: "unknown"
+    val orxVersion = libs.findVersion("orx").getOrNull()?.requiredVersion ?: "unknown"
+    val sonatypeSnapshots = providers.gradleProperty("openrndr.allowSonatypeSnapshots").get() == "true"
+    val localSnapshots = providers.gradleProperty("openrndr.allowLocalSnapshots").get() == "true"
+    logVersions(openrndrVersion, orxVersion, sonatypeSnapshots, localSnapshots)
+}
 
 private fun isWindows(): Boolean {
     return System.getProperty("os.name").lowercase().contains("windows")
@@ -104,6 +125,7 @@ tasks.register("openrndrSonatypeSnapshot") {
         val snapshotVersion = getLatestVersion()
         setVersion(snapshotVersion)
         setGradleProperties(true, false)
+        logVersions(snapshotVersion, snapshotVersion, true, false)
     }
 }
 
@@ -118,6 +140,7 @@ tasks.register("openrndrRelease") {
         )
         setVersion(releaseVersion)
         setGradleProperties(false, false)
+        logVersions(releaseVersion, releaseVersion, false, false)
     }
 }
 
@@ -129,5 +152,6 @@ tasks.register("openrndrLocalSnapshot") {
         val snapshotVersion = getLatestVersion()
         setVersion("$snapshotVersion-SNAPSHOT")
         setGradleProperties(false, true)
+        logVersions(snapshotVersion, snapshotVersion, false, true)
     }
 }
