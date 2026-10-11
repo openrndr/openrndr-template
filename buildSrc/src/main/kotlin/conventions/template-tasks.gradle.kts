@@ -124,7 +124,7 @@ tasks.register("openrndrSonatypeSnapshot") {
     description = "Switch to OPENRNDR and ORX Sonatype snapshot versions"
 
     doLast {
-        val snapshotVersion = getLatestVersion()
+        val snapshotVersion = getLatestVersion() + "-SNAPSHOT"
         setVersion(snapshotVersion)
         setGradleProperties(true, false)
         logVersions(snapshotVersion, snapshotVersion, true, false)
