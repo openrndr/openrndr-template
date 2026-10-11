@@ -151,8 +151,8 @@ tasks.register("openrndrLocalSnapshot") {
     description = "Switch to OPENRNDR and ORX local snapshot versions"
 
     doLast {
-        val snapshotVersion = getLatestVersion()
-        setVersion("$snapshotVersion-SNAPSHOT")
+        val snapshotVersion = getLatestVersion() + "-SNAPSHOT"
+        setVersion(snapshotVersion)
         setGradleProperties(false, true)
         logVersions(snapshotVersion, snapshotVersion, false, true)
     }
