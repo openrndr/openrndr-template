@@ -5,13 +5,15 @@ import org.gradle.kotlin.dsl.getByType
 import java.io.BufferedReader
 import kotlin.jvm.optionals.getOrNull
 
-private fun logVersions(openrndrVersion: String, orxVersion: String, remoteSnapshots: Boolean, localSnapshots: Boolean) {
-    val releases = buildList {
-        if(localSnapshots) add("local snapshots")
-        if(remoteSnapshots) add("remote snapshots")
-    }.joinToString(" and ").ifEmpty { "release" }
-
-    logger.lifecycle("Active OPENRNDR: $openrndrVersion | ORX: $orxVersion ($releases)")
+private fun logVersions(openrndrVersion: String, orxVersion: String, sonatypeSnapshots: Boolean, localSnapshots: Boolean) {
+    logger.lifecycle("""
+        
+        openrndr = "$openrndrVersion" 
+        orx = "$orxVersion"
+        
+        [${if(localSnapshots) "x" else " "}] Use local snapshots
+        [${if(sonatypeSnapshots) "x" else " "}] Use Sonatype snapshots"
+        """.trimIndent())
 }
 
 run {
