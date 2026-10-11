@@ -1,6 +1,29 @@
 package conventions
 
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.kotlin.dsl.getByType
 import java.io.BufferedReader
+import kotlin.jvm.optionals.getOrNull
+
+private fun logVersions(openrndrVersion: String, orxVersion: String, sonatypeSnapshots: Boolean, localSnapshots: Boolean) {
+    logger.lifecycle("""
+        
+        openrndr = "$openrndrVersion" 
+        orx = "$orxVersion"
+        
+        [${if(localSnapshots) "x" else " "}] Use local snapshots
+        [${if(sonatypeSnapshots) "x" else " "}] Use Sonatype snapshots"
+        """.trimIndent())
+}
+
+run {
+    val libs = project.extensions.getByType<VersionCatalogsExtension>().named("libs")
+    val openrndrVersion = libs.findVersion("openrndr").getOrNull()?.requiredVersion ?: "unknown"
+    val orxVersion = libs.findVersion("orx").getOrNull()?.requiredVersion ?: "unknown"
+    val sonatypeSnapshots = providers.gradleProperty("openrndr.allowSonatypeSnapshots").get() == "true"
+    val localSnapshots = providers.gradleProperty("openrndr.allowLocalSnapshots").get() == "true"
+    logVersions(openrndrVersion, orxVersion, sonatypeSnapshots, localSnapshots)
+}
 
 private fun isWindows(): Boolean {
     return System.getProperty("os.name").lowercase().contains("windows")
@@ -101,9 +124,10 @@ tasks.register("openrndrSonatypeSnapshot") {
     description = "Switch to OPENRNDR and ORX Sonatype snapshot versions"
 
     doLast {
-        val snapshotVersion = getLatestVersion()
+        val snapshotVersion = getLatestVersion() + "-SNAPSHOT"
         setVersion(snapshotVersion)
         setGradleProperties(true, false)
+        logVersions(snapshotVersion, snapshotVersion, true, false)
     }
 }
 
@@ -118,6 +142,7 @@ tasks.register("openrndrRelease") {
         )
         setVersion(releaseVersion)
         setGradleProperties(false, false)
+        logVersions(releaseVersion, releaseVersion, false, false)
     }
 }
 
@@ -126,8 +151,9 @@ tasks.register("openrndrLocalSnapshot") {
     description = "Switch to OPENRNDR and ORX local snapshot versions"
 
     doLast {
-        val snapshotVersion = getLatestVersion()
-        setVersion("$snapshotVersion-SNAPSHOT")
+        val snapshotVersion = getLatestVersion() + "-SNAPSHOT"
+        setVersion(snapshotVersion)
         setGradleProperties(false, true)
+        logVersions(snapshotVersion, snapshotVersion, false, true)
     }
 }
