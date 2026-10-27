@@ -102,7 +102,7 @@ tasks.register("openrndrSonatypeSnapshot") {
 
     doLast {
         val snapshotVersion = getLatestVersion()
-        setVersion(snapshotVersion)
+        setVersion("$snapshotVersion-SNAPSHOT")
         setGradleProperties(true, false)
     }
 }
