@@ -1,6 +1,6 @@
 [versions]
-jvmTarget = "17"
-kotlin = "2.4.20"
+jvmTarget = "25"
+kotlin = "2.4.21"
 kotlinApi = "2.4"
 kotlinLanguage = "2.4"
 
@@ -17,7 +17,7 @@ kotlinLogging = "8.0.4"
 kotlinCsvJvm = "1.9.3"
 jsoup = "1.23.2"
 shadow = "9.4.0"
-runtime = "2.0.1"
+jpackage = "1.7.6"
 versions = "0.64.0"
 
 [libraries]
@@ -32,7 +32,7 @@ jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-datab
 jackson-json = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version.ref = "jackson" }
 
 shadow-gradle-plugin = { group = "com.gradleup.shadow", name = "com.gradleup.shadow.gradle.plugin", version.ref = "shadow" }
-runtime-gradle-plugin = { group = "org.beryx.runtime", name = "org.beryx.runtime.gradle.plugin", version.ref = "runtime" }
+jpackage-gradle-plugin = { group = "org.panteleyev.jpackageplugin", name = "org.panteleyev.jpackageplugin.gradle.plugin", version.ref = "jpackage" }
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin.jvm", name = "org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
 xversions-gradle-plugin = { group = "io.github.ben-manes.versions", name = "io.github.ben-manes.versions.gradle.plugin", version.ref = "versions" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
@@ -47,7 +47,7 @@ csv = { group = "com.github.doyaaaaaken", name = "kotlin-csv-jvm", version.ref =
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
-runtime = { id = "org.beryx.runtime", version.ref = "runtime" }
+jpackage = { id = "org.panteleyev.jpackageplugin", version.ref = "jpackage" }
 gitarchive-tomarkdown = { id = "org.openrndr.extra.gitarchiver.tomarkdown", version.ref = "orx" }
 versions = { id = "io.github.ben-manes.versions", version.ref = "versions" }
 

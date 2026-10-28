@@ -30,7 +30,7 @@ The file [gradle.properties](gradle.properties) holds properties that are used i
  - `./gradlew run -Popenrndr.application=MyProgramKt` runs `src/main/kotlin/myProgram.kt`
  - `./gradlew run -Popenrndr.application=foo.bar.MyProgramKt` runs `src/main/kotlin/foo/bar/myProgram.kt` (assuming `package foo.bar` is used in myProgram.kt)
  - `./gradlew shadowJar` creates an executable platform specific jar file with all dependencies. Run the resulting program by typing `java -jar build/libs/openrndr-template-1.0.0-all.jar` in a terminal from the project root. If your project contains multiple `main` methods, specify which one to run with `java -cp build/libs/openrndr-template-1.0.0-all.jar MyProgramKt`, where `MyProgramKt` can also be `foo.bar.MyProgramKt` if it's in the package `foo.bar`.
- - `./gradlew jpackageZip` creates a zip with a stand-alone executable for the current platform (requires Java 17 or newer). Run it like this: `cd build/jpackage/openrndr-application/ && bin/openrndr-application`.
+ - `./gradlew zipAppImage` creates `build/dist/openrndr-application-1.0.0.zip` with a stand-alone app image for the current platform. The image name, version and vendor can be set with the `package.appName`, `package.appVersion` and `package.vendor` Gradle properties. Contents of `data/` are copied into the image.
  - `./gradlew dependencyUpdates` checks whether any dependencies have newer versions.
  - `./gradlew openrndrRelease` switches to the latest release version of OPENRNDR and ORX.
  - `./gradlew openrndrSonatypeSnapshot` switches to the latest snapshot version of OPENRNDR and ORX.

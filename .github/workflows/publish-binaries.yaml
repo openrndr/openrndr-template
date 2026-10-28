@@ -29,13 +29,13 @@ jobs:
         uses: actions/setup-java@v6
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 25
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
 
       - name: Build with Gradle
-        run: ./gradlew jpackageZip
+        run: ./gradlew zipAppImage
 
       - run: echo "OR_TARGET_NAME=linux-x64" >> $GITHUB_ENV
         if: matrix.os == 'ubuntu-latest'
@@ -46,8 +46,8 @@ jobs:
       - run: echo "OR_TARGET_NAME=windows" >> $GITHUB_ENV
         if: matrix.os == 'windows-latest'
 
-      - name: Rename jpackage zip
-        run: mv ./build/distributions/openrndr-application.zip ./build/distributions/openrndr-application-${{env.OR_TARGET_NAME}}.zip
+      - name: Rename app image zip
+        run: mv ./build/dist/openrndr-application-1.0.0.zip ./build/dist/openrndr-application-${{env.OR_TARGET_NAME}}.zip
 
       - name: Create Release
         uses: ncipollo/release-action@v1.21.0
@@ -57,5 +57,5 @@ jobs:
           allowUpdates: true
           replacesArtifacts: false
           body: Fully automated release
-          artifacts: "./build/distributions/openrndr-application-${{env.OR_TARGET_NAME}}.zip"
+          artifacts: "./build/dist/openrndr-application-${{env.OR_TARGET_NAME}}.zip"
 
