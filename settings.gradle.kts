@@ -34,7 +34,6 @@ dependencyResolutionManagement {
         }
     }
 
-
     versionCatalogs {
         // We use a regex to get the openrndr/orx versions from the primary catalog as there is no public Gradle API to parse catalogs.
         val orRegEx = Regex("^openrndr[ ]*=[ ]*(?:\\{[ ]*require[ ]*=[ ]*)?\"(.*)\"[ ]*(?:\\})?", RegexOption.MULTILINE)
