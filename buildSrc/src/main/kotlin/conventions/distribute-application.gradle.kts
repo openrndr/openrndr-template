@@ -3,13 +3,20 @@ package conventions
 import org.gradle.internal.os.OperatingSystem
 import kotlin.collections.set
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.panteleyev.jpackage.ImageType
 
 plugins {
+    application
     id("com.gradleup.shadow")
-    id("org.beryx.runtime")
+    id("org.panteleyev.jpackageplugin")
 }
 
 val applicationMainClass = providers.gradleProperty("applicationMainClass").get()
+
+// packaging properties, override in gradle.properties
+val packageAppName = providers.gradleProperty("package.appName").getOrElse("openrndr-application")
+val packageAppVersion = providers.gradleProperty("package.appVersion").getOrElse("1.0.0")
+val packageVendor = providers.gradleProperty("package.vendor").getOrElse("OPENRNDR")
 
 application {
     mainClass = if (hasProperty("openrndr.application"))
@@ -18,71 +25,101 @@ application {
         applicationMainClass
 }
 
-tasks {
-    named<ShadowJar>("shadowJar") {
-        manifest {
-            attributes["Main-Class"] = applicationMainClass
-            attributes["Implementation-Version"] = project.version
-        }
-        minimize {
-            exclude(dependency("org.openrndr:openrndr-gl3:.*"))
-            exclude(dependency("org.openrndr:openrndr-application-glfw"))
-            exclude(dependency("org.openrndr:openrndr-application-sdl"))
-            exclude(dependency("org.jetbrains.kotlin:kotlin-reflect:.*"))
-            exclude(dependency("org.slf4j:slf4j-simple:.*"))
-            exclude(dependency("org.apache.logging.log4j:log4j-slf4j2-impl:.*"))
-            exclude(dependency("com.fasterxml.jackson.core:jackson-databind:.*"))
-            exclude(dependency("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:.*"))
-            exclude(dependency("org.bytedeco:.*"))
-        }
+tasks.shadowJar {
+    isZip64 = true
+    manifest {
+        attributes["Main-Class"] = applicationMainClass
+        attributes["Implementation-Version"] = project.version
     }
 }
 
-tasks {
-    named<org.beryx.runtime.JPackageTask>("jpackage") {
-        doLast {
-            val destPath = if (OperatingSystem.current().isMacOsX)
-                "build/jpackage/openrndr-application.app/Contents/Resources/data"
-            else
-                "build/jpackage/openrndr-application/data"
-
-            copy {
-                from("data") { include("**/*") }
-                into(destPath)
-            }
-        }
-    }
-
-    register<Zip>("jpackageZip") {
-        archiveFileName = "openrndr-application.zip"
-        from("${layout.buildDirectory.get()}/jpackage") {
-            include("**/*")
-        }
-        filesMatching("**/bin/*") {
-            permissions {
-                unix("0755")
-            }
-        }
-        dependsOn("jpackage")
-    }
+tasks.register<Copy>("copyShadowJar") {
+    dependsOn("shadowJar")
+    from(tasks.findByName("shadowJar")).into("${layout.buildDirectory.get()}/jars")
 }
 
-// Workaround until jpackage is configuration-cache compatible
-listOf("jre", "jpackageZip", "jpackageImage", "jpackage").forEach {
-    tasks.named(it).configure {
-        notCompatibleWithConfigurationCache("org.beryx.runtime plugin is not configuration-cache compatible")
+tasks.jpackage {
+    dependsOn("copyShadowJar")
+    addModules = listOf("jdk.unsupported", "java.management", "java.logging")
+
+    input = layout.buildDirectory.dir("jars")
+    destination = layout.buildDirectory.dir("dist")
+    appName = packageAppName
+    appVersion = packageAppVersion
+    vendor = packageVendor
+
+    mac {
+        javaOptions = listOf(
+            "-Dfile.encoding=UTF-8",
+            "-XX:+UseCompactObjectHeaders",
+            "-XX:+UseZGC",
+            "-XstartOnFirstThread",
+            "--enable-native-access=ALL-UNNAMED",
+            "-Duser.dir=${'$'}APPDIR/../Resources"
+        )
     }
+
+    windows {
+        javaOptions = listOf(
+            "-Dfile.encoding=UTF-8",
+            "-XX:+UseCompactObjectHeaders",
+            "-XX:+UseZGC",
+            "--enable-native-access=ALL-UNNAMED",
+            "-Duser.dir=${'$'}APPDIR\\.."
+        )
+    }
+
+    linux {
+        javaOptions = listOf(
+            "-Dfile.encoding=UTF-8",
+            "-XX:+UseCompactObjectHeaders",
+            "-XX:+UseZGC",
+            "--enable-native-access=ALL-UNNAMED",
+            "-Duser.dir=${'$'}APPDIR/../.."
+        )
+    }
+
+    mainJar = tasks.named<ShadowJar>("shadowJar").get().archiveFileName.get()
+    mainClass = applicationMainClass
+
+    jLinkOptions = listOf(
+        "--strip-debug",
+        "--compress=2",
+        "--no-header-files",
+        "--no-man-pages",
+    )
+
+    type = ImageType.APP_IMAGE
+    finalizedBy("copyAssetsToAppImage")
 }
 
-runtime {
-    jpackage {
-        imageName = "openrndr-application"
-        skipInstaller = true
+// copies data/ next to the directory that -Duser.dir points to
+tasks.register<Copy>("copyAssetsToAppImage") {
+    val destinationPath = if (OperatingSystem.current().isMacOsX) {
+        layout.buildDirectory.dir("dist/$packageAppName.app/Contents/Resources")
+    } else {
+        layout.buildDirectory.dir("dist/$packageAppName")
+    }
+    from(layout.projectDirectory) {
+        include("data/**")
+    }
+    into(destinationPath)
+}
+
+tasks.register<Zip>("zipAppImage") {
+    group = "distribution"
+
+    dependsOn("jpackage")
+    dependsOn("copyAssetsToAppImage")
+
+    from(layout.buildDirectory.dir("dist")) {
         if (OperatingSystem.current().isMacOsX) {
-            jvmArgs.add("-XstartOnFirstThread")
-            jvmArgs.add($$"-Duser.dir=$APPDIR/../Resources")
+            include("$packageAppName.app/**")
+        } else {
+            include("$packageAppName/**")
         }
     }
-    options = listOf("--strip-debug", "--compress", "zip-6", "--no-header-files", "--no-man-pages")
-    modules = listOf("jdk.unsupported", "java.management", "java.desktop")
+
+    archiveFileName = "$packageAppName-$packageAppVersion.zip"
+    destinationDirectory = layout.buildDirectory.dir("dist")
 }

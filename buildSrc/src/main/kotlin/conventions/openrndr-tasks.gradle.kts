@@ -15,9 +15,9 @@ tasks.register("run $applicationMainClass") {
 }
 
 tasks.register("create standalone executable for $applicationMainClass") {
-    description = "Creates build/distributions/openrndr-application.zip"
+    description = "Creates build/dist/openrndr-application-1.0.0.zip"
     group = " \uD83E\uDD8C OPENRNDR"
-    dependsOn("jpackageZip")
+    dependsOn("zipAppImage")
 }
 
 tasks.register("add IDE file scopes") {
