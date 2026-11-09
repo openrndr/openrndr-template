@@ -1,7 +1,8 @@
 application.log
 build
 out
-.idea
+.idea/*
+!.idea/externalDependencies.xml
 .gradle
 .kotlin
 .lwjgl
